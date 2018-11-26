@@ -15,6 +15,23 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+
+* @Description:    图片服务器工具
+
+* @Author:         梁智发
+
+* @CreateDate:     2018/11/26 0026 17:10
+
+* @UpdateUser:     梁智发
+
+* @UpdateDate:     2018/11/26 0026 17:10
+
+* @UpdateRemark:   修改内容
+
+* @Version:        1.0
+
+*/
 @Component
 @org.springframework.context.annotation.Configuration
 public class QiniuUtil {

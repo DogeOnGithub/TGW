@@ -4,6 +4,9 @@ spring:
     username: xiaojian
     password: xiaojian
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 120.79.74.174
+
 
     druid:
       #初始化时建立物理连接的个数
