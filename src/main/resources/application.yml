@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://120.79.74.174:3306/TGW_DB
+    username: xiaojian
+    password: xiaojian
+    driver-class-name: com.mysql.cj.jdbc.Driver
