@@ -14,4 +14,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    //自定义方法开始
+
+    User selectByUsernameAndPasswordAndUserStatus(User record);
+
+    //自定义方法结束
 }
