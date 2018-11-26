@@ -4,10 +4,6 @@ spring:
     username: xiaojian
     password: xiaojian
     driver-class-name: com.mysql.cj.jdbc.Driver
-  redis:
-    host: 120.79.74.174
-
-
     druid:
       #初始化时建立物理连接的个数
       initial-size: 5
@@ -55,6 +51,8 @@ spring:
           statement-create-after-log-enabled: false
           statement-parameter-set-log-enabled: false
           statement-prepare-after-log-enabled: false
+  redis:
+    host: 120.79.74.174
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
