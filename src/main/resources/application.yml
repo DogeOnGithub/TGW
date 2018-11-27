@@ -58,3 +58,10 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations:
     - classpath:mybatis/user/mapper/*
+
+
+#以下配置是调试时使用
+logging:
+  level:
+    cn.tgw.user.service: debug
+debug: true

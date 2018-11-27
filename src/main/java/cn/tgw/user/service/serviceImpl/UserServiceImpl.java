@@ -5,6 +5,7 @@ import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private UserDetailMapper userDetailMapper;
 
     @Override
+    @Cacheable(cacheNames = {"userCache"}, key = "#username")
     public User getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status) {
         User user = new User();
         user.setUsername(username);
