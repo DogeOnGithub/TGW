@@ -63,5 +63,5 @@ mybatis:
 #以下配置是调试时使用
 logging:
   level:
-    cn.tgw.user.service: debug
+    cn.tgw.user.mapper: debug
 debug: true

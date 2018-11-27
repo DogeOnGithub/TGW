@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private UserDetailMapper userDetailMapper;
 
     @Override
-    @Cacheable(cacheNames = {"userCache"}, key = "#username")
+    @Cacheable(cacheNames = {"userCache"}, key = "#username", cacheManager = "userCacheManager")
     public User getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status) {
         User user = new User();
         user.setUsername(username);

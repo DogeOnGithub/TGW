@@ -1,5 +1,6 @@
 package cn.tgw.admin.redisConfig;
 
+import cn.tgw.user.model.User;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,11 +56,10 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     //注入自定义RedisCacheManager，设置键值的序列化器
     @Bean
-    @Primary
-    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+    public RedisCacheManager userCacheManager(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class)));
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<User>(User.class)));
         return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(configuration).build();
     }
 }
