@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tgw.goods.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="cn.tgw.goods.model.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR" />
+    <result column="oringinal_price" property="oringinalPrice" jdbcType="DECIMAL" />
+    <result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+    <result column="tgw_bussinessman_id" property="tgwBussinessmanId" jdbcType="INTEGER" />
+    <result column="goods_category" property="goodsCategory" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_title, oringinal_price, discount_price, tgw_bussinessman_id, goods_category
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tgw_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tgw_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tgw.goods.model.Goods" >
+    insert into tgw_goods (id, goods_title, oringinal_price, 
+      discount_price, tgw_bussinessman_id, goods_category
+      )
+    values (#{id,jdbcType=INTEGER}, #{goodsTitle,jdbcType=VARCHAR}, #{oringinalPrice,jdbcType=DECIMAL}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{tgwBussinessmanId,jdbcType=INTEGER}, #{goodsCategory,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tgw.goods.model.Goods" >
+    insert into tgw_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsTitle != null" >
+        goods_title,
+      </if>
+      <if test="oringinalPrice != null" >
+        oringinal_price,
+      </if>
+      <if test="discountPrice != null" >
+        discount_price,
+      </if>
+      <if test="tgwBussinessmanId != null" >
+        tgw_bussinessman_id,
+      </if>
+      <if test="goodsCategory != null" >
+        goods_category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTitle != null" >
+        #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oringinalPrice != null" >
+        #{oringinalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tgwBussinessmanId != null" >
+        #{tgwBussinessmanId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory != null" >
+        #{goodsCategory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.goods.model.Goods" >
+    update tgw_goods
+    <set >
+      <if test="goodsTitle != null" >
+        goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oringinalPrice != null" >
+        oringinal_price = #{oringinalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null" >
+        discount_price = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tgwBussinessmanId != null" >
+        tgw_bussinessman_id = #{tgwBussinessmanId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory != null" >
+        goods_category = #{goodsCategory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tgw.goods.model.Goods" >
+    update tgw_goods
+    set goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      oringinal_price = #{oringinalPrice,jdbcType=DECIMAL},
+      discount_price = #{discountPrice,jdbcType=DECIMAL},
+      tgw_bussinessman_id = #{tgwBussinessmanId,jdbcType=INTEGER},
+      goods_category = #{goodsCategory,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
