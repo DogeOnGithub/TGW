@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @program:tgw
- * @descrption:user controller
- * @author:TjSanshao
- * @create:2018-11-26 17:28
+/*
+ * @Project:tgw
+ * @Description:user controller
+ * @Author:TjSanshao
+ * @Create:2018-11-26 17:28
+ *
  **/
 
 @RestController
@@ -26,8 +26,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/login")
-    public Map<String, String> login(String username, String password, HttpSession session){
-        HashMap<String, String> loginStatus = new HashMap<>();
+    public Map<String, Object> login(String username, String password, HttpSession session){
+        HashMap<String, Object> loginStatus = new HashMap<>();
 
         //校验用户名和密码是否为空
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
@@ -41,6 +41,7 @@ public class UserController {
         if (user != null){
             loginStatus.put("status", "success");
             loginStatus.put("message", "login success");
+            loginStatus.put("user", user);
 
             //将记录存入session，键为username，值为User对象
             session.setAttribute(user.getUsername(), user);

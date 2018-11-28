@@ -3,11 +3,12 @@ package cn.tgw.user.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @program:tgw
- * @descrption:user module user controller
- * @author:TjSanshao
- * @create:2018-11-26 16:33
+/*
+ * @Project:tgw
+ * @Description:user module user controller
+ * @Author:TjSanshao
+ * @Create:2018-11-26 16:33
+ *
  **/
 
 @RestController

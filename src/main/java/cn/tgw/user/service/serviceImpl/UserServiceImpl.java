@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-/**
- * @program:tgw
- * @descrption:user service implement
- * @author:TjSanshao
- * @create:2018-11-26 17:24
+/*
+ * @Project:tgw
+ * @Description:user service implement
+ * @Author:TjSanshao
+ * @Create:2018-11-26 17:24
+ *
  **/
 
 @Service
