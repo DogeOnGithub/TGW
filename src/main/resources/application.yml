@@ -59,6 +59,9 @@ mybatis:
   mapper-locations:
     - classpath:mybatis/user/mapper/*
 
+miaodi:
+  config:
+    timeout: 120
 
 #以下配置是调试时使用
 logging:

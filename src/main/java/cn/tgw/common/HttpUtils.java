@@ -1,6 +1,8 @@
 package cn.tgw.common;
 
 import cn.tgw.config.TjSanshaoMiaoDiConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
 import java.io.BufferedReader;
@@ -19,7 +21,11 @@ import java.util.Date;
  * @Create:2018-11-28 15:13
  *
  **/
+@Component
 public class HttpUtils {
+
+    @Autowired
+    private TjSanshaoMiaoDiConfig config;
 
     /*
      * @Description:该方法用于使用秒嘀，构造通用参数timestamp、sig和respDataType
@@ -29,15 +35,15 @@ public class HttpUtils {
      * @Date:2018-11-28
      * @Time:15:19
      **/
-    public static String createCommonParam() throws UnsupportedEncodingException {
+    public String createCommonParam() throws UnsupportedEncodingException {
         //构建自定义格式的时间戳
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String timeStamp = simpleDateFormat.format(new Date());
 
         //秒嘀签名
-        String sig = DigestUtils.md5DigestAsHex((TjSanshaoMiaoDiConfig.ACCOUNT_SID + TjSanshaoMiaoDiConfig.AUTH_TOKEN + timeStamp).getBytes("UTF-8"));
+        String sig = DigestUtils.md5DigestAsHex((config.getAccountId() + config.getAuthToken() + timeStamp).getBytes("UTF-8"));
 
-        return "&timestamp=" + timeStamp + "&sig=" + sig + "&respDataType=" + TjSanshaoMiaoDiConfig.RESP_DATA_TYPE;
+        return "&timestamp=" + timeStamp + "&sig=" + sig + "&respDataType=" + config.getRespDataType();
     }
 
     /*
@@ -48,7 +54,7 @@ public class HttpUtils {
      * @Date:2018-11-28
      * @Time:15:23
      **/
-    public static String miaoDiPost(String url, String body){
+    public String miaoDiPost(String url, String body){
         System.out.println("url:" + System.lineSeparator() + url);
         System.out.println("body:" + System.lineSeparator() + body);
 

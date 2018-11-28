@@ -2,6 +2,8 @@ package cn.tgw.common;
 
 import cn.tgw.config.TjSanshaoMiaoDiConfig;
 import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -13,11 +15,14 @@ import java.net.URLEncoder;
  * @Create:2018-11-28 15:27
  *
  **/
+@Component
 public class MiaoDiUtils {
 
-    private static String operation = "/industrySMS/sendSMS";
+    @Autowired
+    private TjSanshaoMiaoDiConfig config;
 
-    private static String accountSid = TjSanshaoMiaoDiConfig.ACCOUNT_SID;
+    @Autowired
+    private HttpUtils miaodiHttpUtils;
 
     /*
      * @Description:根据短信内容以及发送目标发送验证码
@@ -27,19 +32,19 @@ public class MiaoDiUtils {
      * @Date:2018-11-28
      * @Time:15:32
      **/
-    public static void executeWithSmsContent(String smsContent, String to) throws UnsupportedEncodingException {
+    public void executeWithSmsContent(String smsContent, String to) throws UnsupportedEncodingException {
         String tmpSmsContent = null;
         try{
             tmpSmsContent = URLEncoder.encode(smsContent, "UTF-8");
         }catch(Exception e){
 
         }
-        String url = TjSanshaoMiaoDiConfig.BASE_URL + operation;
-        String body = "accountSid=" + accountSid + "&to=" + to + "&smsContent=" + tmpSmsContent
-                + HttpUtils.createCommonParam();
+        String url = config.getBaseUrl() + config.getOperation();
+        String body = "accountSid=" + config.getAccountId() + "&to=" + to + "&smsContent=" + tmpSmsContent
+                + miaodiHttpUtils.createCommonParam();
 
         // 提交请求
-        String result = HttpUtils.miaoDiPost(url, body);
+        String result = miaodiHttpUtils.miaoDiPost(url, body);
         System.out.println("result:" + System.lineSeparator() + result);
     }
 
@@ -51,31 +56,14 @@ public class MiaoDiUtils {
      * @Date:2018-11-28
      * @Time:16:35
      **/
-    public static void executeWithTemplateId(String templateId, String to, String code, int timeout) throws UnsupportedEncodingException {
-        String url = TjSanshaoMiaoDiConfig.BASE_URL + operation;
-        String body = "accountSid=" + accountSid + "&to=" + to + "&templateid=" + templateId + "&param=" + code + "," + timeout
-                + HttpUtils.createCommonParam();
+    public String executeWithTemplateId(String to, String code) throws UnsupportedEncodingException {
+        String url = config.getBaseUrl() + config.getOperation();
+        String body = "accountSid=" + config.getAccountId() + "&to=" + to + "&templateid=" + config.getTemplateId() + "&param=" + code + "," + config.getTimeout()
+                + miaodiHttpUtils.createCommonParam();
 
         // 提交请求
-        String result = HttpUtils.miaoDiPost(url, body);
-        System.out.println("result:" + System.lineSeparator() + result);
-    }
+        String result = miaodiHttpUtils.miaoDiPost(url, body);
 
-    /*
-     * @Description:测试execute方法
-     * @Param:[args]
-     * @Return:void
-     * @Author:TjSanshao
-     * @Date:2018-11-28
-     * @Time:15:39
-     **/
-    public static void main(String[] args){
-//        try {
-//            MiaoDiUtils.executeWithTemplateId("982267297", "13420120424", 30);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-
-        System.out.println(JSON.parseObject("{\"respCode\":\"00000\",\"respDesc\":\"请求成功。\",\"failCount\":\"0\",\"failList\":[],\"smsId\":\"262d62f342c242aabed94ccec6e3b4c7\"}").getString("respCode"));;
+        return result;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
  * @Project:tgw
@@ -74,11 +76,34 @@ public class UserController {
     public Map<String, Object> sendMsgCode(String mobileNumber){
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
 
-        //TODO 验证手机号码是否正确
+        //校验手机号码的正则表达式
+        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
 
+        if (mobileNumber.length() != 11) {
+            //如果不是11位，不是手机号码，直接返回fail
+            sendMsgStatus.put("status", "fail");
+            sendMsgStatus.put("message", "please input correct phone number");
+            return sendMsgStatus;
+        } else {
+            //是11位手机号码，开始用正则匹配
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(mobileNumber);
+            boolean isMatch = m.matches();
+            if (!isMatch) {
+                //如果匹配不成功，不合法，返回fail
+                sendMsgStatus.put("status", "fail");
+                sendMsgStatus.put("message", "please input correct phone number");
+                return sendMsgStatus;
+            }else{
+                //校验成功，是合法的手机号码，返回结果，使用异步的方式，发送手机验证码
+                sendMsgStatus.put("status", "success");
+                sendMsgStatus.put("message", "success");
 
+                //TODO 异步发送手机验证码
 
-        return sendMsgStatus;
+                return sendMsgStatus;
+            }
+        }
     }
 
 }
