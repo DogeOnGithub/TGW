@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@MapperScan()//将项目中对应的mapper接口类的路径加进来就可以了,先注释了，不然运行不起来
 //@EnableScheduling//开启定时任务，需要用到再开
 @SpringBootApplication
-@MapperScan(basePackages = {"cn.tgw.user.mapper"})
+@MapperScan(basePackages = {"cn.tgw.user.mapper", "cn.tgw.common.mapper"})
 public class TgwApplication {
 
 	public static void main(String[] args) {

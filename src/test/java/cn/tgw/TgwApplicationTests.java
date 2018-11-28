@@ -1,5 +1,6 @@
 package cn.tgw;
 
+import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.user.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +15,17 @@ public class TgwApplicationTests {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private SmsVerifyMapper smsVerifyMapper;
+
 	@Test
 	public void test01(){
 		System.out.println(userMapper.selectByPrimaryKey(1));
+	}
+
+	@Test
+	public void testSmsVerifyMapper(){
+		System.out.println(smsVerifyMapper.smsVerifyList());
 	}
 
 	@Test

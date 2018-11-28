@@ -25,6 +25,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /*
+     * @Description:用户登录
+     * @Param:[username, password, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-11-28
+     * @Time:17:38
+     **/
     @GetMapping("/user/login")
     public Map<String, Object> login(String username, String password, HttpSession session){
         HashMap<String, Object> loginStatus = new HashMap<>();
@@ -52,6 +60,25 @@ public class UserController {
         }
 
         return loginStatus;
+    }
+
+    /*
+     * @Description:请求发送验证码
+     * @Param:[mobileNumber]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-11-28
+     * @Time:17:40
+     **/
+    @GetMapping("/user/sendMsgCode")
+    public Map<String, Object> sendMsgCode(String mobileNumber){
+        HashMap<String, Object> sendMsgStatus = new HashMap<>();
+
+        //TODO 验证手机号码是否正确
+
+
+
+        return sendMsgStatus;
     }
 
 }
