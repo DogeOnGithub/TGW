@@ -8,9 +8,11 @@
     <result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
     <result column="tgw_bussinessman_id" property="tgwBussinessmanId" jdbcType="INTEGER" />
     <result column="goods_category" property="goodsCategory" jdbcType="VARCHAR" />
+    <result column="is_online" property="isOnline" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, goods_title, oringinal_price, discount_price, tgw_bussinessman_id, goods_category
+    id, goods_title, oringinal_price, discount_price, tgw_bussinessman_id, goods_category, 
+    is_online
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="cn.tgw.goods.model.Goods" >
     insert into tgw_goods (id, goods_title, oringinal_price, 
-      discount_price, tgw_bussinessman_id, goods_category
-      )
+      discount_price, tgw_bussinessman_id, goods_category, 
+      is_online)
     values (#{id,jdbcType=INTEGER}, #{goodsTitle,jdbcType=VARCHAR}, #{oringinalPrice,jdbcType=DECIMAL}, 
-      #{discountPrice,jdbcType=DECIMAL}, #{tgwBussinessmanId,jdbcType=INTEGER}, #{goodsCategory,jdbcType=VARCHAR}
-      )
+      #{discountPrice,jdbcType=DECIMAL}, #{tgwBussinessmanId,jdbcType=INTEGER}, #{goodsCategory,jdbcType=VARCHAR}, 
+      #{isOnline,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.goods.model.Goods" >
     insert into tgw_goods
@@ -51,6 +53,9 @@
       <if test="goodsCategory != null" >
         goods_category,
       </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -70,6 +75,9 @@
       </if>
       <if test="goodsCategory != null" >
         #{goodsCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -91,6 +99,9 @@
       <if test="goodsCategory != null" >
         goods_category = #{goodsCategory,jdbcType=VARCHAR},
       </if>
+      <if test="isOnline != null" >
+        is_online = #{isOnline,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +111,8 @@
       oringinal_price = #{oringinalPrice,jdbcType=DECIMAL},
       discount_price = #{discountPrice,jdbcType=DECIMAL},
       tgw_bussinessman_id = #{tgwBussinessmanId,jdbcType=INTEGER},
-      goods_category = #{goodsCategory,jdbcType=VARCHAR}
+      goods_category = #{goodsCategory,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

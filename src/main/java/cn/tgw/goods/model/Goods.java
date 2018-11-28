@@ -15,6 +15,8 @@ public class Goods {
 
     private String goodsCategory;
 
+    private Integer isOnline;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Goods {
 
     public void setGoodsCategory(String goodsCategory) {
         this.goodsCategory = goodsCategory == null ? null : goodsCategory.trim();
+    }
+
+    public Integer getIsOnline() {
+        return isOnline;
+    }
+
+    public void setIsOnline(Integer isOnline) {
+        this.isOnline = isOnline;
     }
 }
