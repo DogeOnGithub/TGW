@@ -45,15 +45,15 @@ public class MiaoDiUtils {
 
     /*
      * @Description:根据信息模板以及发送目标发送验证码
-     * @Param:[templateId, to]
+     * @Param:[templateId, to, code, timeout]
      * @Return:void
      * @Author:TjSanshao
      * @Date:2018-11-28
-     * @Time:15:36
+     * @Time:16:35
      **/
-    public static void executeWithTemplateId(String templateId, String to, int timeout) throws UnsupportedEncodingException {
+    public static void executeWithTemplateId(String templateId, String to, String code, int timeout) throws UnsupportedEncodingException {
         String url = TjSanshaoMiaoDiConfig.BASE_URL + operation;
-        String body = "accountSid=" + accountSid + "&to=" + to + "&templateid=" + templateId + "&param=2222," + timeout
+        String body = "accountSid=" + accountSid + "&to=" + to + "&templateid=" + templateId + "&param=" + code + "," + timeout
                 + HttpUtils.createCommonParam();
 
         // 提交请求
