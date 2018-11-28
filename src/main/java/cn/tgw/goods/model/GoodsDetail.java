@@ -1,5 +1,7 @@
 package cn.tgw.goods.model;
 
+import java.util.Date;
+
 public class GoodsDetail {
     private Integer id;
 
@@ -9,7 +11,7 @@ public class GoodsDetail {
 
     private Integer termOfValidity;
 
-    private String creatGoodsTime;
+    private Date creatGoodsTime;
 
     private Integer goodsRepertory;
 
@@ -47,12 +49,12 @@ public class GoodsDetail {
         this.termOfValidity = termOfValidity;
     }
 
-    public String getCreatGoodsTime() {
+    public Date getCreatGoodsTime() {
         return creatGoodsTime;
     }
 
-    public void setCreatGoodsTime(String creatGoodsTime) {
-        this.creatGoodsTime = creatGoodsTime == null ? null : creatGoodsTime.trim();
+    public void setCreatGoodsTime(Date creatGoodsTime) {
+        this.creatGoodsTime = creatGoodsTime;
     }
 
     public Integer getGoodsRepertory() {

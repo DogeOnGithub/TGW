@@ -6,7 +6,7 @@
     <result column="tgw_goods_id" property="tgwGoodsId" jdbcType="INTEGER" />
     <result column="goods_desc" property="goodsDesc" jdbcType="VARCHAR" />
     <result column="term_of_validity" property="termOfValidity" jdbcType="INTEGER" />
-    <result column="creat_goods_time" property="creatGoodsTime" jdbcType="VARCHAR" />
+    <result column="creat_goods_time" property="creatGoodsTime" jdbcType="DATE" />
     <result column="goods_ repertory" property="goodsRepertory" jdbcType="INTEGER" />
     <result column="sales_volumn" property="salesVolumn" jdbcType="INTEGER" />
   </resultMap>
@@ -29,7 +29,7 @@
       term_of_validity, creat_goods_time, "goods_ repertory", 
       sales_volumn)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{goodsDesc,jdbcType=VARCHAR}, 
-      #{termOfValidity,jdbcType=INTEGER}, #{creatGoodsTime,jdbcType=VARCHAR}, #{goodsRepertory,jdbcType=INTEGER}, 
+      #{termOfValidity,jdbcType=INTEGER}, #{creatGoodsTime,jdbcType=DATE}, #{goodsRepertory,jdbcType=INTEGER}, 
       #{salesVolumn,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.goods.model.GoodsDetail" >
@@ -71,7 +71,7 @@
         #{termOfValidity,jdbcType=INTEGER},
       </if>
       <if test="creatGoodsTime != null" >
-        #{creatGoodsTime,jdbcType=VARCHAR},
+        #{creatGoodsTime,jdbcType=DATE},
       </if>
       <if test="goodsRepertory != null" >
         #{goodsRepertory,jdbcType=INTEGER},
@@ -94,7 +94,7 @@
         term_of_validity = #{termOfValidity,jdbcType=INTEGER},
       </if>
       <if test="creatGoodsTime != null" >
-        creat_goods_time = #{creatGoodsTime,jdbcType=VARCHAR},
+        creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
       </if>
       <if test="goodsRepertory != null" >
         "goods_ repertory" = #{goodsRepertory,jdbcType=INTEGER},
@@ -110,7 +110,7 @@
     set tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
       goods_desc = #{goodsDesc,jdbcType=VARCHAR},
       term_of_validity = #{termOfValidity,jdbcType=INTEGER},
-      creat_goods_time = #{creatGoodsTime,jdbcType=VARCHAR},
+      creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
       "goods_ repertory" = #{goodsRepertory,jdbcType=INTEGER},
       sales_volumn = #{salesVolumn,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
