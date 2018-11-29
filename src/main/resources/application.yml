@@ -62,10 +62,11 @@ mybatis:
 #秒嘀API配置，具体可配置内容参考cn.tgw.config.TjSanshaoMiaoDiConfig
 miaodi:
   config:
-    timeout: 120
+    timeout: 30
 
 #以下配置是调试时使用
 logging:
   level:
     cn.tgw.user.mapper: debug
+    cn.tgw.common.mapper: debug
 debug: true

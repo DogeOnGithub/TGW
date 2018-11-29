@@ -1,5 +1,7 @@
 package cn.tgw.user.controller;
 
+import cn.tgw.common.service.MiaoDiService;
+import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.user.model.User;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,17 @@ import java.util.regex.Pattern;
 @RestController
 public class UserController {
 
+    //注入用户处理的service
     @Autowired
     private UserService userService;
+
+    //注入手机验证码处理的service
+    @Autowired
+    private SmsVerifyService smsVerifyService;
+
+    //注入秒嘀工具类service，用于生成验证码
+    @Autowired
+    private MiaoDiService miaoDiService;
 
     /*
      * @Description:用户登录
@@ -95,11 +106,15 @@ public class UserController {
                 sendMsgStatus.put("message", "please input correct phone number");
                 return sendMsgStatus;
             }else{
-                //校验成功，是合法的手机号码，返回结果，使用异步的方式，发送手机验证码
+                //TODO 合法的手机号码，校验今天验证码的发送次数
+
+                //校验成功，返回结果，使用异步的方式，发送手机验证码
                 sendMsgStatus.put("status", "success");
                 sendMsgStatus.put("message", "success");
 
-                //TODO 异步发送手机验证码
+                //异步发送手机验证码
+                smsVerifyService.testAsync();
+                smsVerifyService.sendMsgCodeAsync(mobileNumber, miaoDiService.generateCode(6));
 
                 return sendMsgStatus;
             }

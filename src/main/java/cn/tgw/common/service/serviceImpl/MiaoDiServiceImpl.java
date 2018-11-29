@@ -9,7 +9,7 @@ import java.util.Random;
 
 /*
  * @Project:tgw
- * @Description:miaodi service impl
+ * @Description:miaodi service impl,该类中的方法均是同步方法，如果要异步发送验证码，使用SmsVerifyService
  * @Author:TjSanshao
  * @Create:2018-11-28 21:32
  *
