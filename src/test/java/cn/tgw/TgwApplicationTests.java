@@ -1,6 +1,7 @@
 package cn.tgw;
 
 import cn.tgw.common.mapper.SmsVerifyMapper;
+import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.user.mapper.UserMapper;
 import org.junit.Test;
@@ -8,6 +9,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
+import java.util.TimeZone;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -49,6 +53,44 @@ public class TgwApplicationTests {
 	@Test
 	public void testSmsVerifyMapper(){
 		System.out.println(smsVerifyMapper.smsVerifyList());
+		System.out.println(smsVerifyMapper.selectByMobile("13420120424"));
+
+		SmsVerify smsVerify = new SmsVerify();
+		smsVerify.setMobile("17607591628");
+		smsVerify.setCode(miaoDiService.generateCode(6));
+		smsVerify.setStatus(new Byte("0"));
+		smsVerify.setSendTime(new Date());
+		smsVerify.setTimes(new Byte("1"));
+		System.out.println(smsVerifyMapper.insertSmsVerify(smsVerify));
+
+		System.out.println(new Date());
+
+	}
+
+	/*
+	 * @Description:测试update方法
+	 * @Param:[]
+	 * @Return:void
+	 * @Author:TjSanshao
+	 * @Date:2018-11-29
+	 * @Time:09:06
+	 **/
+	@Test
+	public void testSmsVerifyMapper2(){
+		SmsVerify smsVerify = smsVerifyMapper.selectByMobile("17607591628");
+		smsVerify.setCode(miaoDiService.generateCode(6));
+		smsVerify.setStatus(new Byte("0"));
+		smsVerify.setSendTime(new Date());
+		smsVerify.setTimes(new Byte(String.valueOf(smsVerify.getTimes().intValue() + 1)));
+
+		System.out.println(smsVerifyMapper.updateCodeSmsVerify(smsVerify));
+	}
+
+	@Test
+	public void testSmsVerifyMapper3(){
+		SmsVerify smsVerify = smsVerifyMapper.selectByMobile("17607591628");
+		smsVerify.setStatus(new Byte("1"));
+		System.out.println(smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify));
 	}
 
 	@Test
