@@ -53,6 +53,8 @@ spring:
           statement-prepare-after-log-enabled: false
   redis:
     host: 120.79.74.174
+  rabbitmq:
+    host: 120.79.74.174
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml

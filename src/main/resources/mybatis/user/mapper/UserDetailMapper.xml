@@ -20,6 +20,18 @@
     from tgw_user_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 自定义查询开始 -->
+
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_user_detail
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+
+  <!-- 自定义查询结束 -->
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_user_detail
     where id = #{id,jdbcType=INTEGER}

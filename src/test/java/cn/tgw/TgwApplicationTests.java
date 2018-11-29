@@ -3,13 +3,17 @@ package cn.tgw;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
+import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
+import cn.tgw.user.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -21,6 +25,9 @@ public class TgwApplicationTests {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private UserDetailMapper userDetailMapper;
+
 	//tgw_sms_verify表
 	@Autowired
 	private SmsVerifyMapper smsVerifyMapper;
@@ -28,6 +35,9 @@ public class TgwApplicationTests {
 	//秒嘀业务
 	@Autowired
 	private MiaoDiService miaoDiService;
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 
 	/*
 	 * @Description:测试UserMapper
@@ -39,7 +49,25 @@ public class TgwApplicationTests {
 	 **/
 	@Test
 	public void testUserMapper(){
+		User user = new User();
+		user.setUsername("TjSanshao");
+
 		System.out.println(userMapper.selectByPrimaryKey(1));
+		System.out.println(userMapper.selectByUsername(user));
+	}
+
+	@Test
+	public void testUserMapper2(){
+		User user = new User();
+		user.setUsername("testRegister");
+		user.setPassword("testRegister");
+		System.out.println(userMapper.insertSelective(user));
+		System.out.println(user);
+	}
+
+	@Test
+	public void testUserDetailMapper(){
+		System.out.println(userDetailMapper.selectByMobile("13420120424"));
 	}
 
 	/*
@@ -101,6 +129,23 @@ public class TgwApplicationTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testCalendar(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		System.out.println(calendar.get(Calendar.MINUTE));
+	}
+
+	@Test
+	public void testRabbitMQ(){
+		rabbitTemplate.convertAndSend("tgw.verifycode.relay.exchange", "", "15521634926");
+	}
+
+	@Test
+	public void testRabbitMQ2(){
+		System.out.println(rabbitTemplate.receiveAndConvert("tgw.verifycode.queue"));
 	}
 
 	@Test

@@ -26,6 +26,13 @@
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and user_status = #{userStatus,jdbcType=TINYINT}
   </select>
 
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="cn.tgw.user.model.User">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
   <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -37,6 +44,7 @@
       user_status)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{userStatus,jdbcType=TINYINT})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.user.model.User" >
     insert into tgw_user
@@ -68,6 +76,7 @@
         #{userStatus,jdbcType=TINYINT},
       </if>
     </trim>
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.user.model.User" >
     update tgw_user

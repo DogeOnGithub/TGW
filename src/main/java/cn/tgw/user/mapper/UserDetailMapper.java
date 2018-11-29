@@ -14,4 +14,10 @@ public interface UserDetailMapper {
     int updateByPrimaryKeySelective(UserDetail record);
 
     int updateByPrimaryKey(UserDetail record);
+
+    //自定义查询开始
+
+    UserDetail selectByMobile(String mobile);
+
+    //自定义查询结束
 }

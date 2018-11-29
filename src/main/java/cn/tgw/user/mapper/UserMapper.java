@@ -19,5 +19,7 @@ public interface UserMapper {
 
     User selectByUsernameAndPasswordAndUserStatus(User record);
 
+    User selectByUsername(User user);
+
     //自定义方法结束
 }

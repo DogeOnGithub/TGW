@@ -3,6 +3,7 @@ package cn.tgw.user.controller;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.user.model.User;
+import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -106,7 +107,12 @@ public class UserController {
                 sendMsgStatus.put("message", "please input correct phone number");
                 return sendMsgStatus;
             }else{
-                //TODO 合法的手机号码，校验今天验证码的发送次数
+                if (!smsVerifyService.enableSend(mobileNumber)){
+                    //该手机号不可以发送验证码，超出了每天发送次数
+                    sendMsgStatus.put("status", "fail");
+                    sendMsgStatus.put("message", "send times out");
+                    return sendMsgStatus;
+                }
 
                 //校验成功，返回结果，使用异步的方式，发送手机验证码
                 sendMsgStatus.put("status", "success");
@@ -119,6 +125,56 @@ public class UserController {
                 return sendMsgStatus;
             }
         }
+    }
+
+    /*
+     * @Description:用户注册，用户名、密码、手机号码、验证码是必填项
+     * @Param:[user, mobile, code]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-11-29
+     * @Time:11:09
+     **/
+    @GetMapping("/user/register")
+    public Map<String, Object> register(User user, UserDetail userDetail, String code){
+        HashMap<String, Object> registerStatus = new HashMap<>();
+
+        //验证用户名、密码、手机号码是否为空
+        if (user.getUsername() == null || user.getPassword() == null || StringUtils.isEmpty(userDetail.getMobile()) || StringUtils.isEmpty(code)){
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "please input the whole");
+            return registerStatus;
+        }
+
+        //验证验证码是否正确
+        if (!smsVerifyService.checkCode(userDetail.getMobile(), code)){
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "code is invalid");
+            return registerStatus;
+        }
+
+        //填写了用户名、密码、手机号码、验证码，验证是否可以注册
+        if (!userService.enableUserRegister(user)){
+            //用户名已存在，不可注册
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "username exists");
+            return registerStatus;
+        }
+
+        if (!userService.enableMoblieRegister(userDetail.getMobile())){
+            //手机号已绑定，不可注册
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "mobile exists");
+            return registerStatus;
+        }
+
+        //存入到数据库
+        userService.userRegister(user, userDetail);
+
+        registerStatus.put("status", "success");
+        registerStatus.put("message", "register success");
+
+        return registerStatus;
     }
 
 }
