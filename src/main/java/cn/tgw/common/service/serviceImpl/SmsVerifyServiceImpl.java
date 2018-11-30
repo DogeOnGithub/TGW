@@ -1,6 +1,6 @@
 package cn.tgw.common.service.serviceImpl;
 
-import cn.tgw.common.MiaoDiUtils;
+import cn.tgw.common.utils.MiaoDiUtils;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.SmsVerifyService;

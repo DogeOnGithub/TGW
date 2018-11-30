@@ -3,6 +3,7 @@ package cn.tgw;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
+import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
@@ -146,6 +147,11 @@ public class TgwApplicationTests {
 	@Test
 	public void testRabbitMQ2(){
 		System.out.println(rabbitTemplate.receiveAndConvert("tgw.verifycode.queue"));
+	}
+
+	@Test
+	public void testMd5(){
+		System.out.println(MD5Utils.tgwMD5("password"));
 	}
 
 	@Test

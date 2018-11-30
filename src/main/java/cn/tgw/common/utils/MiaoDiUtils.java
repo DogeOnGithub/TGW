@@ -1,7 +1,7 @@
-package cn.tgw.common;
+package cn.tgw.common.utils;
 
+import cn.tgw.common.utils.HttpUtils;
 import cn.tgw.config.TjSanshaoMiaoDiConfig;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

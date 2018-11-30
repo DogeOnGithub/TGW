@@ -1,6 +1,6 @@
 package cn.tgw.common.service.serviceImpl;
 
-import cn.tgw.common.MiaoDiUtils;
+import cn.tgw.common.utils.MiaoDiUtils;
 import cn.tgw.common.service.MiaoDiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

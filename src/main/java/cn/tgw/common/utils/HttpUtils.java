@@ -1,4 +1,4 @@
-package cn.tgw.common;
+package cn.tgw.common.utils;
 
 import cn.tgw.config.TjSanshaoMiaoDiConfig;
 import org.springframework.beans.factory.annotation.Autowired;

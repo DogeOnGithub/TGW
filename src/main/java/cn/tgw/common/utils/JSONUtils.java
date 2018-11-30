@@ -1,4 +1,4 @@
-package cn.tgw.common;
+package cn.tgw.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
