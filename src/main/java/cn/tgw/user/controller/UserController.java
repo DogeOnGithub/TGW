@@ -78,12 +78,12 @@ public class UserController {
     }
 
     /*
-     * @Description:请求发送验证码
-     * @Param:[mobileNumber]
+     * @Description:发送验证码，requestParam=password参数可以用于请求修改密码的验证码（根据用户登录信息发送验证码，不需要输入手机号），不带有requestParam参数时，需要填写mobileNumber参数
+     * @Param:[mobileNumber, requestParam, session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>
      * @Author:TjSanshao
-     * @Date:2018-11-28
-     * @Time:17:40
+     * @Date:2018-11-30
+     * @Time:10:31
      **/
     @GetMapping("/user/sendMsgCode")
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session){
@@ -209,8 +209,16 @@ public class UserController {
         return registerStatus;
     }
 
+    /*
+     * @Description:修改密码，需要输入新密码、旧密码、验证码，需要用户登录
+     * @Param:[password, code, oldPassword, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-11-30
+     * @Time:10:29
+     **/
     @GetMapping("/user/password")
-    public Map<String, Object> changePassword(String password, String code, String oldPassword, HttpSession session){
+    public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session){
         HashMap<String, Object> passwordStatus = new HashMap<>();
 
         //查询session，用户是否已经登录
@@ -266,6 +274,42 @@ public class UserController {
         passwordStatus.put("message", "success");
 
         return passwordStatus;
+    }
+
+    /*
+     * @Description:使用get请求，返回当前登录用户的用户详细信息，需要用户登录
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-11-30
+     * @Time:10:36
+     **/
+    @GetMapping("/user/detail")
+    public Map<String, Object> getUserAndUserDetail(HttpSession session){
+        HashMap<String, Object> getDetailStatus = new HashMap<>();
+
+        //判断用户是否已经登录
+        Object sessionUser = session.getAttribute("user");
+
+        if (sessionUser == null){
+            //用户未登录
+            getDetailStatus.put("status", "authority");
+            getDetailStatus.put("message", "login first");
+            return getDetailStatus;
+        }
+
+        User userFromSession = (User)sessionUser;
+
+        User userInDB = userService.getUserById(userFromSession.getId());
+        UserDetail userDetail = userService.getUserDetailByUserId(userInDB);
+
+        getDetailStatus.put("status", "success");
+        userInDB.setPassword("");
+        getDetailStatus.put("user", userInDB);
+        getDetailStatus.put("userDetail", userDetail);
+        getDetailStatus.put("message", "success");
+
+        return getDetailStatus;
     }
 
 }

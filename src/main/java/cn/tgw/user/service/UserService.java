@@ -49,4 +49,6 @@ public interface UserService {
 
     User updateUserPassword(User user);
 
+    User getUserById(int id);
+
 }

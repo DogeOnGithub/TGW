@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
     public UserDetail getUserDetailByUserId(User user) {
 
         //查询指定用户的用户信息，包括id
@@ -104,5 +105,11 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKeySelective(user);
         return userMapper.selectByPrimaryKey(user.getId());
 
+    }
+
+    @Override
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    public User getUserById(int id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }
