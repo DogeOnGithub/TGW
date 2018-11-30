@@ -7,6 +7,8 @@ public class GoodsImage {
 
     private Integer tgwGoodsId;
 
+    private Integer isMain;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class GoodsImage {
 
     public void setTgwGoodsId(Integer tgwGoodsId) {
         this.tgwGoodsId = tgwGoodsId;
+    }
+
+    public Integer getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Integer isMain) {
+        this.isMain = isMain;
     }
 }

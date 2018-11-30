@@ -10,6 +10,9 @@
     <result column="goods_category" property="goodsCategory" jdbcType="VARCHAR" />
     <result column="is_online" property="isOnline" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="goodsALL" type="cn.tgw.goods.model.GoodsVO">
+
+  </resultMap>
   <sql id="Base_Column_List" >
     id, goods_title, oringinal_price, discount_price, tgw_bussinessman_id, goods_category, 
     is_online
@@ -19,6 +22,32 @@
     <include refid="Base_Column_List" />
     from tgw_goods
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findIndexGoodsByCityAndTypeAndFirstCategoryName" resultMap="goodsALL" parameterType="string">
+    select
+    tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_bussinessman_id,goods_category,is_online,
+    tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+    tgw_goods_image.id i_id,image_url,is_main,
+    shop_name,shop_location,
+    tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+    tgw_goods,tgw_goods_detail,tgw_goods_image,tgw_bussinessman_detail,tgw_second_category,tgw_first_category
+    WHERE
+    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_bussinessman_detail.id = tgw_goods.tgw_bussinessman_id
+    AND tgw_second_category.category_name = goods_category AND tgw_second_category.first_category_id = tgw_first_category.id
+    AND shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0
+    <choose>
+      <when test="type == 1">
+        Order By sales_volumn DESC
+      </when>
+      <when test="type == 2">
+        Order By creat_goods_time DESC
+      </when>
+      <when test="type == 3">
+        AND tgw_first_category.category_name=#{firstCategoryName,jdbcType=VARCHAR}
+      </when>
+    </choose>
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods
@@ -115,4 +144,7 @@
       is_online = #{isOnline,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
 </mapper>
