@@ -5,9 +5,10 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
     <result column="tgw_goods_id" property="tgwGoodsId" jdbcType="INTEGER" />
+    <result column="is_main" property="isMain" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, image_url, tgw_goods_id
+    id, image_url, tgw_goods_id, is_main
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,10 +21,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tgw.goods.model.GoodsImage" >
-    insert into tgw_goods_image (id, image_url, tgw_goods_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, #{tgwGoodsId,jdbcType=INTEGER}
-      )
+    insert into tgw_goods_image (id, image_url, tgw_goods_id, 
+      is_main)
+    values (#{id,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, #{tgwGoodsId,jdbcType=INTEGER}, 
+      #{isMain,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.goods.model.GoodsImage" >
     insert into tgw_goods_image
@@ -37,6 +38,9 @@
       <if test="tgwGoodsId != null" >
         tgw_goods_id,
       </if>
+      <if test="isMain != null" >
+        is_main,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -47,6 +51,9 @@
       </if>
       <if test="tgwGoodsId != null" >
         #{tgwGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null" >
+        #{isMain,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -59,13 +66,17 @@
       <if test="tgwGoodsId != null" >
         tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
       </if>
+      <if test="isMain != null" >
+        is_main = #{isMain,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.tgw.goods.model.GoodsImage" >
     update tgw_goods_image
     set image_url = #{imageUrl,jdbcType=VARCHAR},
-      tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER}
+      tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
+      is_main = #{isMain,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

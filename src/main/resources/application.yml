@@ -60,6 +60,7 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations:
     - classpath:mybatis/user/mapper/*
+    - classpath:mybatis/goods/mapper/*
 
 #秒嘀API配置，具体可配置内容参考cn.tgw.config.TjSanshaoMiaoDiConfig
 miaodi:
