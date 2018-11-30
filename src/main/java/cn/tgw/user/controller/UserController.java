@@ -6,11 +6,15 @@ import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -285,7 +289,7 @@ public class UserController {
      * @Time:10:36
      **/
     @GetMapping("/user/detail")
-    public Map<String, Object> getUserAndUserDetail(HttpSession session){
+    public Map<String, Object> userDetail(HttpSession session){
         HashMap<String, Object> getDetailStatus = new HashMap<>();
 
         //判断用户是否已经登录
@@ -310,6 +314,36 @@ public class UserController {
         getDetailStatus.put("message", "success");
 
         return getDetailStatus;
+    }
+
+    @PostMapping("/user/detail")
+    public Map<String, Object> userDetail(UserDetail userDetail, HttpSession session){
+        HashMap<String, Object> postDetailStatus = new HashMap<>();
+
+        //判断用户是否已经登录
+        Object sessionUser = session.getAttribute("user");
+
+        if (sessionUser == null){
+            //用户未登录
+            postDetailStatus.put("status", "authority");
+            postDetailStatus.put("message", "login first");
+            return postDetailStatus;
+        }
+
+        User userFromSession = (User)sessionUser;
+        userDetail.setTgwUserId(userFromSession.getId());
+        userDetail.setLastUpdateTime(new Date());
+
+        //更新数据库，并获得更新后的UserDetail
+        UserDetail userDetailUpdated = userService.updateUserDetail(userDetail);
+
+        postDetailStatus.put("status", "success");
+        userFromSession.setPassword("");
+        postDetailStatus.put("user", userFromSession);
+        postDetailStatus.put("userDetail", userDetailUpdated);
+        postDetailStatus.put("message", "success");
+
+        return postDetailStatus;
     }
 
 }

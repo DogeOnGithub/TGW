@@ -21,5 +21,7 @@ public interface UserDetailMapper {
 
     UserDetail selectByUserId(Integer userId);
 
+    int updateByUserIdSelective(UserDetail record);
+
     //自定义查询结束
 }

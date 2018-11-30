@@ -112,4 +112,10 @@ public class UserServiceImpl implements UserService {
     public User getUserById(int id) {
         return userMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public UserDetail updateUserDetail(UserDetail userDetail) {
+        int rows = userDetailMapper.updateByUserIdSelective(userDetail);
+        return userDetailMapper.selectByUserId(userDetail.getTgwUserId());
+    }
 }

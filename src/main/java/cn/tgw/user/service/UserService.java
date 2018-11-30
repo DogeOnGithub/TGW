@@ -51,4 +51,6 @@ public interface UserService {
 
     User getUserById(int id);
 
+    UserDetail updateUserDetail(UserDetail userDetail);
+
 }

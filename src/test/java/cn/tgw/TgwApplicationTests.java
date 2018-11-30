@@ -7,6 +7,7 @@ import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
+import cn.tgw.user.model.UserDetail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -152,6 +153,15 @@ public class TgwApplicationTests {
 	@Test
 	public void testMd5(){
 		System.out.println(MD5Utils.tgwMD5("password"));
+	}
+
+	@Test
+	public void testUserDetailMapper2(){
+		UserDetail userDetail = new UserDetail();
+		userDetail.setTgwUserId(6);
+		userDetail.setLastUpdateTime(new Date());
+
+		System.out.println(userDetailMapper.updateByUserIdSelective(userDetail));
 	}
 
 	@Test

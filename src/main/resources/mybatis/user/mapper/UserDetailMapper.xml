@@ -133,6 +133,36 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 自定义更新开始 -->
+
+  <update id="updateByUserIdSelective" parameterType="cn.tgw.user.model.UserDetail" >
+    update tgw_user_detail
+    <set >
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userImageUrl != null" >
+        user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tgw_user_id = #{tgwUserId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 自定义更新结束 -->
+
   <update id="updateByPrimaryKey" parameterType="cn.tgw.user.model.UserDetail" >
     update tgw_user_detail
     set tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
