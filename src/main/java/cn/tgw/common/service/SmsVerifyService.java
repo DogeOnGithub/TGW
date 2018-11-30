@@ -43,6 +43,8 @@ public interface SmsVerifyService {
      **/
     public boolean checkCode(String mobile, String code);
 
+    public void codeUsed(String mobile);
+
     public void verifyCodeQueueListener(String mobile);
 
 }

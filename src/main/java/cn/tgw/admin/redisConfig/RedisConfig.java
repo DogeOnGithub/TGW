@@ -21,6 +21,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.net.UnknownHostException;
+import java.time.Duration;
 
 @Configuration
 @EnableCaching//开启注解
@@ -58,6 +59,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public RedisCacheManager userCacheManager(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(30L))//设置该缓存管理的键过期时间
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<User>(User.class)));
         return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(configuration).build();

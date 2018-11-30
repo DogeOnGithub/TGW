@@ -8,6 +8,7 @@ import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
     private SmsVerifyMapper smsVerifyMapper;
 
     @Override
-    @Cacheable(cacheNames = {"userCache"}, key = "#username", cacheManager = "userCacheManager")
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
     public User getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status) {
         User user = new User();
         user.setUsername(username);
@@ -84,5 +85,24 @@ public class UserServiceImpl implements UserService {
         smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify);
 
         return true;
+    }
+
+    @Override
+    public UserDetail getUserDetailByUserId(User user) {
+
+        //查询指定用户的用户信息，包括id
+        User queryUser = userMapper.selectByUsername(user);
+
+        return userDetailMapper.selectByUserId(queryUser.getId());
+    }
+
+    @Override
+    @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    @Transactional
+    public User updateUserPassword(User user) {
+
+        userMapper.updateByPrimaryKeySelective(user);
+        return userMapper.selectByPrimaryKey(user.getId());
+
     }
 }

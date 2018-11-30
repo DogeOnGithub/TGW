@@ -63,10 +63,11 @@ public class UserController {
         if (user != null){
             loginStatus.put("status", "success");
             loginStatus.put("message", "login success");
+            user.setPassword(""); //不返回密码到客户端
             loginStatus.put("user", user);
 
-            //将记录存入session，键为username，值为User对象
-            session.setAttribute(user.getUsername(), user);
+            //将记录存入session，键为"user"，值为User对象
+            session.setAttribute("user", user);
 
         }else{
             loginStatus.put("status", "fail");
@@ -85,8 +86,40 @@ public class UserController {
      * @Time:17:40
      **/
     @GetMapping("/user/sendMsgCode")
-    public Map<String, Object> sendMsgCode(String mobileNumber){
+    public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session){
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
+
+        //是否是修改密码要求的验证码
+        if (requestParam.equals("password")){
+            //查询session，用户是否已经登录
+            Object sessionUser = session.getAttribute("user");
+            if (sessionUser == null){
+                //用户没有登录，提示用户先登录
+                sendMsgStatus.put("status", "authority");
+                sendMsgStatus.put("message", "login first");
+                return sendMsgStatus;
+            }
+
+            //用户已经登录
+            User userFromSession = (User)sessionUser;
+
+            //根据用户名查询绑定的手机号码
+            UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
+
+            smsVerifyService.sendMsgCodeAsync(userDetail.getMobile(), miaoDiService.generateCode(6));
+
+            sendMsgStatus.put("status", "success");
+            sendMsgStatus.put("message", "success");
+
+            return sendMsgStatus;
+        }
+
+        //验证手机号码是否为空
+        if (StringUtils.isEmpty(mobileNumber)){
+            sendMsgStatus.put("status", "fail");
+            sendMsgStatus.put("message", "please input correct phone number");
+            return sendMsgStatus;
+        }
 
         //校验手机号码的正则表达式
         String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
@@ -119,7 +152,6 @@ public class UserController {
                 sendMsgStatus.put("message", "success");
 
                 //异步发送手机验证码
-                smsVerifyService.testAsync();
                 smsVerifyService.sendMsgCodeAsync(mobileNumber, miaoDiService.generateCode(6));
 
                 return sendMsgStatus;
@@ -175,6 +207,65 @@ public class UserController {
         registerStatus.put("message", "register success");
 
         return registerStatus;
+    }
+
+    @GetMapping("/user/password")
+    public Map<String, Object> changePassword(String password, String code, String oldPassword, HttpSession session){
+        HashMap<String, Object> passwordStatus = new HashMap<>();
+
+        //查询session，用户是否已经登录
+        Object sessionUser = session.getAttribute("user");
+        if (sessionUser == null){
+            //用户没有登录，提示用户先登录
+            passwordStatus.put("status", "authority");
+            passwordStatus.put("message", "login first");
+            return passwordStatus;
+        }
+
+        //用户已经登录
+        User userFromSession = (User)sessionUser;
+
+        //根据用户名查询绑定的手机号码
+        UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
+
+        //判断是否带有验证码，如果没有，需要发送验证码
+        if (StringUtils.isEmpty(code)){
+            //请求中没有验证码
+            passwordStatus.put("status", "fail");
+            passwordStatus.put("message", "verify code error");
+            return passwordStatus;
+        }
+
+        //请求中带有验证码，开始验证验证码
+        if (!smsVerifyService.checkCode(userDetail.getMobile(), code)){
+            //验证码不通过
+            passwordStatus.put("status", "fail");
+            passwordStatus.put("message", "verify code error");
+            return passwordStatus;
+        }
+
+        //查询数据库中的User，验证用户名和用户输入的旧密码是否匹配
+        User queryUser = userService.getUserByUsernameAndPasswordAndStatus(userFromSession.getUsername(), oldPassword, new Byte("1"));
+
+        if (queryUser == null){
+            //没有查询到用户，即用户名和旧密码不匹配
+            passwordStatus.put("status", "fail");
+            passwordStatus.put("message", "old password error");
+            return passwordStatus;
+        }
+
+        //更新数据库信息
+        queryUser.setPassword(password);
+        queryUser.setUserStatus(new Byte("1"));
+        userService.updateUserPassword(queryUser);
+
+        //设置验证码状态为已使用
+        smsVerifyService.codeUsed(userDetail.getMobile());
+
+        passwordStatus.put("status", "success");
+        passwordStatus.put("message", "success");
+
+        return passwordStatus;
     }
 
 }

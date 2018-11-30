@@ -167,6 +167,15 @@ public class SmsVerifyServiceImpl implements SmsVerifyService {
         return true;
     }
 
+    @Override
+    @Async
+    public void codeUsed(String mobile){
+        SmsVerify smsVerify = new SmsVerify();
+        smsVerify.setStatus(new Byte("1"));
+        smsVerify.setMobile(mobile);
+        smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify);
+    }
+
     /*
      * @Description:该方法监听消息队列，将数据库中的验证码设置为过期
      * @Param:[mobile]

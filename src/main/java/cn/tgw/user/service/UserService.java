@@ -35,6 +35,18 @@ public interface UserService {
      **/
     boolean enableMoblieRegister(String mobile);
 
+    /*
+     * @Description:将用户注册信息持久化到数据库
+     * @Param:[user, userDetail]
+     * @Return:boolean
+     * @Author:TjSanshao
+     * @Date:2018-11-29
+     * @Time:16:50
+     **/
     boolean userRegister(User user, UserDetail userDetail);
+
+    UserDetail getUserDetailByUserId(User user);
+
+    User updateUserPassword(User user);
 
 }

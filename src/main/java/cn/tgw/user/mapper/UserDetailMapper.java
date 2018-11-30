@@ -19,5 +19,7 @@ public interface UserDetailMapper {
 
     UserDetail selectByMobile(String mobile);
 
+    UserDetail selectByUserId(Integer userId);
+
     //自定义查询结束
 }

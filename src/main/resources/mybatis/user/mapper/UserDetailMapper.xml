@@ -30,6 +30,13 @@
     where mobile = #{mobile,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_user_detail
+    where tgw_user_id = #{userId}
+  </select>
+
   <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
