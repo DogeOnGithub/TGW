@@ -225,14 +225,10 @@ public class UserController {
     public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session){
         HashMap<String, Object> passwordStatus = new HashMap<>();
 
-        //查询session，用户是否已经登录
+        //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
+
+        //从session中获取用户信息
         Object sessionUser = session.getAttribute("user");
-        if (sessionUser == null){
-            //用户没有登录，提示用户先登录
-            passwordStatus.put("status", "authority");
-            passwordStatus.put("message", "login first");
-            return passwordStatus;
-        }
 
         //用户已经登录
         User userFromSession = (User)sessionUser;
@@ -292,15 +288,18 @@ public class UserController {
     public Map<String, Object> userDetail(HttpSession session){
         HashMap<String, Object> getDetailStatus = new HashMap<>();
 
-        //判断用户是否已经登录
+        //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
+
+        //从session中获取用户信息
         Object sessionUser = session.getAttribute("user");
 
-        if (sessionUser == null){
-            //用户未登录
-            getDetailStatus.put("status", "authority");
-            getDetailStatus.put("message", "login first");
-            return getDetailStatus;
-        }
+        //验证用户登录已使用过滤器
+//        if (sessionUser == null){
+//            //用户未登录
+//            getDetailStatus.put("status", "authority");
+//            getDetailStatus.put("message", "login first");
+//            return getDetailStatus;
+//        }
 
         User userFromSession = (User)sessionUser;
 
@@ -320,15 +319,10 @@ public class UserController {
     public Map<String, Object> userDetail(UserDetail userDetail, HttpSession session){
         HashMap<String, Object> postDetailStatus = new HashMap<>();
 
-        //判断用户是否已经登录
-        Object sessionUser = session.getAttribute("user");
+        //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
 
-        if (sessionUser == null){
-            //用户未登录
-            postDetailStatus.put("status", "authority");
-            postDetailStatus.put("message", "login first");
-            return postDetailStatus;
-        }
+        //从session中获取用户信息
+        Object sessionUser = session.getAttribute("user");
 
         User userFromSession = (User)sessionUser;
         userDetail.setTgwUserId(userFromSession.getId());
