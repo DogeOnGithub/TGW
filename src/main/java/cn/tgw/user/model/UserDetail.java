@@ -22,4 +22,6 @@ public class UserDetail {
 
     private String userImageUrl;
 
+    private String nickName;
+
 }

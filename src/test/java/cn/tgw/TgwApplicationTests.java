@@ -165,6 +165,25 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testUserDetailMapper3(){
+		UserDetail userDetail = new UserDetail();
+		userDetail.setTgwUserId(6);
+		userDetail.setSex(new Byte("0"));
+		userDetail.setMobile("17607591628");
+		userDetail.setEmail("testupdatebyuserid@test.com");
+		userDetail.setLastUpdateTime(new Date());
+		userDetail.setNickName("tgw_" + userDetail.getMobile());
+		System.out.println(userDetailMapper.updateByUserIdSelective(userDetail));
+	}
+
+	@Test
+	public void testUserDetailMapper4(){
+		System.out.println(userDetailMapper.selectByUserId(6));
+		System.out.println(userDetailMapper.selectByPrimaryKey(4));
+		System.out.println(userDetailMapper.selectByMobile("17607591628"));
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 

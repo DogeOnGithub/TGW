@@ -10,9 +10,10 @@
     <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
     <result column="user_image_url" property="userImageUrl" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, tgw_user_id, sex, mobile, email, reg_time, last_update_time, user_image_url
+    id, tgw_user_id, sex, mobile, email, reg_time, last_update_time, user_image_url, nick_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -46,10 +47,10 @@
   <insert id="insert" parameterType="cn.tgw.user.model.UserDetail" >
     insert into tgw_user_detail (id, tgw_user_id, sex, 
       mobile, email, reg_time, 
-      last_update_time, user_image_url)
+      last_update_time, user_image_url, nick_name)
     values (#{id,jdbcType=INTEGER}, #{tgwUserId,jdbcType=INTEGER}, #{sex,jdbcType=TINYINT}, 
       #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{regTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{userImageUrl,jdbcType=VARCHAR})
+      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{userImageUrl,jdbcType=VARCHAR}, #{#nickName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.user.model.UserDetail" >
     insert into tgw_user_detail
@@ -78,6 +79,9 @@
       <if test="userImageUrl != null" >
         user_image_url,
       </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -104,6 +108,9 @@
       <if test="userImageUrl != null" >
         #{userImageUrl,jdbcType=VARCHAR},
       </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.user.model.UserDetail" >
@@ -129,6 +136,9 @@
       </if>
       <if test="userImageUrl != null" >
         user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -157,6 +167,9 @@
       <if test="userImageUrl != null" >
         user_image_url = #{userImageUrl,jdbcType=VARCHAR},
       </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
     </set>
     where tgw_user_id = #{tgwUserId,jdbcType=INTEGER}
   </update>
@@ -171,7 +184,8 @@
       email = #{email,jdbcType=VARCHAR},
       reg_time = #{regTime,jdbcType=TIMESTAMP},
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
-      user_image_url = #{userImageUrl,jdbcType=VARCHAR}
+      user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
