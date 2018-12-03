@@ -211,6 +211,10 @@ public class UserController {
         registerStatus.put("status", "success");
         registerStatus.put("message", "register success");
 
+        user.setPassword("");
+        registerStatus.put("user", user);
+        registerStatus.put("userDetail", userDetail);
+
         return registerStatus;
     }
 
