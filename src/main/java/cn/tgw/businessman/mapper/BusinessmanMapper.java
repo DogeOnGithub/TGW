@@ -14,4 +14,11 @@ public interface BusinessmanMapper {
     int updateByPrimaryKeySelective(Businessman record);
 
     int updateByPrimaryKey(Businessman record);
+
+    //自定义方法开始
+
+    Businessman selectByUsernameAndPasswordAndStatus(Businessman record);
+
+    //自定义方法结束
+
 }

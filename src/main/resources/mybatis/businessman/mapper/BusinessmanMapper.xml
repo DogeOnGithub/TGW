@@ -16,6 +16,18 @@
     from tgw_businessman
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 自定义查询开始 -->
+
+  <select id="selectByUsernameAndPasswordAndStatus" resultMap="BaseResultMap" parameterType="cn.tgw.businessman.model.Businessman">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and status = #{status,jdbcType=TINYINT}
+  </select>
+
+  <!-- 自定义查询结束 -->
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_businessman
     where id = #{id,jdbcType=INTEGER}

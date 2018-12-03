@@ -24,7 +24,7 @@ public class BusinessmanFilterCustomConfiguration {
         registrationBean.setFilter(new BusinessmanAuthenticationFilter());
 
         //添加过滤规则
-        registrationBean.addUrlPatterns("/businessman/*");
+        registrationBean.addUrlPatterns("/businessman/test");
 
         //设置过滤器名称
         registrationBean.setName("BusinessmanLoginFilter");
