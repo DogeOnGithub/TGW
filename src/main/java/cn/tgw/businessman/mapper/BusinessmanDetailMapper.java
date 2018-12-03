@@ -25,5 +25,7 @@ public interface BusinessmanDetailMapper {
 
     List<BusinessmanDetail> selectAllBusinessmanDetail();
 
+    BusinessmanDetail selectByContactPhone(String contactPhone);
+
     //自定义方法结束
 }

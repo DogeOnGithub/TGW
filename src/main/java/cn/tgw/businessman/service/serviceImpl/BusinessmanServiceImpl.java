@@ -5,8 +5,11 @@ import cn.tgw.businessman.mapper.BusinessmanMapper;
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.businessman.model.BusinessmanDetail;
 import cn.tgw.businessman.service.BusinessmanService;
+import cn.tgw.common.mapper.SmsVerifyMapper;
+import cn.tgw.common.model.SmsVerify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class BusinessmanServiceImpl implements BusinessmanService
 
     @Autowired
     private BusinessmanDetailMapper businessmanDetailMapper;
+
+    @Autowired
+    private SmsVerifyMapper smsVerifyMapper;
 
     /*
      * @Description:根据用户名、密码、状态查询商家用户
@@ -109,4 +115,50 @@ public class BusinessmanServiceImpl implements BusinessmanService
     public List<BusinessmanDetail> getBusinessmanDetailFailForReview() {
         return businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("2"));
     }
+
+    /*
+     * @Description:验证用户名是否可以注册
+     * @Param:[businessman]
+     * @Return:boolean
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:17:16
+     **/
+    @Override
+    public boolean enableBusinessmanRegister(Businessman businessman) {
+        //判断用户名是否存在
+        if (businessmanMapper.selectByUsername(businessman) != null) {
+            //用户名已存在
+            return false;
+        }
+
+        //用户名未注册
+        return true;
+    }
+
+    /*
+     * @Description:商家用户注册
+     * @Param:[businessman, businessmanDetail]
+     * @Return:boolean
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:17:48
+     **/
+    @Override
+    @Transactional
+    public boolean businessmanRegister(Businessman businessman, BusinessmanDetail businessmanDetail) {
+        businessman.setStatus(new Byte("1"));
+        businessmanMapper.insertSelective(businessman);
+        businessmanDetail.setTgwBusinessmanId(businessman.getId());
+        businessmanDetailMapper.insertSelective(businessmanDetail);
+
+        //更新验证码状态
+        SmsVerify smsVerify = new SmsVerify();
+        smsVerify.setMobile(businessmanDetail.getContactPhoneNumber());
+        smsVerify.setStatus(new Byte("1"));
+        smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify);
+
+        return true;
+    }
+
 }

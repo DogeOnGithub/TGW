@@ -44,6 +44,7 @@
       status)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.businessman.model.Businessman" >
     insert into tgw_businessman
@@ -75,6 +76,7 @@
         #{status,jdbcType=TINYINT},
       </if>
     </trim>
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.businessman.model.Businessman" >
     update tgw_businessman
