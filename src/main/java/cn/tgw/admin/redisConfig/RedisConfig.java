@@ -54,14 +54,4 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(stringSerializer );
         return redisTemplate;
     }
-
-    //注入自定义RedisCacheManager，设置键值的序列化器
-    @Bean
-    public RedisCacheManager userCacheManager(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
-        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(30L))//设置该缓存管理的键过期时间
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<User>(User.class)));
-        return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(configuration).build();
-    }
 }

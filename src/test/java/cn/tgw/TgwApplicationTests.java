@@ -10,6 +10,7 @@ import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
+import cn.tgw.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -48,6 +49,9 @@ public class TgwApplicationTests {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+
+	@Autowired
+	private UserService userService;
 
 	/*
 	 * @Description:测试UserMapper
@@ -195,6 +199,11 @@ public class TgwApplicationTests {
 	public void testBusinessmanMapper(){
 		System.out.println(businessmanMapper.selectByPrimaryKey(1));
 		System.out.println(businessmanDetailMapper.selectByPrimaryKey(2));
+	}
+
+	@Test
+	public void testUserService(){
+		System.out.println(userService.getUserById(1));
 	}
 
 	@Test
