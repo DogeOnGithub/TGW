@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  *
  **/
 @Configuration
-public class FilterCustomConfiguration {
+public class UserFilterCustomConfiguration {
 
     @Bean
     public FilterRegistrationBean userAuthenticationFilterRegistration(){
