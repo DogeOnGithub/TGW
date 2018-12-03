@@ -1,6 +1,7 @@
 package cn.tgw.businessman.service;
 
 import cn.tgw.businessman.model.Businessman;
+import cn.tgw.businessman.model.BusinessmanDetail;
 import org.springframework.stereotype.Service;
 
 /*
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
  **/
 public interface BusinessmanService {
 
-    Businessman getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status);
+    Businessman getBusinessmanByUsernameAndPasswordAndStatus(String username, String password, Byte status);
+
+    BusinessmanDetail getBusinessmanDetailByBusinessmanId(Businessman businessman);
 
 }

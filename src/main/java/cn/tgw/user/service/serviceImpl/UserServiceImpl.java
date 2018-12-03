@@ -91,10 +91,7 @@ public class UserServiceImpl implements UserService {
     @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
     public UserDetail getUserDetailByUserId(User user) {
 
-        //查询指定用户的用户信息，包括id
-        User queryUser = userMapper.selectByUsername(user);
-
-        return userDetailMapper.selectByUserId(queryUser.getId());
+        return userDetailMapper.selectByUserId(user.getId());
     }
 
     @Override

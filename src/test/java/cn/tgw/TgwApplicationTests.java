@@ -2,6 +2,7 @@ package cn.tgw;
 
 import cn.tgw.businessman.mapper.BusinessmanDetailMapper;
 import cn.tgw.businessman.mapper.BusinessmanMapper;
+import cn.tgw.businessman.model.Businessman;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
@@ -204,6 +205,18 @@ public class TgwApplicationTests {
 	@Test
 	public void testUserService(){
 		System.out.println(userService.getUserById(1));
+	}
+
+	@Test
+	public void testBusinessmanMapper2(){
+		Businessman businessman = new Businessman();
+		businessman.setUsername("TjSanshao");
+		System.out.println(businessmanMapper.selectByUsername(businessman));
+	}
+
+	@Test
+	public void testBusinessmanDetailMapper(){
+		System.out.println(businessmanDetailMapper.selectByBusinessmanId(1));
 	}
 
 	@Test

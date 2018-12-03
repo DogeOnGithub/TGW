@@ -14,4 +14,10 @@ public interface BusinessmanDetailMapper {
     int updateByPrimaryKeySelective(BusinessmanDetail record);
 
     int updateByPrimaryKey(BusinessmanDetail record);
+
+    //自定义方法开始
+
+    BusinessmanDetail selectByBusinessmanId(Integer businessmanId);
+
+    //自定义方法结束
 }

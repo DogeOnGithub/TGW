@@ -25,6 +25,18 @@
     from tgw_businessman_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 自定义查询开始 -->
+
+  <select id="selectByBusinessmanId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman_detail
+    where tgw_businessman_id = #{businessmanId}
+  </select>
+
+  <!-- 自定义查询结束 -->
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_businessman_detail
     where id = #{id,jdbcType=INTEGER}

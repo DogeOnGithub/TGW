@@ -86,6 +86,8 @@ public class SmsVerifyServiceImpl implements SmsVerifyService {
                     Calendar nowSend = Calendar.getInstance();
                     nowSend.setTime(new Date());
 
+                    //TODO 这里逻辑有问题，没有判断月份，如果月份不同，下面的比较毫无意义
+
                     if (lastSend.get(Calendar.DATE) < nowSend.get(Calendar.DATE)){
                         //今天没有发送过验证码
                         smsVerify.setCode(code);
