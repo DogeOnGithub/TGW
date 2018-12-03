@@ -170,10 +170,12 @@
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.2</version>
 				<configuration>
-					<!--user-->
+					<!-- user -->
 					<!--<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>-->
-					<!--goods-->
-					<configurationFile>${basedir}/src/main/resources/generator/xiaojian_genertorConfig.xml</configurationFile>
+					<!-- goods -->
+					<!--<configurationFile>${basedir}/src/main/resources/generator/xiaojian_genertorConfig.xml</configurationFile>-->
+					<!-- businessman -->
+					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
 					<overwrite>true</overwrite>
 					<verbose>true</verbose>
 				</configuration>

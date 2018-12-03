@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tgw.businessman.mapper.BusinessmanDetailMapper" >
+  <resultMap id="BaseResultMap" type="cn.tgw.businessman.model.BusinessmanDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tgw_businessman_id" property="tgwBusinessmanId" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_location" property="shopLocation" jdbcType="VARCHAR" />
+    <result column="shop_desc" property="shopDesc" jdbcType="VARCHAR" />
+    <result column="shop_time_open" property="shopTimeOpen" jdbcType="TIMESTAMP" />
+    <result column="shop_time_close" property="shopTimeClose" jdbcType="TIMESTAMP" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="contact_phone_number" property="contactPhoneNumber" jdbcType="VARCHAR" />
+    <result column="shop_status" property="shopStatus" jdbcType="TINYINT" />
+    <result column="tgw_user_id" property="tgwUserId" jdbcType="INTEGER" />
+    <result column="shop_notice" property="shopNotice" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tgw_businessman_id, shop_name, shop_location, shop_desc, shop_time_open, shop_time_close, 
+    phone_number, contact_phone_number, shop_status, tgw_user_id, shop_notice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tgw_businessman_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tgw_businessman_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
+    insert into tgw_businessman_detail (id, tgw_businessman_id, shop_name, 
+      shop_location, shop_desc, shop_time_open, 
+      shop_time_close, phone_number, contact_phone_number, 
+      shop_status, tgw_user_id, shop_notice
+      )
+    values (#{id,jdbcType=INTEGER}, #{tgwBusinessmanId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
+      #{shopLocation,jdbcType=VARCHAR}, #{shopDesc,jdbcType=VARCHAR}, #{shopTimeOpen,jdbcType=TIMESTAMP}, 
+      #{shopTimeClose,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR}, 
+      #{shopStatus,jdbcType=TINYINT}, #{tgwUserId,jdbcType=INTEGER}, #{shopNotice,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
+    insert into tgw_businessman_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopLocation != null" >
+        shop_location,
+      </if>
+      <if test="shopDesc != null" >
+        shop_desc,
+      </if>
+      <if test="shopTimeOpen != null" >
+        shop_time_open,
+      </if>
+      <if test="shopTimeClose != null" >
+        shop_time_close,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="contactPhoneNumber != null" >
+        contact_phone_number,
+      </if>
+      <if test="shopStatus != null" >
+        shop_status,
+      </if>
+      <if test="tgwUserId != null" >
+        tgw_user_id,
+      </if>
+      <if test="shopNotice != null" >
+        shop_notice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tgwBusinessmanId != null" >
+        #{tgwBusinessmanId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLocation != null" >
+        #{shopLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDesc != null" >
+        #{shopDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTimeOpen != null" >
+        #{shopTimeOpen,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTimeClose != null" >
+        #{shopTimeClose,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNumber != null" >
+        #{contactPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null" >
+        #{shopStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tgwUserId != null" >
+        #{tgwUserId,jdbcType=INTEGER},
+      </if>
+      <if test="shopNotice != null" >
+        #{shopNotice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
+    update tgw_businessman_detail
+    <set >
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLocation != null" >
+        shop_location = #{shopLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDesc != null" >
+        shop_desc = #{shopDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTimeOpen != null" >
+        shop_time_open = #{shopTimeOpen,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTimeClose != null" >
+        shop_time_close = #{shopTimeClose,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNumber != null" >
+        contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null" >
+        shop_status = #{shopStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tgwUserId != null" >
+        tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
+      </if>
+      <if test="shopNotice != null" >
+        shop_notice = #{shopNotice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
+    update tgw_businessman_detail
+    set tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_location = #{shopLocation,jdbcType=VARCHAR},
+      shop_desc = #{shopDesc,jdbcType=VARCHAR},
+      shop_time_open = #{shopTimeOpen,jdbcType=TIMESTAMP},
+      shop_time_close = #{shopTimeClose,jdbcType=TIMESTAMP},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
+      shop_status = #{shopStatus,jdbcType=TINYINT},
+      tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
+      shop_notice = #{shopNotice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
