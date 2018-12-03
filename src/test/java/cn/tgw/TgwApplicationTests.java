@@ -1,5 +1,7 @@
 package cn.tgw;
 
+import cn.tgw.businessman.mapper.BusinessmanDetailMapper;
+import cn.tgw.businessman.mapper.BusinessmanMapper;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
@@ -33,6 +35,12 @@ public class TgwApplicationTests {
 	//tgw_sms_verify表
 	@Autowired
 	private SmsVerifyMapper smsVerifyMapper;
+
+	@Autowired
+	private BusinessmanMapper businessmanMapper;
+
+	@Autowired
+	private BusinessmanDetailMapper businessmanDetailMapper;
 
 	//秒嘀业务
 	@Autowired
@@ -181,6 +189,12 @@ public class TgwApplicationTests {
 		System.out.println(userDetailMapper.selectByUserId(6));
 		System.out.println(userDetailMapper.selectByPrimaryKey(4));
 		System.out.println(userDetailMapper.selectByMobile("17607591628"));
+	}
+
+	@Test
+	public void testBusinessmanMapper(){
+		System.out.println(businessmanMapper.selectByPrimaryKey(1));
+		System.out.println(businessmanDetailMapper.selectByPrimaryKey(2));
 	}
 
 	@Test
