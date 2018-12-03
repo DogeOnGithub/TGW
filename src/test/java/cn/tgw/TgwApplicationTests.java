@@ -233,6 +233,8 @@ public class TgwApplicationTests {
 	@Test
 	public void testBusinessmanDetailMapper4(){
 		System.out.println(businessmanDetailMapper.selectByContactPhone("98765432101"));
+//		System.out.println(businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("0")));
+//		System.out.println(businessmanDetailMapper.selectAllBusinessman());
 	}
 
 	@Test

@@ -80,7 +80,7 @@ public class QiniuUtil {
                     Response response = uploadManager.put(file, key, upToken, null, null);
                     //解析上传成功的结果
                     DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
-                    String return_path = path + "/" + putRet.key;
+                    String return_path = "http://"+path + "/" + putRet.key;
                     return return_path;
                 } catch (QiniuException ex) {
                     Response r = ex.response;

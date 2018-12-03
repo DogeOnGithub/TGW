@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>后台管理</title>
+<link href="/admin_static/login.css" rel="stylesheet" type="text/css" />
+    <script src="/jquery-easyui-1.3.3/jquery.min.js"></script>
+    <script src="/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+
+</head>
+
+
+<body>
+<div class="login_box">
+      <div class="login_l_img"><img src="/admin_static/images/login-img.png" /></div>
+      <div class="login">
+          <div class="login_logo"><a href="#"><img src="/admin_static/images/imglogin.png2.png" /></a></div>
+          <div class="login_name">
+               <p>团购网后台管理系统</p>
+          </div>
+          <form >
+              <input name="username" id="tgwManagerName"  type="text"  value="admin" onfocus="this.value=''" onblur="if(this.value==''){this.value='admin'}">
+              <span id="password_text" onclick="this.style.display='none';document.getElementById('password').style.display='block';document.getElementById('password').focus().select();" >密码</span>
+			  <input name="password" type="password" value="123" id="password" style="display:none;" />
+              <input value="登录" style="width:100%;" type="button" onclick="login()">
+          </form>
+      </div>
+      <div class="copyright"> 版权所有--By并夕夕团队© 技术支持：QQ：877657682</div>
+</div>
+</body>
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            url:"manager_login",
+            type:"post",
+            data:{tgwManagerName:$('#tgwManagerName').val(),managerPassword:$('#password').val()},
+            success:function(result){
+               // console.log(result);
+                //var result=eval('('+result+')');
+                if(result.status){
+                    window.location=result.url;
+                }else {
+                    alert(result.msg);
+                }
+            },
+            error:function(e){
+                alert("错误！！");
+
+            }
+        });
+    }
+</script>
+</html>
