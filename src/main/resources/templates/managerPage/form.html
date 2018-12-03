@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单内容</title>
+    <script src="/ueditor/ueditor.config.js"></script>
+    <script src="/ueditor/ueditor.all.js"></script>
+    <script src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    <script type="text/javascript">
+        var editor = UE.getEditor('container');
+        UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+
+        UE.Editor.prototype.getActionUrl = function(action){
+
+            if(action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage'){
+                return '/uploadimage';
+            }else{
+                return this._bkGetActionUrl.call(this, action);
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+    <div>
+        <form action="/content" method="post">
+            <textarea id="container" name="content" type="text/plain">初始化内容</textarea>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
