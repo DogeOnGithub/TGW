@@ -46,7 +46,7 @@ public class BusinessmanController {
      * @Date:2018-12-03
      * @Time:10:48
      **/
-    @GetMapping("/businessman/login")
+    @GetMapping("/tjsanshao/businessman/login")
     public Map<String, Object> login(String username, String password, HttpSession session) {
         HashMap<String, Object> loginStatus = new HashMap<>();
 
@@ -75,7 +75,7 @@ public class BusinessmanController {
         return loginStatus;
     }
 
-    @GetMapping("/businessman/sendMsgCode")
+    @GetMapping("/tjsanshao/businessman/sendMsgCode")
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session) {
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
 

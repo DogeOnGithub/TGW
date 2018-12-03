@@ -50,7 +50,7 @@ public class UserController {
      * @Date:2018-11-28
      * @Time:17:38
      **/
-    @GetMapping("/user/login")
+    @GetMapping("/tjsanshao/user/login")
     public Map<String, Object> login(String username, String password, HttpSession session){
         HashMap<String, Object> loginStatus = new HashMap<>();
 
@@ -88,7 +88,7 @@ public class UserController {
      * @Date:2018-11-30
      * @Time:10:31
      **/
-    @GetMapping("/user/sendMsgCode")
+    @GetMapping("/tjsanshao/user/sendMsgCode")
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session){
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
 
@@ -172,7 +172,7 @@ public class UserController {
      * @Date:2018-11-29
      * @Time:11:09
      **/
-    @GetMapping("/user/register")
+    @GetMapping("/tjsanshao/user/register")
     public Map<String, Object> register(User user, UserDetail userDetail, String code){
         HashMap<String, Object> registerStatus = new HashMap<>();
 
@@ -226,7 +226,7 @@ public class UserController {
      * @Date:2018-11-30
      * @Time:10:29
      **/
-    @GetMapping("/user/password")
+    @GetMapping("/tjsanshao/user/password")
     public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session){
         HashMap<String, Object> passwordStatus = new HashMap<>();
 
@@ -289,7 +289,7 @@ public class UserController {
      * @Date:2018-11-30
      * @Time:10:36
      **/
-    @GetMapping("/user/detail")
+    @GetMapping("/tjsanshao/user/detail")
     public Map<String, Object> userDetail(HttpSession session){
         HashMap<String, Object> getDetailStatus = new HashMap<>();
 
@@ -320,7 +320,7 @@ public class UserController {
         return getDetailStatus;
     }
 
-    @PostMapping("/user/detail")
+    @PostMapping("/tjsanshao/user/detail")
     public Map<String, Object> userDetail(UserDetail userDetail, HttpSession session){
         HashMap<String, Object> postDetailStatus = new HashMap<>();
 
