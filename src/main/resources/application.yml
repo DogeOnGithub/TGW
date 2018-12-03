@@ -65,7 +65,6 @@ mybatis:
     - classpath:mybatis/goods/mapper/*
     - classpath:mybatis/businessman/mapper/*
     - classpath:mybatis/admin/mapper/*
-
 #秒嘀API配置，具体可配置内容参考cn.tgw.config.TjSanshaoMiaoDiConfig
 miaodi:
   config:
@@ -77,3 +76,5 @@ logging:
     cn.tgw.user.mapper: debug
     cn.tgw.common.mapper: debug
 debug: true
+pagehelper:
+  auto-dialect: mysql

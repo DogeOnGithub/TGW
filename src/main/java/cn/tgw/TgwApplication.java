@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableScheduling //开启定时任务，需要用到再开
 @EnableRabbit //开启RabbitMQ
 @SpringBootApplication
-@MapperScan(basePackages = {"cn.tgw.user.mapper", "cn.tgw.businessman.mapper", "cn.tgw.common.mapper","cn.tgw.goods.mapper", "cn.tgw.admin.mapper",})
+@MapperScan(basePackages = {"cn.tgw.user.mapper", "cn.tgw.businessman.mapper", "cn.tgw.common.mapper","cn.tgw.goods.mapper", "cn.tgw.admin.mapper"})
 public class TgwApplication {
 
 	public static void main(String[] args) {

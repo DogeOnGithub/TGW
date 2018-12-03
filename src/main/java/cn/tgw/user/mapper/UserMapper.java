@@ -1,6 +1,10 @@
 package cn.tgw.user.mapper;
 
 import cn.tgw.user.model.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -22,4 +26,13 @@ public interface UserMapper {
     User selectByUsername(User user);
 
     //自定义方法结束
+
+    /**
+     * 查询全部用户
+     * @return
+     * @param phone
+     * @param stime
+     * @param etime
+     */
+    List<User>findAllUsers(@Param("phone") String phone, @Param("stime")Date stime, @Param("etime")Date etime);
 }

@@ -32,8 +32,22 @@
     from tgw_user
     where username = #{username,jdbcType=VARCHAR}
   </select>
+    <select id="findAllUsers" resultType="cn.tgw.user.model.User">
+      select tgw_user.id, username, password, user_status from tgw_user inner join tgw_user_detail on tgw_user.id=tgw_user_detail.tgw_user_id
+      <where>
+        <if test="phone!=null and phone!=''">
+          and mobile like #{phone}
+        </if>
+        <if test="stime!=null">
+          and reg_time >= #{stime}
+        </if>
+        <if test="etime!=null">
+          and  #{etime}>=reg_time
+        </if>
+      </where>
+    </select>
 
-  <!-- 自定义查询结束 -->
+    <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_user
