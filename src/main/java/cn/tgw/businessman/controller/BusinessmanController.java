@@ -5,6 +5,7 @@ import cn.tgw.businessman.model.BusinessmanDetail;
 import cn.tgw.businessman.service.BusinessmanService;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
+import cn.tgw.common.utils.TGWStaticString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,7 @@ public class BusinessmanController {
      * @Date:2018-12-03
      * @Time:10:48
      **/
-    @PostMapping("/businessman/login")
+    @GetMapping("/businessman/login")
     public Map<String, Object> login(String username, String password, HttpSession session) {
         HashMap<String, Object> loginStatus = new HashMap<>();
 
@@ -64,8 +65,8 @@ public class BusinessmanController {
             businessman.setPassword(""); //不返回密码到客户端
             loginStatus.put("businessman", businessman);
 
-            //将记录存入session，键为"user"，值为User对象
-            session.setAttribute("businessman", businessman);
+            //将记录存入session，键为"businessman"，值为businessman对象
+            session.setAttribute(TGWStaticString.TGW_BUSINESSMAN, businessman);
         }else {
             loginStatus.put("status", "fail");
             loginStatus.put("message", "username or password error");
@@ -82,7 +83,7 @@ public class BusinessmanController {
             //是否是修改密码要求的验证码
             if (requestParam.equals("password")) {
                 //查询session，用户是否已经登录
-                Object sessionBusinessman = session.getAttribute("businessman");
+                Object sessionBusinessman = session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
                 if (sessionBusinessman == null) {
                     //没有登录
                     sendMsgStatus.put("status", "authority");

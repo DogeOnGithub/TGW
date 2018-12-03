@@ -2,14 +2,13 @@ package cn.tgw.user.controller;
 
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
+import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,7 +70,7 @@ public class UserController {
             loginStatus.put("user", user);
 
             //将记录存入session，键为"user"，值为User对象
-            session.setAttribute("user", user);
+            session.setAttribute(TGWStaticString.TGW_USER, user);
 
         }else{
             loginStatus.put("status", "fail");
@@ -96,7 +95,7 @@ public class UserController {
         //是否是修改密码要求的验证码
         if (requestParam.equals("password")){
             //查询session，用户是否已经登录
-            Object sessionUser = session.getAttribute("user");
+            Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
             if (sessionUser == null){
                 //用户没有登录，提示用户先登录
                 sendMsgStatus.put("status", "authority");
