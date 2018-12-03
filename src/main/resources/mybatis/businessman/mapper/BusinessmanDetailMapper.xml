@@ -14,10 +14,11 @@
     <result column="shop_status" property="shopStatus" jdbcType="TINYINT" />
     <result column="tgw_user_id" property="tgwUserId" jdbcType="INTEGER" />
     <result column="shop_notice" property="shopNotice" jdbcType="VARCHAR" />
+    <result column="shop_settle_status" property="shopSettleStatus" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, tgw_businessman_id, shop_name, shop_location, shop_desc, shop_time_open, shop_time_close, 
-    phone_number, contact_phone_number, shop_status, tgw_user_id, shop_notice
+    phone_number, contact_phone_number, shop_status, tgw_user_id, shop_notice, shop_settle_status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,6 +36,19 @@
     where tgw_businessman_id = #{businessmanId}
   </select>
 
+  <select id="selectBusinessmanByShopSettleStatus" resultType="cn.tgw.businessman.model.BusinessmanDetail" parameterType="java.lang.Byte" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman_detail
+    where shop_settle_status = #{status}
+  </select>
+
+  <select id="selectAllBusinessmanDetail" resultType="cn.tgw.businessman.model.BusinessmanDetail" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman_detail
+  </select>
+
   <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -45,12 +59,12 @@
     insert into tgw_businessman_detail (id, tgw_businessman_id, shop_name, 
       shop_location, shop_desc, shop_time_open, 
       shop_time_close, phone_number, contact_phone_number, 
-      shop_status, tgw_user_id, shop_notice
+      shop_status, tgw_user_id, shop_notice, shop_settle_status
       )
     values (#{id,jdbcType=INTEGER}, #{tgwBusinessmanId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
       #{shopLocation,jdbcType=VARCHAR}, #{shopDesc,jdbcType=VARCHAR}, #{shopTimeOpen,jdbcType=TIMESTAMP}, 
       #{shopTimeClose,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR}, 
-      #{shopStatus,jdbcType=TINYINT}, #{tgwUserId,jdbcType=INTEGER}, #{shopNotice,jdbcType=VARCHAR}
+      #{shopStatus,jdbcType=TINYINT}, #{tgwUserId,jdbcType=INTEGER}, #{shopNotice,jdbcType=VARCHAR}, #{shopSettleStatus,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
@@ -92,6 +106,9 @@
       <if test="shopNotice != null" >
         shop_notice,
       </if>
+      <if test="shopSettleStatus != null" >
+        shop_settle_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -129,6 +146,9 @@
       </if>
       <if test="shopNotice != null" >
         #{shopNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="shopSettleStatus != null" >
+        #{shopSettleStatus,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -168,6 +188,9 @@
       <if test="shopNotice != null" >
         shop_notice = #{shopNotice,jdbcType=VARCHAR},
       </if>
+      <if test="shopSettleStatus != null" >
+        shop_settle_status = #{shopSettleStatus,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -183,7 +206,8 @@
       contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
       shop_status = #{shopStatus,jdbcType=TINYINT},
       tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
-      shop_notice = #{shopNotice,jdbcType=VARCHAR}
+      shop_notice = #{shopNotice,jdbcType=VARCHAR},
+      shop_settle_status = #{shopSettleStatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
