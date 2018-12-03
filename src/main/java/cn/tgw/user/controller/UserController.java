@@ -212,6 +212,7 @@ public class UserController {
         registerStatus.put("message", "register success");
 
         user.setPassword("");
+        userDetail = userService.getUserDetailByUserId(user);
         registerStatus.put("user", user);
         registerStatus.put("userDetail", userDetail);
 

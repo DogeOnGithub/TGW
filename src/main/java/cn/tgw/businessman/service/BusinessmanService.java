@@ -2,7 +2,6 @@ package cn.tgw.businessman.service;
 
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.businessman.model.BusinessmanDetail;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -26,5 +25,9 @@ public interface BusinessmanService {
     List<BusinessmanDetail> getBusinessmanDetailNormalStatus();
 
     List<BusinessmanDetail> getBusinessmanDetailFailForReview();
+
+    boolean enableBusinessmanRegister(Businessman businessman);
+
+    boolean businessmanRegister(Businessman businessman, BusinessmanDetail businessmanDetail);
 
 }

@@ -75,6 +75,14 @@ public class BusinessmanController {
         return loginStatus;
     }
 
+    /*
+     * @Description:商家发送验证码功能
+     * @Param:[mobileNumber, requestParam, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:16:28
+     **/
     @GetMapping("/tjsanshao/businessman/sendMsgCode")
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session) {
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
@@ -98,7 +106,7 @@ public class BusinessmanController {
                 BusinessmanDetail businessmanDetail = businessmanService.getBusinessmanDetailByBusinessmanId(businessmanFromSession);
 
                 //异步发送验证码，返回响应
-                smsVerifyService.sendMsgCodeAsync(businessmanDetail.getPhoneNumber(), miaoDiService.generateCode(6));
+                smsVerifyService.sendMsgCodeAsync(businessmanDetail.getContactPhoneNumber(), miaoDiService.generateCode(6));
 
                 sendMsgStatus.put("status", "success");
                 sendMsgStatus.put("message", "success");
@@ -151,5 +159,53 @@ public class BusinessmanController {
             }
         }
 
+    }
+
+    /*
+     * @Description:商家注册
+     * @Param:[businessman, businessmanDetail, code]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:16:31
+     **/
+    @GetMapping("/tjsanshao/businessman/register")
+    public Map<String, Object> register(Businessman businessman, BusinessmanDetail businessmanDetail, String code) {
+        HashMap<String, Object> registerStatus = new HashMap<>();
+
+        //验证用户名、密码、手机号码是否为空
+        if (businessman.getUsername() == null || businessman.getPassword() == null || StringUtils.isEmpty(businessmanDetail.getContactPhoneNumber()) || StringUtils.isEmpty(code)) {
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "please input the whole");
+            return registerStatus;
+        }
+
+        //验证验证码是否正确
+        if (!smsVerifyService.checkCode(businessmanDetail.getContactPhoneNumber(), code)){
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "code is invalid");
+            return registerStatus;
+        }
+
+        //填写了用户名、密码、验证码，验证是否可以注册
+        if (!businessmanService.enableBusinessmanRegister(businessman)){
+            //用户名已存在，不可注册
+            registerStatus.put("status", "fail");
+            registerStatus.put("message", "username exists");
+            return registerStatus;
+        }
+
+        //存入到数据库
+        businessmanService.businessmanRegister(businessman, businessmanDetail);
+
+        registerStatus.put("status", "success");
+        registerStatus.put("message", "register success");
+
+        businessman.setPassword("");
+        businessmanDetail = businessmanService.getBusinessmanDetailByBusinessmanId(businessman);
+        registerStatus.put("businessman", businessman);
+        registerStatus.put("businessmanDetail", businessmanDetail);
+
+        return registerStatus;
     }
 }

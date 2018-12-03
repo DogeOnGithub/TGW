@@ -49,6 +49,13 @@
     from tgw_businessman_detail
   </select>
 
+  <select id="selectByContactPhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman_detail
+    where contact_phone_number = #{contactPhone}
+  </select>
+
   <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
