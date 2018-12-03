@@ -92,29 +92,31 @@ public class UserController {
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session){
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
 
-        //是否是修改密码要求的验证码
-        if (requestParam.equals("password")){
-            //查询session，用户是否已经登录
-            Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
-            if (sessionUser == null){
-                //用户没有登录，提示用户先登录
-                sendMsgStatus.put("status", "authority");
-                sendMsgStatus.put("message", "login first");
+        if(requestParam != null) {
+            //是否是修改密码要求的验证码
+            if (requestParam.equals("password")){
+                //查询session，用户是否已经登录
+                Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
+                if (sessionUser == null){
+                    //用户没有登录，提示用户先登录
+                    sendMsgStatus.put("status", "authority");
+                    sendMsgStatus.put("message", "login first");
+                    return sendMsgStatus;
+                }
+
+                //用户已经登录
+                User userFromSession = (User)sessionUser;
+
+                //根据用户名查询绑定的手机号码
+                UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
+
+                smsVerifyService.sendMsgCodeAsync(userDetail.getMobile(), miaoDiService.generateCode(6));
+
+                sendMsgStatus.put("status", "success");
+                sendMsgStatus.put("message", "success");
+
                 return sendMsgStatus;
             }
-
-            //用户已经登录
-            User userFromSession = (User)sessionUser;
-
-            //根据用户名查询绑定的手机号码
-            UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
-
-            smsVerifyService.sendMsgCodeAsync(userDetail.getMobile(), miaoDiService.generateCode(6));
-
-            sendMsgStatus.put("status", "success");
-            sendMsgStatus.put("message", "success");
-
-            return sendMsgStatus;
         }
 
         //验证手机号码是否为空
