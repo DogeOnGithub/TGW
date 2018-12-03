@@ -29,4 +29,6 @@ public class BusinessmanDetail {
     private Integer tgwUserId;
 
     private String shopNotice;
+
+    private Byte shopSettleStatus;
 }

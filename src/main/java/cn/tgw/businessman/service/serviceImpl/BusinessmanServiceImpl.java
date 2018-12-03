@@ -8,6 +8,8 @@ import cn.tgw.businessman.service.BusinessmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*
  * @Project:tgw
  * @Description:businessman service
@@ -54,5 +56,57 @@ public class BusinessmanServiceImpl implements BusinessmanService
     @Override
     public BusinessmanDetail getBusinessmanDetailByBusinessmanId(Businessman businessman) {
         return businessmanDetailMapper.selectByBusinessmanId(businessman.getId());
+    }
+
+    /*
+     * @Description:返回所有待审核入驻的商家详细信息
+     * @Param:[]
+     * @Return:java.util.List<cn.tgw.businessman.model.BusinessmanDetail>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:15:59
+     **/
+    @Override
+    public List<BusinessmanDetail> getBusinessmanDetailWaitForReview() {
+        return businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("0"));
+    }
+
+    /*
+     * @Description:获取所有的商家详细信息
+     * @Param:[]
+     * @Return:java.util.List<cn.tgw.businessman.model.BusinessmanDetail>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:16:08
+     **/
+    @Override
+    public List<BusinessmanDetail> getAllBusinessmanDetail() {
+        return businessmanDetailMapper.selectAllBusinessmanDetail();
+    }
+
+    /*
+     * @Description:获取所有的出于正常状态的商家的详细信息，即状态为1
+     * @Param:[]
+     * @Return:java.util.List<cn.tgw.businessman.model.BusinessmanDetail>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:16:08
+     **/
+    @Override
+    public List<BusinessmanDetail> getBusinessmanDetailNormalStatus() {
+        return businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("1"));
+    }
+
+    /*
+     * @Description:获取所有的未通过入驻审核的商家的详细信息，即状态为2
+     * @Param:[]
+     * @Return:java.util.List<cn.tgw.businessman.model.BusinessmanDetail>
+     * @Author:TjSanshao
+     * @Date:2018-12-03
+     * @Time:16:09
+     **/
+    @Override
+    public List<BusinessmanDetail> getBusinessmanDetailFailForReview() {
+        return businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("2"));
     }
 }

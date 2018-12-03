@@ -220,6 +220,17 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testBusinessmanDetailMapper2(){
+		System.out.println(businessmanDetailMapper.selectByPrimaryKey(3));
+	}
+
+	@Test
+	public void testBusinessmanDetailMapper3(){
+		System.out.println(businessmanDetailMapper.selectBusinessmanByShopSettleStatus(new Byte("0")));
+		System.out.println(businessmanDetailMapper.selectAllBusinessman());
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 
