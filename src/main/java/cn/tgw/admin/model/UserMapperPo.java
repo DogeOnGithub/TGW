@@ -1,5 +1,6 @@
 package cn.tgw.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,8 +21,10 @@ public class UserMapperPo {
 
     private String email;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date regTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date lastUpdateTime;
 
     private String userImageUrl;

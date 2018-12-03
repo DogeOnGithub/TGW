@@ -8,6 +8,31 @@
     <script src="/jquery-easyui-1.3.3/jquery.min.js"></script>
     <script src="/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
     <script src="/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        function formatuserStatus(val,row){
+            if (val ==1){
+                return "正常使用";
+            }else {
+                return "已停用！";
+            }
+        }
+        function formatsex(val,row) {
+            if (val==0){
+                return "女";
+            } else if (val==1){
+                return "男";
+            } else {
+                return "保密";
+            }
+        }
+        function search(){
+            $("#dg").datagrid('load',{
+                "phone":$("#phone").val(),
+                "stime":$("#stime").datebox("getValue"),
+                "etime":$("#etime").datebox("getValue")
+            });
+        }
+    </script>
 
 </head>
 <body>
@@ -17,29 +42,21 @@
     <thead>
     <tr>
         <!--
-    private Integer id;
-    private String username;
-    private String password;
-    private Byte userStatus;
-    private Byte sex;
-    private String mobile;
-    private String email;
-    private Date regTime;
-    private Date lastUpdateTime;
-    private String userImageUrl;
-    private String nickName;
+  {"total":4,"rows":[{"id":1,"username":"TjSanshao","password":"123456","userStatus":1,"sex":2,"mobile":"13420120424","email":"1305705188@qq.com","regTime":"2018-11-26 10:32:48","lastUpdateTime":null,"userImageUrl":null,"nickName":null},
+  {"id":6,"username":"testRegister","password":"newtestPassword","userStatus":1,"sex":0,"mobile":"17607591628","email":"testupdatebyuserid@test.com","regTime":"2018-11-30 17:02:53","lastUpdateTime":"2018-11-30 17:04:04","userImageUrl":null,"nickName":"tgw_17607591628"},
+  {"id":8,"username":"13427491053","password":"123456","userStatus":1,"sex":2,"mobile":"13427491053","email":null,"regTime":"2018-12-03 15:35:50","lastUpdateTime":null,"userImageUrl":null,"nickName":null},{"id":10,"username":"testtest","password":"testtest","userStatus":1,"sex":2,"mobile":"12345678901","email":"test@test.com","regTime":"2018-12-03 18:50:05","lastUpdateTime":null,"userImageUrl":null,"nickName":null}]}
         -->
 
         <th field="id" width="50" align="center">编号</th>
-        <th field="name" width="60" align="center">用户名</th>
-        <th field="position" width="90" align="center">密码</th>
-        <th field="purpose" width="50" align="center" >性别</th>
-        <th field="detail" width="100" align="center">手机号码</th>
-        <th field="status" width="80" align="center">邮箱</th>
-        <th field="price" width="70" align="center">注册时间</th>
-        <th field="adminName" width="60" align="center">最后修改时间</th>
-        <th field="changeDate" width="60" align="center">用户昵称</th>
-        <th field="userStatus" width="60" align="center">用户状态</th>
+        <th field="username" width="60" align="center">用户名</th>
+        <th field="password" width="90" align="center">密码</th>
+        <th field="sex" width="50" align="center" formatter="formatsex">性别</th>
+        <th field="mobile" width="100" align="center">手机号码</th>
+        <th field="email" width="80" align="center">邮箱</th>
+        <th field="regTime" width="70" align="center">注册时间</th>
+        <th field="lastUpdateTime" width="60" align="center">最后修改时间</th>
+        <th field="nickName" width="60" align="center">用户昵称</th>
+        <th field="userStatus" width="60" align="center" formatter="formatuserStatus">用户状态</th>
 
     </tr>
     </thead>
