@@ -6,9 +6,10 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="user_status" property="userStatus" jdbcType="TINYINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, user_status
+    id, username, password, user_status, mobile
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -54,10 +55,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tgw.user.model.User" >
-    insert into tgw_user (id, username, password, 
-      user_status)
+    insert into tgw_user (id, username, password, user_status, mobile)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userStatus,jdbcType=TINYINT})
+      #{userStatus,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.user.model.User" >
@@ -75,6 +75,9 @@
       <if test="userStatus != null" >
         user_status,
       </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -88,6 +91,9 @@
       </if>
       <if test="userStatus != null" >
         #{userStatus,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
       </if>
     </trim>
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
@@ -104,6 +110,9 @@
       <if test="userStatus != null" >
         user_status = #{userStatus,jdbcType=TINYINT},
       </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -111,7 +120,8 @@
     update tgw_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      user_status = #{userStatus,jdbcType=TINYINT}
+      user_status = #{userStatus,jdbcType=TINYINT},
+      mobile = #{mobile,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

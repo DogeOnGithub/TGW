@@ -11,4 +11,6 @@ public class Businessman {
     private String password;
 
     private Byte status;
+
+    private String mobile;
 }

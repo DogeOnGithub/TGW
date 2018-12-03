@@ -238,6 +238,21 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testNewUserMapper(){
+		System.out.println(userMapper.selectByPrimaryKey(1));
+	}
+
+	@Test
+	public void testNewBusinessmanMapper(){
+		System.out.println(businessmanMapper.selectByPrimaryKey(2));
+
+		Businessman businessman = new Businessman();
+		businessman.setId(1);
+		businessman.setMobile("12345678901");
+		System.out.println(businessmanMapper.updateByPrimaryKeySelective(businessman));
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 
