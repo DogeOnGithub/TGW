@@ -11,7 +11,7 @@ public class Goods {
 
     private BigDecimal discountPrice;
 
-    private Integer tgwBussinessmanId;
+    private Integer tgwBusinessmanId;
 
     private String goodsCategory;
 
@@ -49,12 +49,12 @@ public class Goods {
         this.discountPrice = discountPrice;
     }
 
-    public Integer getTgwBussinessmanId() {
-        return tgwBussinessmanId;
+    public Integer getTgwBusinessmanId() {
+        return tgwBusinessmanId;
     }
 
-    public void setTgwBussinessmanId(Integer tgwBussinessmanId) {
-        this.tgwBussinessmanId = tgwBussinessmanId;
+    public void setTgwBusinessmanId(Integer tgwBusinessmanId) {
+        this.tgwBusinessmanId = tgwBusinessmanId;
     }
 
     public String getGoodsCategory() {
@@ -71,5 +71,18 @@ public class Goods {
 
     public void setIsOnline(Integer isOnline) {
         this.isOnline = isOnline;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", goodsTitle='" + goodsTitle + '\'' +
+                ", oringinalPrice=" + oringinalPrice +
+                ", discountPrice=" + discountPrice +
+                ", tgwBusinessmanId=" + tgwBusinessmanId +
+                ", goodsCategory='" + goodsCategory + '\'' +
+                ", isOnline=" + isOnline +
+                '}';
     }
 }

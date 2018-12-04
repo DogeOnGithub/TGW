@@ -6,7 +6,7 @@
     <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR" />
     <result column="oringinal_price" property="oringinalPrice" jdbcType="DECIMAL" />
     <result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
-    <result column="tgw_bussinessman_id" property="tgwBussinessmanId" jdbcType="INTEGER" />
+    <result column="tgw_businessman_id" property="tgwBusinessmanId" jdbcType="INTEGER" />
     <result column="goods_category" property="goodsCategory" jdbcType="VARCHAR" />
     <result column="is_online" property="isOnline" jdbcType="INTEGER" />
   </resultMap>
@@ -14,7 +14,7 @@
 
   </resultMap>
   <sql id="Base_Column_List" >
-    id, goods_title, oringinal_price, discount_price, tgw_bussinessman_id, goods_category, 
+    id, goods_title, oringinal_price, discount_price, tgw_businessman_id, goods_category, 
     is_online
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -25,26 +25,30 @@
   </select>
   <select id="findIndexGoodsByCityAndTypeAndFirstCategoryName" resultMap="goodsALL" parameterType="string">
     select
-    tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_bussinessman_id,goods_category,is_online,
+    tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
     tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
     tgw_goods_image.id i_id,image_url,is_main,
     shop_name,shop_location,
     tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
     FROM
-    tgw_goods,tgw_goods_detail,tgw_goods_image,tgw_bussinessman_detail,tgw_second_category,tgw_first_category
+    tgw_goods,tgw_goods_detail,tgw_goods_image,tgw_businessman_detail,tgw_second_category,tgw_first_category
     WHERE
-    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_bussinessman_detail.id = tgw_goods.tgw_bussinessman_id
+    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_businessman_detail.id = tgw_goods.tgw_businessman_id
     AND tgw_second_category.category_name = goods_category AND tgw_second_category.first_category_id = tgw_first_category.id
     AND shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0
     <choose>
       <when test="type == 1">
         Order By sales_volumn DESC
+        LIMIT 6
       </when>
       <when test="type == 2">
         Order By creat_goods_time DESC
+        LIMIT 5
       </when>
       <when test="type == 3">
         AND tgw_first_category.category_name=#{firstCategoryName,jdbcType=VARCHAR}
+        Order By sales_volumn DESC
+        LIMIT 8
       </when>
     </choose>
 
@@ -55,10 +59,10 @@
   </delete>
   <insert id="insert" parameterType="cn.tgw.goods.model.Goods" >
     insert into tgw_goods (id, goods_title, oringinal_price, 
-      discount_price, tgw_bussinessman_id, goods_category, 
+      discount_price, tgw_businessman_id, goods_category, 
       is_online)
     values (#{id,jdbcType=INTEGER}, #{goodsTitle,jdbcType=VARCHAR}, #{oringinalPrice,jdbcType=DECIMAL}, 
-      #{discountPrice,jdbcType=DECIMAL}, #{tgwBussinessmanId,jdbcType=INTEGER}, #{goodsCategory,jdbcType=VARCHAR}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{tgwBusinessmanId,jdbcType=INTEGER}, #{goodsCategory,jdbcType=VARCHAR}, 
       #{isOnline,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.goods.model.Goods" >
@@ -76,8 +80,8 @@
       <if test="discountPrice != null" >
         discount_price,
       </if>
-      <if test="tgwBussinessmanId != null" >
-        tgw_bussinessman_id,
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id,
       </if>
       <if test="goodsCategory != null" >
         goods_category,
@@ -99,8 +103,8 @@
       <if test="discountPrice != null" >
         #{discountPrice,jdbcType=DECIMAL},
       </if>
-      <if test="tgwBussinessmanId != null" >
-        #{tgwBussinessmanId,jdbcType=INTEGER},
+      <if test="tgwBusinessmanId != null" >
+        #{tgwBusinessmanId,jdbcType=INTEGER},
       </if>
       <if test="goodsCategory != null" >
         #{goodsCategory,jdbcType=VARCHAR},
@@ -122,8 +126,8 @@
       <if test="discountPrice != null" >
         discount_price = #{discountPrice,jdbcType=DECIMAL},
       </if>
-      <if test="tgwBussinessmanId != null" >
-        tgw_bussinessman_id = #{tgwBussinessmanId,jdbcType=INTEGER},
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
       </if>
       <if test="goodsCategory != null" >
         goods_category = #{goodsCategory,jdbcType=VARCHAR},
@@ -139,7 +143,7 @@
     set goods_title = #{goodsTitle,jdbcType=VARCHAR},
       oringinal_price = #{oringinalPrice,jdbcType=DECIMAL},
       discount_price = #{discountPrice,jdbcType=DECIMAL},
-      tgw_bussinessman_id = #{tgwBussinessmanId,jdbcType=INTEGER},
+      tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
       goods_category = #{goodsCategory,jdbcType=VARCHAR},
       is_online = #{isOnline,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

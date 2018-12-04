@@ -72,4 +72,17 @@ public class GoodsDetail {
     public void setSalesVolumn(Integer salesVolumn) {
         this.salesVolumn = salesVolumn;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsDetail{" +
+                "id=" + id +
+                ", tgwGoodsId=" + tgwGoodsId +
+                ", goodsDesc='" + goodsDesc + '\'' +
+                ", termOfValidity=" + termOfValidity +
+                ", creatGoodsTime=" + creatGoodsTime +
+                ", goodsRepertory=" + goodsRepertory +
+                ", salesVolumn=" + salesVolumn +
+                '}';
+    }
 }

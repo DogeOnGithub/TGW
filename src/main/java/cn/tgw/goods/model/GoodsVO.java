@@ -21,7 +21,7 @@ public class GoodsVO {
 
     private BigDecimal discountPrice;
 
-    private Integer tgwBussinessmanId;
+    private Integer tgwBusinessmanId;
 
     private String goodsCategory;
 

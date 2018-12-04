@@ -7,11 +7,11 @@
     <result column="goods_desc" property="goodsDesc" jdbcType="VARCHAR" />
     <result column="term_of_validity" property="termOfValidity" jdbcType="INTEGER" />
     <result column="creat_goods_time" property="creatGoodsTime" jdbcType="DATE" />
-    <result column="goods_ repertory" property="goodsRepertory" jdbcType="INTEGER" />
+    <result column="goods_repertory" property="goodsRepertory" jdbcType="INTEGER" />
     <result column="sales_volumn" property="salesVolumn" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, tgw_goods_id, goods_desc, term_of_validity, creat_goods_time, "goods_ repertory", 
+    id, tgw_goods_id, goods_desc, term_of_validity, creat_goods_time, goods_repertory, 
     sales_volumn
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -26,7 +26,7 @@
   </delete>
   <insert id="insert" parameterType="cn.tgw.goods.model.GoodsDetail" >
     insert into tgw_goods_detail (id, tgw_goods_id, goods_desc, 
-      term_of_validity, creat_goods_time, "goods_ repertory", 
+      term_of_validity, creat_goods_time, goods_repertory, 
       sales_volumn)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{goodsDesc,jdbcType=VARCHAR}, 
       #{termOfValidity,jdbcType=INTEGER}, #{creatGoodsTime,jdbcType=DATE}, #{goodsRepertory,jdbcType=INTEGER}, 
@@ -51,7 +51,7 @@
         creat_goods_time,
       </if>
       <if test="goodsRepertory != null" >
-        "goods_ repertory",
+        goods_repertory,
       </if>
       <if test="salesVolumn != null" >
         sales_volumn,
@@ -97,7 +97,7 @@
         creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
       </if>
       <if test="goodsRepertory != null" >
-        "goods_ repertory" = #{goodsRepertory,jdbcType=INTEGER},
+        goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
       </if>
       <if test="salesVolumn != null" >
         sales_volumn = #{salesVolumn,jdbcType=INTEGER},
@@ -111,7 +111,7 @@
       goods_desc = #{goodsDesc,jdbcType=VARCHAR},
       term_of_validity = #{termOfValidity,jdbcType=INTEGER},
       creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
-      "goods_ repertory" = #{goodsRepertory,jdbcType=INTEGER},
+      goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
       sales_volumn = #{salesVolumn,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
