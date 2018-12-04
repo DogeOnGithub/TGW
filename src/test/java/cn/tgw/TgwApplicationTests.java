@@ -253,6 +253,15 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testNewBusinessmanMapper2(){
+		Businessman businessman = new Businessman();
+		businessman.setMobile("13420120424");
+		businessman.setPassword("666666");
+		businessman.setStatus(new Byte("1"));
+		System.out.println(businessmanMapper.selectByMobileAndPasswordAndStatus(businessman));
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 

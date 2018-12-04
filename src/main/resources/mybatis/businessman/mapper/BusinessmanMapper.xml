@@ -27,11 +27,25 @@
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and status = #{status,jdbcType=TINYINT}
   </select>
 
+  <select id="selectByMobileAndPasswordAndStatus" resultMap="BaseResultMap" parameterType="cn.tgw.businessman.model.Businessman">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman
+    where mobile = #{mobile,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and status = #{status,jdbcType=TINYINT}
+  </select>
+
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="cn.tgw.businessman.model.Businessman">
     select
     <include refid="Base_Column_List" />
     from tgw_businessman
     where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="cn.tgw.businessman.model.Businessman">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_businessman
+    where mobile = #{mobile,jdbcType=VARCHAR}
   </select>
 
   <!-- 自定义查询结束 -->

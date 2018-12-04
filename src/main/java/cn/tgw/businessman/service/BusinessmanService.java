@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public interface BusinessmanService {
 
-    Businessman getBusinessmanByUsernameAndPasswordAndStatus(String username, String password, Byte status);
+    Businessman getBusinessmanByUsernameOrMobileAndPasswordAndStatus(String username, String password, Byte status);
 
     BusinessmanDetail getBusinessmanDetailByBusinessmanId(Businessman businessman);
 
@@ -28,6 +28,6 @@ public interface BusinessmanService {
 
     boolean enableBusinessmanRegister(Businessman businessman);
 
-    boolean businessmanRegister(Businessman businessman, BusinessmanDetail businessmanDetail);
+    boolean businessmanRegister(Businessman businessman);
 
 }
