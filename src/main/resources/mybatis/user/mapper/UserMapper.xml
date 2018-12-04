@@ -37,13 +37,16 @@
       select tgw_user.id, username, password, user_status from tgw_user inner join tgw_user_detail on tgw_user.id=tgw_user_detail.tgw_user_id
       <where>
         <if test="phone!=null and phone!=''">
-          and mobile like #{phone}
+          and tgw_user.mobile like #{phone}
         </if>
         <if test="stime!=null">
           and reg_time >= #{stime}
         </if>
         <if test="etime!=null">
           and  #{etime}>=reg_time
+        </if>
+        <if test="userStatus!=null">
+          and  user_status=#{userStatus}
         </if>
       </where>
     </select>

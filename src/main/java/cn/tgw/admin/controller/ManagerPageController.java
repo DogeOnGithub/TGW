@@ -34,4 +34,7 @@ public class ManagerPageController {
         return "managerPage/yonghuxinxiguanli";
     }
 
+    @RequestMapping("/shangpinfenleiguanli")
+    public String shangpinfenleiguanli(){ return "managerPage/shangpinfenleiguanli"; }
+
 }

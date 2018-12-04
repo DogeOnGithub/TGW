@@ -34,5 +34,5 @@ public interface UserMapper {
      * @param stime
      * @param etime
      */
-    List<User>findAllUsers(@Param("phone") String phone, @Param("stime")Date stime, @Param("etime")Date etime);
+    List<User>findAllUsers(@Param("phone") String phone, @Param("stime")Date stime, @Param("etime")Date etime,@Param("userStatus")Integer userStatus);
 }

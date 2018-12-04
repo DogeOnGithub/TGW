@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品分类管理</title>
+    <link rel="stylesheet" href="/jquery-easyui-1.3.3/themes/default/easyui.css">
+    <link rel="stylesheet" href="/jquery-easyui-1.3.3/themes/icon.css">
+    <link rel="stylesheet" href="/jquery-easyui-1.3.3/demo/demo.css">
+    <script src="/jquery-easyui-1.3.3/jquery.min.js"></script>
+    <script src="/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    <script src="/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
+
+</head>
+<body>
+<h1>商品分类管理</h1>
+<div style="margin:20px 0;"></div>
+<div class="easyui-panel" title="商品分类管理" style="width:430px">
+    <div style="padding:10px 10px 10px 10px">
+        <form id="ff" >
+            <table cellpadding="5">
+                <tr>
+                    <td>请选择一级分类:</td>
+                    <td>
+                        <input class="easyui-combobox" name="firstid" id="firstid" style="width: 220px;"
+                               data-options="
+                                    url:'/category/findFirstCategory',
+									valueField:'id',
+									textField:'text',
+									panelHeight:'auto',
+
+                                    ">
+                    </td>
+                </tr>
+                <tr>
+                    <td>填写二级分类:</td>
+                    <td><input class="easyui-textbox" type="text" name="secName" id="secName" data-options="required:true" style="width:220px;"></input></td>
+                </tr>
+
+            </table>
+        </form>
+        <div style="text-align:center;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function submitForm(){
+       var fir= $("#firstid").combobox("getValue");
+       var sec= $('#secName').val();
+        if (fir==""){
+            $.messager.alert('温馨提示','请选择一级分类!');
+            return;
+        }
+        if (sec==""){
+            $.messager.alert('温馨提示','请填写二级分类!');
+            return;
+        }
+        $.ajax({
+            url:"/category/addFirstCategory",
+            type:"post",
+            data:{secName:sec,firstid:fir},
+            success:function(result){
+                // console.log(result);
+                //var result=eval('('+result+')');
+                if(result.status){
+                    $.messager.alert('温馨提示','添加分类成功!');
+                }else {
+                    $.messager.alert('温馨提示','添加分类失败!');
+                }
+            },
+            error:function(e){
+                alert("错误！！");
+
+            }
+        });
+    }
+    function clearForm(){
+        $('#ff').form('clear');
+    }
+</script>
+</body>
+</html>

@@ -33,14 +33,23 @@ public class ManagerUserInfoService {
     @Autowired
     UserDetailMapper userDetailMapper;
 
-
-    public EasyUIDataGridResult findAllUsers(Integer page,Integer rows,String phone,Date stime, Date etime){
+    /**
+     * 返回easyui界面显示结果
+     * @param page 分页起始页
+     * @param rows 行数
+     * @param phone 手机号  模糊搜索
+     * @param stime  时间范围查询 开始时间
+     * @param etime  时间范围查询 结束时间
+     * @param userStatus  用户状态出巡
+     * @return
+     */
+    public EasyUIDataGridResult findAllUsers(Integer page,Integer rows,String phone,Date stime, Date etime,Integer userStatus){
         EasyUIDataGridResult easyUIDataGridResult=new EasyUIDataGridResult();
         PageHelper.startPage(page,rows);
         if (phone!=null){
             phone="%"+phone+"%";
         }
-        List<User> allUsers = userMapper.findAllUsers(phone,stime,etime);
+        List<User> allUsers = userMapper.findAllUsers(phone,stime,etime,userStatus);
         PageInfo<User>pageInfo=new PageInfo<>(allUsers);
         List<User> list = pageInfo.getList();
         List<UserMapperPo>allUserMapperPo=new ArrayList<>();

@@ -32,6 +32,15 @@ public class UiTreeController {
                     "        \"attributes\": {\n" +
                     "            \"authPath\": \"shangjiaruzhuguanli\"\n" +
                     "        }\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "        \"id\": 3,\n" +
+                    "        \"text\": \"商品分类管理\",\n" +
+                    "        \"state\": \"open\",\n" +
+                    "        \"iconCls\": \"icon-userManage\",\n" +
+                    "        \"attributes\": {\n" +
+                    "            \"authPath\": \"shangpinfenleiguanli\"\n" +
+                    "        }\n" +
                     "    }\n" +
                     "]";
         }

@@ -29,7 +29,8 @@
             $("#dg").datagrid('load',{
                 "phone":$("#phone").val(),
                 "stime":$("#stime").datebox("getValue"),
-                "etime":$("#etime").datebox("getValue")
+                "etime":$("#etime").datebox("getValue"),
+                "userStatus":$("#userStatus").combobox("getValue")
             });
         }
     </script>
@@ -67,6 +68,12 @@
         &nbsp;手 机 号：&nbsp;<input class="easyui-textbox" name="phone" id="phone" style="width:150px"></input>
         &nbsp;日期区间：&nbsp;<input class="easyui-datebox" name="stime" id="stime" style="width: 140px;"></input>
         &nbsp;--至--&nbsp;<input class="easyui-datebox" name="etime" id="etime" style="width: 140px;"></input>
+        &nbsp;用户状态：&nbsp;
+        <select id="userStatus" class="easyui-combobox" name="userStatus" panelHeight="auto" style="width: 135px;">
+            <option value="" selected>请选择:</option>
+            <option value="1">正常使用</option>
+            <option value="0">已停用！</option>
+        </select>
         <a href="javascript:search()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
     </div>
 </div>

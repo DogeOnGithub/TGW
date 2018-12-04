@@ -31,12 +31,23 @@ public class ManagerUserInfoController {
     @Autowired
     ManagerUserInfoService managerUserInfoService;
 
+    /**
+     * 条件可选查询
+     * @param page 分页起始页
+     * @param rows 行数
+     * @param phone 手机号  模糊搜索
+     * @param stime  时间范围查询 开始时间
+     * @param etime  时间范围查询 结束时间
+     * @param userStatus  用户状态出巡
+     * @return
+     */
     @RequestMapping("/usermanager/findAllUsers")
     public EasyUIDataGridResult findAllUsers(Integer page,Integer rows,
                                              @RequestParam(value = "phone",required = false) String phone,
                                              @RequestParam(value = "stime",required = false) Date stime,
-                                             @RequestParam(value = "etime",required = false) Date etime){
-        return managerUserInfoService.findAllUsers(page, rows, phone, stime, etime);
+                                             @RequestParam(value = "etime",required = false) Date etime,
+                                             @RequestParam(value = "userStatus",required = false) Integer userStatus){
+        return managerUserInfoService.findAllUsers(page, rows, phone, stime, etime,userStatus);
     }
 
 
