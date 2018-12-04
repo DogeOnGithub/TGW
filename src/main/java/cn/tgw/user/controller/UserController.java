@@ -50,7 +50,7 @@ public class UserController {
      * @Date:2018-11-28
      * @Time:17:38
      **/
-    @GetMapping("/tjsanshao/user/login")
+    @PostMapping("/tjsanshao/user/login")
     public Map<String, Object> login(String username, String password, HttpSession session){
         HashMap<String, Object> loginStatus = new HashMap<>();
 
@@ -62,7 +62,7 @@ public class UserController {
         }
 
         //调用service，获取记录
-        User user = userService.getUserByUsernameAndPasswordAndStatus(username, password, new Byte("1"));
+        User user = userService.getUserByUsernameOrMobileAndPasswordAndStatus(username, password, new Byte("1"));
         if (user != null){
             loginStatus.put("status", "success");
             loginStatus.put("message", "login success");
@@ -172,19 +172,19 @@ public class UserController {
      * @Date:2018-11-29
      * @Time:11:09
      **/
-    @GetMapping("/tjsanshao/user/register")
-    public Map<String, Object> register(User user, UserDetail userDetail, String code){
+    @PostMapping("/tjsanshao/user/register")
+    public Map<String, Object> register(User user, String code){
         HashMap<String, Object> registerStatus = new HashMap<>();
 
         //验证用户名、密码、手机号码是否为空
-        if (user.getUsername() == null || user.getPassword() == null || StringUtils.isEmpty(userDetail.getMobile()) || StringUtils.isEmpty(code)){
+        if (user.getUsername() == null || user.getPassword() == null || StringUtils.isEmpty(user.getMobile()) || StringUtils.isEmpty(code)){
             registerStatus.put("status", "fail");
             registerStatus.put("message", "please input the whole");
             return registerStatus;
         }
 
         //验证验证码是否正确
-        if (!smsVerifyService.checkCode(userDetail.getMobile(), code)){
+        if (!smsVerifyService.checkCode(user.getMobile(), code)){
             registerStatus.put("status", "fail");
             registerStatus.put("message", "code is invalid");
             return registerStatus;
@@ -198,7 +198,7 @@ public class UserController {
             return registerStatus;
         }
 
-        if (!userService.enableMoblieRegister(userDetail.getMobile())){
+        if (!userService.enableMoblieRegister(user.getMobile())){
             //手机号已绑定，不可注册
             registerStatus.put("status", "fail");
             registerStatus.put("message", "mobile exists");
@@ -206,14 +206,16 @@ public class UserController {
         }
 
         //存入到数据库
-        userService.userRegister(user, userDetail);
+        userService.userRegister(user);
 
         registerStatus.put("status", "success");
         registerStatus.put("message", "register success");
 
         user.setPassword("");
-        userDetail = userService.getUserDetailByUserId(user);
         registerStatus.put("user", user);
+
+        //查询到userDetail返回到前端
+        UserDetail userDetail = userService.getUserDetailByUserId(user);
         registerStatus.put("userDetail", userDetail);
 
         return registerStatus;
@@ -236,11 +238,8 @@ public class UserController {
         //从session中获取用户信息
         Object sessionUser = session.getAttribute("user");
 
-        //用户已经登录
+        //用户已经登录，这个session中包含有用户记录的所有信息
         User userFromSession = (User)sessionUser;
-
-        //根据用户名查询绑定的手机号码
-        UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
 
         //判断是否带有验证码，如果没有，需要发送验证码
         if (StringUtils.isEmpty(code)){
@@ -251,7 +250,7 @@ public class UserController {
         }
 
         //请求中带有验证码，开始验证验证码
-        if (!smsVerifyService.checkCode(userDetail.getMobile(), code)){
+        if (!smsVerifyService.checkCode(userFromSession.getMobile(), code)){
             //验证码不通过
             passwordStatus.put("status", "fail");
             passwordStatus.put("message", "verify code error");
@@ -259,7 +258,7 @@ public class UserController {
         }
 
         //查询数据库中的User，验证用户名和用户输入的旧密码是否匹配
-        User queryUser = userService.getUserByUsernameAndPasswordAndStatus(userFromSession.getUsername(), oldPassword, new Byte("1"));
+        User queryUser = userService.getUserByUsernameOrMobileAndPasswordAndStatus(userFromSession.getUsername(), oldPassword, new Byte("1"));
 
         if (queryUser == null){
             //没有查询到用户，即用户名和旧密码不匹配
@@ -274,7 +273,7 @@ public class UserController {
         userService.updateUserPassword(queryUser);
 
         //设置验证码状态为已使用
-        smsVerifyService.codeUsed(userDetail.getMobile());
+        smsVerifyService.codeUsed(userFromSession.getMobile());
 
         passwordStatus.put("status", "success");
         passwordStatus.put("message", "success");

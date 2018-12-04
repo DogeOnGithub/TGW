@@ -6,14 +6,14 @@ import cn.tgw.user.model.UserDetail;
 public interface UserService {
 
     /*
-     * @Description:
+     * @Description:根据用户名和密码或者根据手机号和密码查询用户，有则返回用户记录，查询不到则返回null
      * @Param:[username, password, status]
      * @Return:cn.tgw.user.model.User
      * @Author:TjSanshao
-     * @Date:2018-11-26
-     * @Time:17:24
+     * @Date:2018-12-04
+     * @Time:08:31
      **/
-    User getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status);
+    User getUserByUsernameOrMobileAndPasswordAndStatus(String username, String password, Byte status);
 
     /*
      * @Description:判断用户名是否可以注册
@@ -43,7 +43,7 @@ public interface UserService {
      * @Date:2018-11-29
      * @Time:16:50
      **/
-    boolean userRegister(User user, UserDetail userDetail);
+    boolean userRegister(User user);
 
     UserDetail getUserDetailByUserId(User user);
 

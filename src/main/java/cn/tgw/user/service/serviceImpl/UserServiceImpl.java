@@ -35,15 +35,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SmsVerifyMapper smsVerifyMapper;
 
+    /*
+     * @Description:根据用户名和密码或者根据mobile和密码查询用户，如果两者中存在用户记录，返回用户记录，否则返回null
+     * @Param:[username, password, status]
+     * @Return:cn.tgw.user.model.User
+     * @Author:TjSanshao
+     * @Date:2018-12-04
+     * @Time:08:29
+     **/
     @Override
     @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
-    public User getUserByUsernameAndPasswordAndStatus(String username, String password, Byte status) {
+    public User getUserByUsernameOrMobileAndPasswordAndStatus(String username, String password, Byte status) {
+
+        //传进来的username可能是用户名，也可以是mobile，因此要做两次判断
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setUserStatus(status);
 
-        return userMapper.selectByUsernameAndPasswordAndUserStatus(user);
+        //参数username有可能是手机号码
+        user.setMobile(username);
+
+        User userByUsername = userMapper.selectByUsernameAndPasswordAndUserStatus(user);
+
+        //如果根据用户名和密码查询不到用户，那么就根据mobile和密码查询用户，如果都为空，返回null
+        return userByUsername == null ? userMapper.selectByMobileAndPasswordAndUserStatus(user) : userByUsername;
     }
 
     @Override
@@ -71,11 +87,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public boolean userRegister(User user, UserDetail userDetail) {
-        user.setUserStatus(new Byte("1"));
+    public boolean userRegister(User user) {
+
+        //创建一个和user的id对应的userDetail
+        UserDetail userDetail = new UserDetail();
+        userDetail.setMobile(user.getMobile());
+        userDetail.setRegTime(new Date());   //设置注册时间
+        userDetail.setNickName("tgw_" + user.getUsername());   //设置默认昵称
+
+        user.setUserStatus(new Byte("1"));   //将用户状态设置为1，即正常可登录
+
         userMapper.insertSelective(user);
-        userDetail.setTgwUserId(user.getId());
-        userDetail.setRegTime(new Date());
+
+        userDetail.setTgwUserId(user.getId());   //设置用户id
+
         userDetailMapper.insertSelective(userDetail);
 
         //更新验证码状态
