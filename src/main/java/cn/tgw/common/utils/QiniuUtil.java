@@ -98,4 +98,36 @@ public class QiniuUtil {
             }
         return "error";
     }
+
+    public static String tjsanshaoUploadImage(MultipartFile multipartFile) throws IOException {
+        String key= UUID.randomUUID().toString();
+
+        Configuration cfg = new Configuration(Zone.zone2());
+        UploadManager uploadManager = new UploadManager(cfg);
+
+        try {
+            Auth auth = Auth.create(accessKey, secretKey);
+            String upToken = auth.uploadToken(bucket);
+            try {
+                Response response = uploadManager.put(multipartFile.getInputStream(), key, upToken, null, null);
+                //解析上传成功的结果
+                DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
+                String return_path = "http://"+path + "/" + putRet.key;
+                return return_path;
+            } catch (QiniuException ex) {
+                Response r = ex.response;
+                System.err.println(r.toString());
+                try {
+                    System.err.println(r.bodyString());
+                } catch (QiniuException ex2) {
+                    //ignore
+                    return "error";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "error";
+    }
 }
