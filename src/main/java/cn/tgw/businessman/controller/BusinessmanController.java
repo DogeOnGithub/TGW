@@ -46,7 +46,7 @@ public class BusinessmanController {
      * @Date:2018-12-03
      * @Time:10:48
      **/
-    @GetMapping("/tjsanshao/businessman/login")
+    @PostMapping("/tjsanshao/businessman/login")
     public Map<String, Object> login(String username, String password, HttpSession session) {
         HashMap<String, Object> loginStatus = new HashMap<>();
 
@@ -58,7 +58,7 @@ public class BusinessmanController {
         }
 
         //调用service，获取记录
-        Businessman businessman = businessmanService.getBusinessmanByUsernameAndPasswordAndStatus(username, password, new Byte("1"));
+        Businessman businessman = businessmanService.getBusinessmanByUsernameOrMobileAndPasswordAndStatus(username, password, new Byte("1"));
         if (businessman != null) {
             loginStatus.put("status", "success");
             loginStatus.put("message", "login success");
@@ -169,19 +169,19 @@ public class BusinessmanController {
      * @Date:2018-12-03
      * @Time:16:31
      **/
-    @GetMapping("/tjsanshao/businessman/register")
-    public Map<String, Object> register(Businessman businessman, BusinessmanDetail businessmanDetail, String code) {
+    @PostMapping("/tjsanshao/businessman/register")
+    public Map<String, Object> register(Businessman businessman, String code) {
         HashMap<String, Object> registerStatus = new HashMap<>();
 
         //验证用户名、密码、手机号码是否为空
-        if (businessman.getUsername() == null || businessman.getPassword() == null || StringUtils.isEmpty(businessmanDetail.getContactPhoneNumber()) || StringUtils.isEmpty(code)) {
+        if (businessman.getUsername() == null || businessman.getPassword() == null || StringUtils.isEmpty(businessman.getMobile()) || StringUtils.isEmpty(code)) {
             registerStatus.put("status", "fail");
             registerStatus.put("message", "please input the whole");
             return registerStatus;
         }
 
         //验证验证码是否正确
-        if (!smsVerifyService.checkCode(businessmanDetail.getContactPhoneNumber(), code)){
+        if (!smsVerifyService.checkCode(businessman.getMobile(), code)){
             registerStatus.put("status", "fail");
             registerStatus.put("message", "code is invalid");
             return registerStatus;
@@ -196,15 +196,13 @@ public class BusinessmanController {
         }
 
         //存入到数据库
-        businessmanService.businessmanRegister(businessman, businessmanDetail);
+        businessmanService.businessmanRegister(businessman);
 
         registerStatus.put("status", "success");
         registerStatus.put("message", "register success");
 
         businessman.setPassword("");
-        businessmanDetail = businessmanService.getBusinessmanDetailByBusinessmanId(businessman);
         registerStatus.put("businessman", businessman);
-        registerStatus.put("businessmanDetail", businessmanDetail);
 
         return registerStatus;
     }

@@ -21,6 +21,10 @@ public interface BusinessmanMapper {
 
     Businessman selectByUsername(Businessman record);
 
+    Businessman selectByMobileAndPasswordAndStatus(Businessman record);
+
+    Businessman selectByMobile(Businessman record);
+
     //自定义方法结束
 
 }

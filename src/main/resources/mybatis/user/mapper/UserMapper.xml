@@ -27,6 +27,13 @@
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and user_status = #{userStatus,jdbcType=TINYINT}
   </select>
 
+  <select id="selectByMobileAndPasswordAndUserStatus" resultMap="BaseResultMap" parameterType="cn.tgw.user.model.User" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_user
+    where mobile = #{mobile,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and user_status = #{userStatus,jdbcType=TINYINT}
+  </select>
+
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="cn.tgw.user.model.User">
     select
     <include refid="Base_Column_List" />

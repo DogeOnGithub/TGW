@@ -33,22 +33,30 @@ public class BusinessmanServiceImpl implements BusinessmanService
     private SmsVerifyMapper smsVerifyMapper;
 
     /*
-     * @Description:根据用户名、密码、状态查询商家用户
+     * @Description:根据用户名和密码或者根据手机号和密码查询用户
      * @Param:[username, password, status]
      * @Return:cn.tgw.businessman.model.Businessman
      * @Author:TjSanshao
-     * @Date:2018-12-03
-     * @Time:10:34
+     * @Date:2018-12-04
+     * @Time:09:11
      **/
     @Override
-    public Businessman getBusinessmanByUsernameAndPasswordAndStatus(String username, String password, Byte status) {
+    public Businessman getBusinessmanByUsernameOrMobileAndPasswordAndStatus(String username, String password, Byte status) {
+
+        //调用方传入的username参数有可能是用户名，也有可能是手机号，因此要做两次查询
 
         Businessman businessman = new Businessman();
         businessman.setUsername(username);
         businessman.setPassword(password);
         businessman.setStatus(status);
 
-        return businessmanMapper.selectByUsernameAndPasswordAndStatus(businessman);
+        businessman.setMobile(username);   //username可能是手机号
+
+        //根据用户名和密码查询用户
+        Businessman businessmanByUsername = businessmanMapper.selectByUsernameAndPasswordAndStatus(businessman);
+
+        //如果根据用户名和密码查询不到记录，则返回根据mobile和密码查询到的记录，如果均没有，返回null
+        return businessmanByUsername == null ? businessmanMapper.selectByMobileAndPasswordAndStatus(businessman) : businessmanByUsername;
     }
 
     /*
@@ -132,29 +140,33 @@ public class BusinessmanServiceImpl implements BusinessmanService
             return false;
         }
 
-        //用户名未注册
+        //判断手机号是否已经绑定
+        if (businessmanMapper.selectByMobile(businessman) != null) {
+            //手机号已绑定
+            return false;
+        }
+
+        //用户名未注册，手机号未绑定
         return true;
     }
 
     /*
-     * @Description:商家用户注册
-     * @Param:[businessman, businessmanDetail]
+     * @Description:商家注册
+     * @Param:[businessman]
      * @Return:boolean
      * @Author:TjSanshao
-     * @Date:2018-12-03
-     * @Time:17:48
+     * @Date:2018-12-04
+     * @Time:09:34
      **/
     @Override
     @Transactional
-    public boolean businessmanRegister(Businessman businessman, BusinessmanDetail businessmanDetail) {
+    public boolean businessmanRegister(Businessman businessman) {
         businessman.setStatus(new Byte("1"));
         businessmanMapper.insertSelective(businessman);
-        businessmanDetail.setTgwBusinessmanId(businessman.getId());
-        businessmanDetailMapper.insertSelective(businessmanDetail);
 
         //更新验证码状态
         SmsVerify smsVerify = new SmsVerify();
-        smsVerify.setMobile(businessmanDetail.getContactPhoneNumber());
+        smsVerify.setMobile(businessman.getMobile());
         smsVerify.setStatus(new Byte("1"));
         smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify);
 

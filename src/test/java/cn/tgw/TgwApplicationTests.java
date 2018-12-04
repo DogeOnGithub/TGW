@@ -7,6 +7,7 @@ import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.utils.MD5Utils;
+import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
@@ -17,8 +18,11 @@ import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -53,6 +57,9 @@ public class TgwApplicationTests {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private QiniuUtil qiniuUtil;
 
 	/*
 	 * @Description:测试UserMapper
@@ -250,6 +257,27 @@ public class TgwApplicationTests {
 		businessman.setId(1);
 		businessman.setMobile("12345678901");
 		System.out.println(businessmanMapper.updateByPrimaryKeySelective(businessman));
+	}
+
+	@Test
+	public void testNewBusinessmanMapper2(){
+		Businessman businessman = new Businessman();
+		businessman.setMobile("13420120424");
+		businessman.setPassword("666666");
+		businessman.setStatus(new Byte("1"));
+		System.out.println(businessmanMapper.selectByMobileAndPasswordAndStatus(businessman));
+	}
+
+	@Test
+	public void tjsanshaoTestQiniu(){
+		try {
+			File leimu = new File("C:\\Users\\TjSanshao\\Pictures\\Saved Pictures\\雷姆001.jpg");
+			FileInputStream inputStream = new FileInputStream(leimu);
+			MultipartFile multipartFile = new MockMultipartFile(leimu.getName(), inputStream);
+			System.out.println(QiniuUtil.tjsanshaoUploadImage(multipartFile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
