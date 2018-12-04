@@ -107,10 +107,7 @@ public class UserController {
                 //用户已经登录
                 User userFromSession = (User)sessionUser;
 
-                //根据用户名查询绑定的手机号码
-                UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
-
-                smsVerifyService.sendMsgCodeAsync(userDetail.getMobile(), miaoDiService.generateCode(6));
+                smsVerifyService.sendMsgCodeAsync(userFromSession.getMobile(), miaoDiService.generateCode(6));
 
                 sendMsgStatus.put("status", "success");
                 sendMsgStatus.put("message", "success");
