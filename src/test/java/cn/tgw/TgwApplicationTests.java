@@ -8,6 +8,7 @@ import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.common.utils.QiniuUtil;
+import cn.tgw.order.service.OrderService;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
@@ -61,14 +62,9 @@ public class TgwApplicationTests {
 	@Autowired
 	private QiniuUtil qiniuUtil;
 
-	/*
-	 * @Description:测试UserMapper
-	 * @Param:[]
-	 * @Return:void
-	 * @Author:TjSanshao
-	 * @Date:2018-11-28
-	 * @Time:21:43
-	 **/
+	@Autowired
+	private OrderService orderService;
+
 	@Test
 	public void testUserMapper(){
 		User user = new User();
@@ -92,14 +88,7 @@ public class TgwApplicationTests {
 		System.out.println(userDetailMapper.selectByMobile("13420120424"));
 	}
 
-	/*
-	 * @Description:测试SmsVerifyMapper
-	 * @Param:[]
-	 * @Return:void
-	 * @Author:TjSanshao
-	 * @Date:2018-11-28
-	 * @Time:21:43
-	 **/
+
 	@Test
 	public void testSmsVerifyMapper(){
 		System.out.println(smsVerifyMapper.smsVerifyList());
@@ -117,14 +106,6 @@ public class TgwApplicationTests {
 
 	}
 
-	/*
-	 * @Description:测试update方法
-	 * @Param:[]
-	 * @Return:void
-	 * @Author:TjSanshao
-	 * @Date:2018-11-29
-	 * @Time:09:06
-	 **/
 	@Test
 	public void testSmsVerifyMapper2(){
 		SmsVerify smsVerify = smsVerifyMapper.selectByMobile("17607591628");
@@ -278,6 +259,23 @@ public class TgwApplicationTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testOrderService(){
+		System.out.println(orderService.getAllOrders());
+		System.out.println(orderService.getAllOrdersByUserId(1));
+		System.out.println("test");
+	}
+
+	@Test
+	public void testOrderService2(){
+		System.out.println(orderService.createOrderWithUserIdAndGoodsId(1, 1, 10));
+	}
+
+	@Test
+	public void testOrderService3(){
+		System.out.println(orderService.getOrdersByUserIdAndOrderSellStatusAndStatusNormal(1, new Byte("1")));
 	}
 
 	@Test

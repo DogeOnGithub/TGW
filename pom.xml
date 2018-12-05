@@ -184,7 +184,8 @@
 					<!-- goods -->
 					<!--<configurationFile>${basedir}/src/main/resources/generator/xiaojian_genertorConfig.xml</configurationFile>-->
 					<!-- businessman -->
-					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<!--<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>-->
+					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig-tgw_order.xml</configurationFile>
 					<overwrite>true</overwrite>
 					<verbose>true</verbose>
 				</configuration>

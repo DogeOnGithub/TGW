@@ -65,6 +65,7 @@ mybatis:
     - classpath:mybatis/goods/mapper/*
     - classpath:mybatis/businessman/mapper/*
     - classpath:mybatis/admin/mapper/*
+    - classpath:mybatis/order/mapper/*
 #秒嘀API配置，具体可配置内容参考cn.tgw.config.TjSanshaoMiaoDiConfig
 miaodi:
   config:
