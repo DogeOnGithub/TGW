@@ -11,10 +11,11 @@
     <result column="total" property="total" jdbcType="DECIMAL" />
     <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
     <result column="pay_serials_number" property="paySerialsNumber" jdbcType="VARCHAR" />
+    <result column="tgw_businessman_id" property="tgwBusinessmanId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, tgw_goods_id, tgw_user_id, order_create_time, sell_status, count, total, order_status, 
-    pay_serials_number
+    pay_serials_number, tgw_businessman_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -40,12 +41,12 @@
   <insert id="insert" parameterType="cn.tgw.order.model.Order" >
     insert into tgw_order (id, tgw_goods_id, tgw_user_id, 
       order_create_time, sell_status, count, 
-      total, order_status, pay_serials_number
-      )
+      total, order_status, pay_serials_number, 
+      tgw_businessman_id)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{tgwUserId,jdbcType=INTEGER}, 
       #{orderCreateTime,jdbcType=TIMESTAMP}, #{sellStatus,jdbcType=TINYINT}, #{count,jdbcType=INTEGER}, 
-      #{total,jdbcType=DECIMAL}, #{orderStatus,jdbcType=TINYINT}, #{paySerialsNumber,jdbcType=VARCHAR}
-      )
+      #{total,jdbcType=DECIMAL}, #{orderStatus,jdbcType=TINYINT}, #{paySerialsNumber,jdbcType=VARCHAR}, 
+      #{tgwBusinessmanId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.order.model.Order" >
     insert into tgw_order
@@ -77,6 +78,9 @@
       <if test="paySerialsNumber != null" >
         pay_serials_number,
       </if>
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -105,6 +109,9 @@
       </if>
       <if test="paySerialsNumber != null" >
         #{paySerialsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tgwBusinessmanId != null" >
+        #{tgwBusinessmanId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -135,6 +142,9 @@
       <if test="paySerialsNumber != null" >
         pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR},
       </if>
+      <if test="tgwBusinessmanId != null" >
+        tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -147,7 +157,8 @@
       count = #{count,jdbcType=INTEGER},
       total = #{total,jdbcType=DECIMAL},
       order_status = #{orderStatus,jdbcType=TINYINT},
-      pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR}
+      pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR},
+      tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

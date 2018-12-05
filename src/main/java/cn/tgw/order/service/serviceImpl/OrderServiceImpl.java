@@ -3,6 +3,7 @@ package cn.tgw.order.service.serviceImpl;
 import cn.tgw.order.mapper.OrderMapper;
 import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
+import cn.tgw.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllOrders() {
         return orderMapper.selectAllOrders();
+    }
+
+    @Override
+    public List<Order> getAllOrdersByUser(User user) {
+        return null;
+    }
+
+    @Override
+    public List<Order> geteAllOrdersByUserId(int userId) {
+        return null;
     }
 }

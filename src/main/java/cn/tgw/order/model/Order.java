@@ -24,4 +24,6 @@ public class Order {
     private Byte orderStatus;
 
     private String paySerialsNumber;
+
+    private Integer tgwBusinessmanId;
 }

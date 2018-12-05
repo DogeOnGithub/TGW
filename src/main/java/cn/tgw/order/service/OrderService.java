@@ -1,6 +1,7 @@
 package cn.tgw.order.service;
 
 import cn.tgw.order.model.Order;
+import cn.tgw.user.model.User;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public interface OrderService {
      * @Time:15:38
      **/
     List<Order> getAllOrders();
+
+    List<Order> getAllOrdersByUser(User user);
+
+    List<Order> geteAllOrdersByUserId(int userId);
 
 }
