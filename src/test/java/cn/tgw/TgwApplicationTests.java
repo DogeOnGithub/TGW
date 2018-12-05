@@ -264,7 +264,18 @@ public class TgwApplicationTests {
 	@Test
 	public void testOrderService(){
 		System.out.println(orderService.getAllOrders());
+		System.out.println(orderService.getAllOrdersByUserId(1));
 		System.out.println("test");
+	}
+
+	@Test
+	public void testOrderService2(){
+		System.out.println(orderService.createOrderWithUserIdAndGoodsId(1, 1, 10));
+	}
+
+	@Test
+	public void testOrderService3(){
+		System.out.println(orderService.getOrdersByUserIdAndOrderSellStatusAndStatusNormal(1, new Byte("1")));
 	}
 
 	@Test

@@ -21,5 +21,11 @@ public interface OrderMapper {
 
     List<Order> selectAllOrders();
 
+    List<Order> selectAllOrdersByUserId(Integer userId);
+
+    List<Order> selectAllOrdersByBusinessmanId(Integer businessmanId);
+
+    List<Order> selectAllOrdersByUserIdAndSellStatusAndStatus(Order order);
+
     //自定义查询结束
 }
