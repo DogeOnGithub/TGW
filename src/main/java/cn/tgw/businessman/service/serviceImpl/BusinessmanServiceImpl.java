@@ -7,6 +7,8 @@ import cn.tgw.businessman.model.BusinessmanDetail;
 import cn.tgw.businessman.service.BusinessmanService;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -171,6 +173,40 @@ public class BusinessmanServiceImpl implements BusinessmanService
         smsVerifyMapper.updateCodeStatusSmsVerify(smsVerify);
 
         return true;
+    }
+
+    /**
+    * @Description:    根据手机模糊搜索商家信息
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/5 0005 8:56
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/5 0005 8:56
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    @Override
+    public PageInfo<Businessman> findBusinessmansByLikeMobile(Integer page, Integer rows, String mobile) {
+        PageHelper.startPage(page,rows);
+        List<Businessman> businessmansByLikeMobile = businessmanMapper.findBusinessmansByLikeMobile(mobile);
+        PageInfo<Businessman>pageInfo=new PageInfo<>(businessmansByLikeMobile);
+        return pageInfo;
+    }
+
+    /**
+    * @Description:    根据商家id、查询商户所有店铺信息，Integer id可选
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/5 0005 14:46
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/5 0005 14:46
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    @Override
+    public PageInfo<BusinessmanDetail> findAllDetailsByBusinessmanId(Integer page, Integer rows, Integer id) {
+        PageHelper.startPage(page,rows);
+        List<BusinessmanDetail> allDetailsByBusinessmanId = businessmanDetailMapper.findAllDetailsByBusinessmanId(id);
+        PageInfo<BusinessmanDetail> pageInfo=new PageInfo<>(allDetailsByBusinessmanId);
+        return pageInfo;
     }
 
 }

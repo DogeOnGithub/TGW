@@ -2,6 +2,9 @@ package cn.tgw.businessman.service;
 
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.businessman.model.BusinessmanDetail;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -29,5 +32,9 @@ public interface BusinessmanService {
     boolean enableBusinessmanRegister(Businessman businessman);
 
     boolean businessmanRegister(Businessman businessman);
+
+    PageInfo<Businessman> findBusinessmansByLikeMobile(Integer page, Integer rows, String mobile);
+
+    PageInfo<BusinessmanDetail> findAllDetailsByBusinessmanId(Integer page, Integer rows, Integer id);
 
 }

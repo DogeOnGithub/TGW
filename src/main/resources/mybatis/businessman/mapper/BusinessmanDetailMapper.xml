@@ -55,6 +55,16 @@
     from tgw_businessman_detail
     where contact_phone_number = #{contactPhone}
   </select>
+  <select id="findAllDetailsByBusinessmanId" resultType="cn.tgw.businessman.model.BusinessmanDetail">
+
+    select * from tgw_businessman_detail
+    <where>
+      <if test="tgw_businessman_id!=null">
+        and tgw_businessman_id=#{tgw_businessman_id}
+      </if>
+    </where>
+
+  </select>
 
   <!-- 自定义查询结束 -->
 

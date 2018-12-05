@@ -47,8 +47,16 @@
     from tgw_businessman
     where mobile = #{mobile,jdbcType=VARCHAR}
   </select>
+    <select id="findBusinessmansByLikeMobile" resultType="cn.tgw.businessman.model.Businessman">
+      select * from tgw_businessman
+      <where>
+        <if test="mobile!=null and mobile!='' ">
+          and mobile like #{mobile}
+        </if>
+      </where>
+    </select>
 
-  <!-- 自定义查询结束 -->
+    <!-- 自定义查询结束 -->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_businessman

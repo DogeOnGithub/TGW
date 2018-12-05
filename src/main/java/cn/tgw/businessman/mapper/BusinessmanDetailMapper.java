@@ -1,6 +1,7 @@
 package cn.tgw.businessman.mapper;
 
 import cn.tgw.businessman.model.BusinessmanDetail;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface BusinessmanDetailMapper {
     BusinessmanDetail selectByContactPhone(String contactPhone);
 
     //自定义方法结束
+
+    List<BusinessmanDetail> findAllDetailsByBusinessmanId(@Param("tgw_businessman_id") Integer tgw_businessman_id);
 }
