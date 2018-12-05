@@ -33,6 +33,45 @@
                 "userStatus":$("#userStatus").combobox("getValue")
             });
         }
+        function openModifyDialog(){
+
+            var selectedRows=$("#dg").datagrid('getSelections');
+            if(selectedRows.length!=1){
+                $.messager.alert("系统提示","请选择一条要注销的数据！");
+                return;
+            }
+            var row=selectedRows[0];
+            if (row.userStatus!=1){
+                $.messager.alert("系统提示","请选择一条要注销的数据！");
+                return;
+            }
+            $.messager.confirm('注销用户使用', '您确定要注销该用户吗?', function(r){
+                if (r){
+                    $.ajax({
+                        url:"modify_user_status",
+                        type:"get",
+                        data:{id:row.id},
+                        success:function(result){
+                            // console.log(result);
+                            //var result=eval('('+result+')');
+                            if(result.status){
+                                $.messager.alert('温馨提示','操作成功!');
+                                $("#dg").datagrid('reload');
+                            }else {
+                                $.messager.alert('温馨提示','操作失败!');
+                            }
+                        },
+                        error:function(e){
+                            alert("错误！！");
+
+                        }
+                    });
+                }else {
+                    return;
+                }
+            });
+
+        }
     </script>
 
 </head>
@@ -63,7 +102,9 @@
     </thead>
 </table>
 <div id="tb">
-
+    <div>
+        <a href="javascript:openModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">注销用户</a>
+    </div>
     <div>
         &nbsp;手 机 号：&nbsp;<input class="easyui-textbox" name="phone" id="phone" style="width:150px"></input>
         &nbsp;日期区间：&nbsp;<input class="easyui-datebox" name="stime" id="stime" style="width: 140px;"></input>

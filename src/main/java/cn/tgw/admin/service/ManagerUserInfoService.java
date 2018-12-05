@@ -75,4 +75,18 @@ public class ManagerUserInfoService {
         easyUIDataGridResult.setRows(allUserMapperPo);
         return easyUIDataGridResult;
     }
+
+    /**
+     * 通过用户id 注销用户状态
+     * @param id
+     * @return
+     */
+    public int modify_user_status(Integer id){
+        User user=new User();
+        user.setId(id);
+        user.setUserStatus(new Byte("0"));
+        int i = userMapper.updateByPrimaryKeySelective(user);
+        return i;
+
+    }
 }

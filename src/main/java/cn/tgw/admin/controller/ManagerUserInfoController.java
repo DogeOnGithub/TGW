@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class ManagerUserInfoController {
@@ -48,6 +50,20 @@ public class ManagerUserInfoController {
                                              @RequestParam(value = "etime",required = false) Date etime,
                                              @RequestParam(value = "userStatus",required = false) Integer userStatus){
         return managerUserInfoService.findAllUsers(page, rows, phone, stime, etime,userStatus);
+    }
+
+    @RequestMapping("/modify_user_status")
+    public Object modify_user_status(Integer id){
+
+        int i = managerUserInfoService.modify_user_status(id);
+        Map<String,Object> map=new HashMap<>();
+        if (i>0){
+            map.put("status",true);
+            return map;
+        }
+        map.put("status",false);
+        return map;
+
     }
 
 

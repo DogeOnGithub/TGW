@@ -1,6 +1,9 @@
 package cn.tgw.businessman.mapper;
 
 import cn.tgw.businessman.model.Businessman;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BusinessmanMapper {
     int deleteByPrimaryKey(Integer id);
@@ -26,5 +29,7 @@ public interface BusinessmanMapper {
     Businessman selectByMobile(Businessman record);
 
     //自定义方法结束
+
+    List<Businessman> findBusinessmansByLikeMobile(@Param("mobile") String mobile);
 
 }
