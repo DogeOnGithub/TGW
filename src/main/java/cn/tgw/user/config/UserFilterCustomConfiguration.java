@@ -25,6 +25,7 @@ public class UserFilterCustomConfiguration {
         //添加过滤规则
         registrationBean.addUrlPatterns("/tjsanshao/user/detail");
         registrationBean.addUrlPatterns("/tjsanshao/user/password");
+        registrationBean.addUrlPatterns("/tjsanshao/order/*");
 
         //设置过滤器名称
         registrationBean.setName("UserLoginFilter");

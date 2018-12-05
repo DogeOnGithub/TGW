@@ -242,7 +242,7 @@ public class UserController {
         //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
 
         //从session中获取用户信息
-        Object sessionUser = session.getAttribute("user");
+        Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
 
         //用户已经登录，这个session中包含有用户记录的所有信息
         User userFromSession = (User)sessionUser;
@@ -302,7 +302,7 @@ public class UserController {
         //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
 
         //从session中获取用户信息
-        Object sessionUser = session.getAttribute("user");
+        Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
 
         User userFromSession = (User)sessionUser;
 
@@ -323,7 +323,7 @@ public class UserController {
         //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
 
         //从session中获取用户信息
-        Object sessionUser = session.getAttribute("user");
+        Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
 
         User userFromSession = (User)sessionUser;
         userDetail.setTgwUserId(userFromSession.getId());
