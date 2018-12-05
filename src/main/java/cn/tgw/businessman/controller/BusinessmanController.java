@@ -102,11 +102,8 @@ public class BusinessmanController {
                 //已经登录，从session中获取的businessman对象持有id
                 Businessman businessmanFromSession = (Businessman)sessionBusinessman;
 
-                //根据businessman的userId查询绑定的手机号
-                BusinessmanDetail businessmanDetail = businessmanService.getBusinessmanDetailByBusinessmanId(businessmanFromSession);
-
                 //异步发送验证码，返回响应
-                smsVerifyService.sendMsgCodeAsync(businessmanDetail.getContactPhoneNumber(), miaoDiService.generateCode(6));
+                smsVerifyService.sendMsgCodeAsync(businessmanFromSession.getMobile(), miaoDiService.generateCode(6));
 
                 sendMsgStatus.put("status", "success");
                 sendMsgStatus.put("message", "success");

@@ -2,6 +2,7 @@ package cn.tgw.user.controller;
 
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
+import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
@@ -11,8 +12,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,10 +67,16 @@ public class UserController {
         //调用service，获取记录
         User user = userService.getUserByUsernameOrMobileAndPasswordAndStatus(username, password, new Byte("1"));
         if (user != null){
+
+            //根据用户id获取userDetail，例如昵称、头像url
+            UserDetail userDetail = userService.getUserDetailByUserId(user);
+
             loginStatus.put("status", "success");
             loginStatus.put("message", "login success");
             user.setPassword(""); //不返回密码到客户端
             loginStatus.put("user", user);
+
+            loginStatus.put("userDetail", userDetail);
 
             //将记录存入session，键为"user"，值为User对象
             session.setAttribute(TGWStaticString.TGW_USER, user);
@@ -107,10 +116,7 @@ public class UserController {
                 //用户已经登录
                 User userFromSession = (User)sessionUser;
 
-                //根据用户名查询绑定的手机号码
-                UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
-
-                smsVerifyService.sendMsgCodeAsync(userDetail.getMobile(), miaoDiService.generateCode(6));
+                smsVerifyService.sendMsgCodeAsync(userFromSession.getMobile(), miaoDiService.generateCode(6));
 
                 sendMsgStatus.put("status", "success");
                 sendMsgStatus.put("message", "success");
@@ -298,22 +304,12 @@ public class UserController {
         //从session中获取用户信息
         Object sessionUser = session.getAttribute("user");
 
-        //验证用户登录已使用过滤器
-//        if (sessionUser == null){
-//            //用户未登录
-//            getDetailStatus.put("status", "authority");
-//            getDetailStatus.put("message", "login first");
-//            return getDetailStatus;
-//        }
-
         User userFromSession = (User)sessionUser;
 
-        User userInDB = userService.getUserById(userFromSession.getId());
-        UserDetail userDetail = userService.getUserDetailByUserId(userInDB);
+        UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
 
         getDetailStatus.put("status", "success");
-        userInDB.setPassword("");
-        getDetailStatus.put("user", userInDB);
+        getDetailStatus.put("user", userFromSession);
         getDetailStatus.put("userDetail", userDetail);
         getDetailStatus.put("message", "success");
 
@@ -321,7 +317,7 @@ public class UserController {
     }
 
     @PostMapping("/tjsanshao/user/detail")
-    public Map<String, Object> userDetail(UserDetail userDetail, HttpSession session){
+    public Map<String, Object> userDetail(UserDetail userDetail, MultipartFile headImage, HttpSession session) throws IOException {
         HashMap<String, Object> postDetailStatus = new HashMap<>();
 
         //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
@@ -332,6 +328,17 @@ public class UserController {
         User userFromSession = (User)sessionUser;
         userDetail.setTgwUserId(userFromSession.getId());
         userDetail.setLastUpdateTime(new Date());
+
+        //判断用户是否上传了头像图片
+        if (headImage != null) {
+
+            //将图片上传到七牛云
+            String qiNiuRes = QiniuUtil.tjsanshaoUploadImage(headImage);
+            if (!qiNiuRes.equals("error")) {
+                //如果图片上传到七牛云成功，将返回的url存入到UserDetail记录中
+                userDetail.setUserImageUrl(qiNiuRes);
+            }
+        }
 
         //更新数据库，并获得更新后的UserDetail
         UserDetail userDetailUpdated = userService.updateUserDetail(userDetail);

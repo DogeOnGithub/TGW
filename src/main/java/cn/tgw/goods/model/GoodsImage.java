@@ -40,4 +40,14 @@ public class GoodsImage {
     public void setIsMain(Integer isMain) {
         this.isMain = isMain;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsImage{" +
+                "id=" + id +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", tgwGoodsId=" + tgwGoodsId +
+                ", isMain=" + isMain +
+                '}';
+    }
 }
