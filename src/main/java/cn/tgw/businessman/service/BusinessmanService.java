@@ -37,4 +37,8 @@ public interface BusinessmanService {
 
     PageInfo<BusinessmanDetail> findAllDetailsByBusinessmanId(Integer page, Integer rows, Integer id);
 
+    PageInfo<BusinessmanDetail> findAllAppliDetails(Integer page, Integer rows,Byte status);
+
+    int changeShop_settle_statusById(Integer id,Byte status);
+
 }

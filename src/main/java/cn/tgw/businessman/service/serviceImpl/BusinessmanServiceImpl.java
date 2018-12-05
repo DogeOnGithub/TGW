@@ -209,4 +209,27 @@ public class BusinessmanServiceImpl implements BusinessmanService
         return pageInfo;
     }
 
+    /**
+    * @Description:    按照条件查询商家详情，Byte status 可选，默认是正在审核
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/5 0005 18:52
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/5 0005 18:52
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    @Override
+    public PageInfo<BusinessmanDetail> findAllAppliDetails(Integer page, Integer rows, Byte status) {
+        PageHelper.startPage(page,rows);
+        List<BusinessmanDetail> allAppliDetails = businessmanDetailMapper.findAllAppliDetails(status);
+        PageInfo<BusinessmanDetail> pageInfo=new PageInfo<>(allAppliDetails);
+        return pageInfo;
+    }
+
+    @Override
+    public int changeShop_settle_statusById(Integer id, Byte status) {
+        int i = businessmanDetailMapper.changeShop_settle_statusById(id, status);
+        return i;
+    }
+
 }

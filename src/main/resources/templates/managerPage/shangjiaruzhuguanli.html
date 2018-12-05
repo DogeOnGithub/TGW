@@ -2,9 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>商家入驻管理</title>
+    <title>商家信息</title>
+    <link rel="stylesheet" href="/jquery-easyui-1.3.3/themes/default/easyui.css">
+    <link rel="stylesheet" href="/jquery-easyui-1.3.3/themes/icon.css">
+    <script src="/jquery-easyui-1.3.3/jquery.min.js"></script>
+    <script src="/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    <script src="/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+
+        function search(){
+            $("#dg").datagrid('load',{
+                "shopSettleStatus":$("#shopSettleStatus").combobox("getValue")
+            });
+        }
+        function formatshopStatus(val,row) {
+            if (val==1){
+                return "正在营业";
+            }
+            return "关店";
+        }
+        function formatshopSettleStatus(val,row) {
+            if (val==0){
+                return "正在申请入驻审核";
+            }else if (val==2){
+                return "已拒绝";
+            }
+            return "已通过";
+        }
+        function openAccessModify() {
+            var selectedRows=$("#dg").datagrid('getSelections');
+            if(selectedRows.length!=1){
+                $.messager.alert("系统提示","请选择一条要同意的数据！");
+                return;
+            }
+            var row=selectedRows[0];
+            if (row.shopSettleStatus!=0){
+                $.messager.alert("系统提示","请选择一条要同意的数据！");
+                return;
+            }
+            $.messager.confirm('同意审批', '您确定要同意审批吗?', function(r){
+                if (r){
+                    $.ajax({
+                        url:"/usermanager/accessApplication",
+                        type:"get",
+                        data:{id:row.id,typereq:"access"},
+                        success:function(result){
+                            // console.log(result);
+                            //var result=eval('('+result+')');
+                            if(result.status){
+                                $.messager.alert('温馨提示','操作成功!');
+                                $("#dg").datagrid('reload');
+                            }else {
+                                $.messager.alert('温馨提示','操作失败!');
+                            }
+                        },
+                        error:function(e){
+                            alert("错误！！");
+
+                        }
+                    });
+                }else {
+                    return;
+                }
+            });
+        }
+        function openCancle() {
+            var selectedRows=$("#dg").datagrid('getSelections');
+            if(selectedRows.length!=1){
+                $.messager.alert("系统提示","请选择一条要拒绝的数据！");
+                return;
+            }
+            var row=selectedRows[0];
+            if (row.shopSettleStatus!=0){
+                $.messager.alert("系统提示","请选择一条要拒绝的数据！");
+                return;
+            }
+            $.messager.confirm('同意审批', '您确定要拒绝审批吗?', function(r){
+                if (r){
+                    $.ajax({
+                        url:"/usermanager/accessApplication",
+                        type:"get",
+                        data:{id:row.id,typereq:"refuse"},
+                        success:function(result){
+                            // console.log(result);
+                            //var result=eval('('+result+')');
+                            if(result.status){
+                                $.messager.alert('温馨提示','操作成功!');
+                                $("#dg").datagrid('reload');
+                            }else {
+                                $.messager.alert('温馨提示','操作失败!');
+                            }
+                        },
+                        error:function(e){
+                            alert("错误！！");
+
+                        }
+                    });
+                }else {
+                    return;
+                }
+            });
+        }
+
+    </script>
+
 </head>
 <body>
-商家入驻管理
+
+<div id="p" class="easyui-panel" title="商家的商店信息" style="width:1600px;height:450px;padding:10px;background:#fafafa;"
+     data-options="iconCls:'icon-save',closable:false,
+                collapsible:true,minimizable:false,maximizable:false">
+    <table id="dg" title="商家的商店信息" class="easyui-datagrid"
+           fitColumns="true" pagination="true" rownumbers="true" singleSelect="true"
+           url="/usermanager/findAllAppliDetails" fit="true" toolbar="#tb">
+        <thead>
+        <tr>
+            <th field="id" width="20" align="center">编号</th>
+            <th field="shopName" width="50" align="center">商店名称</th>
+            <th field="shopLocation" width="120" align="center">商店位置</th>
+            <th field="shopDesc" width="100" align="center">商店描述</th>
+            <th field="shopTimeOpen" width="80" align="center">开店时间</th>
+            <th field="shopTimeClose" width="80" align="center" >打烊时间</th>
+            <th field="phoneNumber" width="80" align="center">店家联系电话</th>
+            <th field="shopStatus" width="40" align="center" formatter="formatshopStatus">营业状态</th>
+            <th field="shopNotice" width="70" align="center">商店公告</th>
+            <th field="shopSettleStatus" width="60" align="center" formatter="formatshopSettleStatus">入驻申请状态</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="tb">
+        <div>
+            <a href="javascript:openAccessModify()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">同意审批</a>
+            <a href="javascript:openCancle()" class="easyui-linkbutton" iconCls="icon-no" plain="true">拒绝审批</a>
+        </div>
+        <div>
+            <select id="shopSettleStatus" class="easyui-combobox" name="shopSettleStatus" panelHeight="auto" style="width: 135px;">
+                <option value="0" selected>正在申请审批</option>
+                <option value="1">已通过审批</option>
+                <option value="2">已拒绝审批</option>
+            </select>
+            <a href="javascript:search()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+        </div>
+    </div>
+</div>
+
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ManagerBusinessmanController {
@@ -42,6 +44,36 @@ public class ManagerBusinessmanController {
         easyUIDataGridResult.setRows(details.getList());
         return easyUIDataGridResult;
     }
+    @RequestMapping("/usermanager/findAllAppliDetails")
+    public EasyUIDataGridResult findAllAppliDetails(Integer page,Integer rows,@RequestParam(value = "shopSettleStatus",defaultValue = "0",required = false)String shopSettleStatus){
+        EasyUIDataGridResult easyUIDataGridResult=new EasyUIDataGridResult();
+        if (StringUtils.isEmpty(shopSettleStatus)){
+            shopSettleStatus="0";
+        }
+        PageInfo<BusinessmanDetail> detailPageInfo=businessmanService.findAllAppliDetails(page,rows,new Byte(shopSettleStatus));
+        easyUIDataGridResult.setTotal((int) detailPageInfo.getTotal());
+        easyUIDataGridResult.setRows(detailPageInfo.getList());
+        return easyUIDataGridResult;
+    }
+
+    @RequestMapping("/usermanager/accessApplication")
+    public Object accessApplication(Integer id,String typereq){
+        int i=0;
+        if (typereq.equals("access")){
+            i=businessmanService.changeShop_settle_statusById(id,new Byte("1"));
+        }else {
+            i = businessmanService.changeShop_settle_statusById(id, new Byte("2"));
+        }
+        Map<String,Object> map=new HashMap<>();
+        if (i>0){
+            map.put("status",true);
+            return map;
+        }
+        map.put("status",false);
+        return map;
+
+    }
+
 
 
 }

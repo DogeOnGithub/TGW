@@ -31,4 +31,8 @@ public interface BusinessmanDetailMapper {
     //自定义方法结束
 
     List<BusinessmanDetail> findAllDetailsByBusinessmanId(@Param("tgw_businessman_id") Integer tgw_businessman_id);
+
+    List<BusinessmanDetail> findAllAppliDetails(@Param("shop_settle_status") Byte shop_settle_status);
+
+    int changeShop_settle_statusById(@Param("id")Integer id, @Param("shop_settle_status") Byte shop_settle_status);
 }

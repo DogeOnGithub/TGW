@@ -65,6 +65,17 @@
     </where>
 
   </select>
+  <select id="findAllAppliDetails" resultType="cn.tgw.businessman.model.BusinessmanDetail">
+
+
+    select * from tgw_businessman_detail
+    <where>
+      <if test="shop_settle_status!=null">
+        and shop_settle_status=#{shop_settle_status}
+      </if>
+    </where>
+
+  </select>
 
   <!-- 自定义查询结束 -->
 
@@ -226,5 +237,9 @@
       shop_notice = #{shopNotice,jdbcType=VARCHAR},
       shop_settle_status = #{shopSettleStatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="changeShop_settle_statusById">
+    update tgw_businessman_detail set shop_settle_status=#{shop_settle_status}
+     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
