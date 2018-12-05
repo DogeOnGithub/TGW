@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tgw.order.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.tgw.order.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tgw_goods_id" property="tgwGoodsId" jdbcType="INTEGER" />
+    <result column="tgw_user_id" property="tgwUserId" jdbcType="INTEGER" />
+    <result column="order_create_time" property="orderCreateTime" jdbcType="TIMESTAMP" />
+    <result column="sell_status" property="sellStatus" jdbcType="TINYINT" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="DECIMAL" />
+    <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
+    <result column="pay_serials_number" property="paySerialsNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tgw_goods_id, tgw_user_id, order_create_time, sell_status, count, total, order_status, 
+    pay_serials_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tgw_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!-- 自定义查询开始 -->
+
+  <select id="selectAllOrders" resultType="cn.tgw.order.model.Order" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_order
+  </select>
+
+  <!-- 自定义查询结束 -->
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tgw_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tgw.order.model.Order" >
+    insert into tgw_order (id, tgw_goods_id, tgw_user_id, 
+      order_create_time, sell_status, count, 
+      total, order_status, pay_serials_number
+      )
+    values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{tgwUserId,jdbcType=INTEGER}, 
+      #{orderCreateTime,jdbcType=TIMESTAMP}, #{sellStatus,jdbcType=TINYINT}, #{count,jdbcType=INTEGER}, 
+      #{total,jdbcType=DECIMAL}, #{orderStatus,jdbcType=TINYINT}, #{paySerialsNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tgw.order.model.Order" >
+    insert into tgw_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tgwGoodsId != null" >
+        tgw_goods_id,
+      </if>
+      <if test="tgwUserId != null" >
+        tgw_user_id,
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time,
+      </if>
+      <if test="sellStatus != null" >
+        sell_status,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="paySerialsNumber != null" >
+        pay_serials_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tgwGoodsId != null" >
+        #{tgwGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="tgwUserId != null" >
+        #{tgwUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellStatus != null" >
+        #{sellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="paySerialsNumber != null" >
+        #{paySerialsNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.order.model.Order" >
+    update tgw_order
+    <set >
+      <if test="tgwGoodsId != null" >
+        tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="tgwUserId != null" >
+        tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time = #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellStatus != null" >
+        sell_status = #{sellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="paySerialsNumber != null" >
+        pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tgw.order.model.Order" >
+    update tgw_order
+    set tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
+      tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
+      order_create_time = #{orderCreateTime,jdbcType=TIMESTAMP},
+      sell_status = #{sellStatus,jdbcType=TINYINT},
+      count = #{count,jdbcType=INTEGER},
+      total = #{total,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
