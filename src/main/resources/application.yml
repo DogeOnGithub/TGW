@@ -71,6 +71,11 @@ miaodi:
   config:
     timeout: 30
 
+#支付宝配置，具体可配置内容请参考cn.tgw.config.AlipayConfiguration
+alipay:
+  config:
+    common-url-prefix: http://tjsanshao.free.idcfengye.com
+
 #以下配置是调试时使用
 logging:
   level:

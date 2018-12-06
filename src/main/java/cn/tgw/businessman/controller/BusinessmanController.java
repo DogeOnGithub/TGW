@@ -206,6 +206,14 @@ public class BusinessmanController {
         return registerStatus;
     }
 
+    /*
+     * @Description:商家修改密码
+     * @Param:[password, code, oldPassword, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-06
+     * @Time:09:20
+     **/
     @PostMapping("/tjsanshao/businessman/password")
     public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session) {
         HashMap<String, Object> passwordStatus = new HashMap<>();

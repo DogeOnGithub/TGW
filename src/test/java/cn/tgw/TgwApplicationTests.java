@@ -8,12 +8,17 @@ import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.common.utils.QiniuUtil;
+import cn.tgw.config.AlipayConfiguration;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -64,6 +69,9 @@ public class TgwApplicationTests {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private AlipayConfiguration alipayConfiguration;
 
 	@Test
 	public void testUserMapper(){
@@ -276,6 +284,41 @@ public class TgwApplicationTests {
 	@Test
 	public void testOrderService3(){
 		System.out.println(orderService.getOrdersByUserIdAndOrderSellStatusAndStatusNormal(1, new Byte("1")));
+	}
+
+	@Test
+	public void testAlipay(){
+		System.out.println(alipayConfiguration.getCommonUrlPrefix());
+		System.out.println("test");
+
+		System.out.println("-----------------------------------");
+
+		AlipayClient alipayClient = new DefaultAlipayClient(alipayConfiguration.getGatewayUrl(), alipayConfiguration.getApp_id(), alipayConfiguration.getMerchant_private_key(), "json", alipayConfiguration.getCharset(), alipayConfiguration.getAlipay_public_key(), alipayConfiguration.getSign_type());
+		AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+		alipayRequest.setReturnUrl(alipayConfiguration.getReturn_url());
+		alipayRequest.setNotifyUrl(alipayConfiguration.getNotify_url());
+
+		//商户订单号，商户网站订单系统中唯一订单号，必填
+		String out_trade_no = "13420120424";
+		//付款金额，必填
+		String total_amount = "99";
+		//订单名称，必填
+		String subject = "test";
+		//商品描述，可空
+		String body = "test test";
+
+		alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+				+ "\"total_amount\":\""+ total_amount +"\","
+				+ "\"subject\":\""+ subject +"\","
+				+ "\"body\":\""+ body +"\","
+				+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+
+		try {
+			String result = alipayClient.pageExecute(alipayRequest).getBody();
+			System.out.println(result);
+		} catch (AlipayApiException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
