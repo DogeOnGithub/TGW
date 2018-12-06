@@ -26,4 +26,6 @@ public class Order {
     private String paySerialsNumber;
 
     private Integer tgwBusinessmanId;
+
+    private String uniqueOrderNumber;
 }

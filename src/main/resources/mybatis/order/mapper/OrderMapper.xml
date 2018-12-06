@@ -12,10 +12,11 @@
     <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
     <result column="pay_serials_number" property="paySerialsNumber" jdbcType="VARCHAR" />
     <result column="tgw_businessman_id" property="tgwBusinessmanId" jdbcType="INTEGER" />
+    <result column="unique_order_number" property="uniqueOrderNumber" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, tgw_goods_id, tgw_user_id, order_create_time, sell_status, count, total, order_status, 
-    pay_serials_number, tgw_businessman_id
+    pay_serials_number, tgw_businessman_id, unique_order_number
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -63,11 +64,11 @@
     insert into tgw_order (id, tgw_goods_id, tgw_user_id, 
       order_create_time, sell_status, count, 
       total, order_status, pay_serials_number, 
-      tgw_businessman_id)
+      tgw_businessman_id, unique_order_number)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{tgwUserId,jdbcType=INTEGER}, 
       #{orderCreateTime,jdbcType=TIMESTAMP}, #{sellStatus,jdbcType=TINYINT}, #{count,jdbcType=INTEGER}, 
       #{total,jdbcType=DECIMAL}, #{orderStatus,jdbcType=TINYINT}, #{paySerialsNumber,jdbcType=VARCHAR}, 
-      #{tgwBusinessmanId,jdbcType=INTEGER})
+      #{tgwBusinessmanId,jdbcType=INTEGER}, #{uniqueOrderNumber,jdbcType=VARCHAR})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.order.model.Order" >
@@ -103,6 +104,9 @@
       <if test="tgwBusinessmanId != null" >
         tgw_businessman_id,
       </if>
+      <if test="uniqueOrderNumber != null" >
+        unique_order_number,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,6 +138,9 @@
       </if>
       <if test="tgwBusinessmanId != null" >
         #{tgwBusinessmanId,jdbcType=INTEGER},
+      </if>
+      <if test="uniqueOrderNumber != null" >
+        #{uniqueOrderNumber,jdbcType=VARCHAR}
       </if>
     </trim>
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">SELECT LAST_INSERT_ID()</selectKey>
@@ -168,6 +175,9 @@
       <if test="tgwBusinessmanId != null" >
         tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
       </if>
+      <if test="uniqueOrderNumber != null" >
+        unique_order_number = #{uniqueOrderNumber,jdbcType=VARCHAR}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -181,7 +191,8 @@
       total = #{total,jdbcType=DECIMAL},
       order_status = #{orderStatus,jdbcType=TINYINT},
       pay_serials_number = #{paySerialsNumber,jdbcType=VARCHAR},
-      tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER}
+      tgw_businessman_id = #{tgwBusinessmanId,jdbcType=INTEGER},
+      unique_order_number = #{uniqueOrderNumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

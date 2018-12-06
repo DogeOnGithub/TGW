@@ -9,6 +9,8 @@ import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.config.AlipayConfiguration;
+import cn.tgw.order.mapper.OrderMapper;
+import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
@@ -29,6 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -72,6 +75,9 @@ public class TgwApplicationTests {
 
 	@Autowired
 	private AlipayConfiguration alipayConfiguration;
+
+	@Autowired
+	private OrderMapper orderMapper;
 
 	@Test
 	public void testUserMapper(){
@@ -319,6 +325,17 @@ public class TgwApplicationTests {
 		} catch (AlipayApiException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testOrderMapper(){
+		System.out.println(orderMapper.selectByPrimaryKey(2));
+
+		Order order = new Order();
+		order.setId(1);
+		order.setTotal(new BigDecimal(500));
+		order.setUniqueOrderNumber(Long.toString(new Date().getTime()));
+		System.out.println(orderMapper.updateByPrimaryKeySelective(order));
 	}
 
 	@Test
