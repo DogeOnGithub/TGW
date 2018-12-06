@@ -92,6 +92,8 @@ public class BusinessmanController {
             if (requestParam.equals("password")) {
                 //查询session，用户是否已经登录
                 Object sessionBusinessman = session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+                //这个请求并没有经过cn.tgw.businessman.filter.BusinessmanAuthenticationFilter过滤器，因此要判断是否登录
                 if (sessionBusinessman == null) {
                     //没有登录
                     sendMsgStatus.put("status", "authority");
@@ -202,5 +204,58 @@ public class BusinessmanController {
         registerStatus.put("businessman", businessman);
 
         return registerStatus;
+    }
+
+    @PostMapping("/tjsanshao/businessman/password")
+    public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session) {
+        HashMap<String, Object> passwordStatus = new HashMap<>();
+
+        //验证用户登录已使用过滤器，详细请查看cn.tgw.user.filter.UserAuthenticationFilter
+
+        //从session中获取商家对象
+        Businessman businessmanFromSession = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        //判断是否带有验证码，如果没有，需要发送验证码
+        if (StringUtils.isEmpty(code)){
+            //请求中没有验证码
+            passwordStatus.put("status", "fail");
+            passwordStatus.put("message", "verify code error");
+            return passwordStatus;
+        }
+
+        //请求中带有验证码，开始验证验证码
+        if (!smsVerifyService.checkCode(businessmanFromSession.getMobile(), code)){
+            //验证码不通过
+            passwordStatus.put("status", "fail");
+            passwordStatus.put("message", "verify code error");
+            return passwordStatus;
+        }
+
+        //查询数据库，验证旧密码和已登录商家用户是否匹配
+        Businessman queryBusinessman = businessmanService.getBusinessmanByUsernameOrMobileAndPasswordAndStatus(businessmanFromSession.getUsername(), oldPassword, new Byte("1"));
+
+        //如果根据username查询为空，尝试使用mobile匹配
+        if (queryBusinessman == null) {
+            queryBusinessman = businessmanService.getBusinessmanByUsernameOrMobileAndPasswordAndStatus(businessmanFromSession.getMobile(), oldPassword, new Byte("1"));
+            if (queryBusinessman == null) {
+                //没有查询到用户，即用户名和旧密码不匹配
+                passwordStatus.put("status", "fail");
+                passwordStatus.put("message", "old password error");
+                return passwordStatus;
+            }
+        }
+
+        //更新数据库
+        queryBusinessman.setPassword(password);
+        queryBusinessman.setStatus(new Byte("1"));
+        businessmanService.updateBusinessmanPassword(queryBusinessman);
+
+        //设置验证码状态为已使用
+        smsVerifyService.codeUsed(queryBusinessman.getMobile());
+
+        passwordStatus.put("status", "success");
+        passwordStatus.put("message", "success");
+
+        return passwordStatus;
     }
 }

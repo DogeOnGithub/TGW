@@ -33,6 +33,8 @@ public interface BusinessmanService {
 
     boolean businessmanRegister(Businessman businessman);
 
+    Businessman updateBusinessmanPassword(Businessman businessman);
+
     PageInfo<Businessman> findBusinessmansByLikeMobile(Integer page, Integer rows, String mobile);
 
     PageInfo<BusinessmanDetail> findAllDetailsByBusinessmanId(Integer page, Integer rows, Integer id);

@@ -175,6 +175,12 @@ public class BusinessmanServiceImpl implements BusinessmanService
         return true;
     }
 
+    @Override
+    public Businessman updateBusinessmanPassword(Businessman businessman) {
+        businessmanMapper.updateByPrimaryKeySelective(businessman);
+        return businessmanMapper.selectByPrimaryKey(businessman.getId());
+    }
+
     /**
     * @Description:    根据手机模糊搜索商家信息
     * @Author:         梁智发
