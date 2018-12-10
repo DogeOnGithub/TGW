@@ -238,4 +238,24 @@ public class BusinessmanServiceImpl implements BusinessmanService
         return i;
     }
 
+    /*
+     * @Description:商家申请入驻
+     * @Param:[businessmanDetail]
+     * @Return:boolean
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:15:23
+     **/
+    @Override
+    public boolean applyToSettle(BusinessmanDetail businessmanDetail) {
+
+        int row = businessmanDetailMapper.insertSelective(businessmanDetail);
+
+        if (row > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

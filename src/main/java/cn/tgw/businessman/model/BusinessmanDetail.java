@@ -3,6 +3,7 @@ package cn.tgw.businessman.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -17,17 +18,13 @@ public class BusinessmanDetail {
 
     private String shopDesc;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date shopTimeOpen;
+    private LocalTime shopTimeOpen;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date shopTimeClose;
+    private LocalTime shopTimeClose;
 
     private String phoneNumber;
 
     private String contactPhoneNumber;
-
-    private Byte shopStatus;
 
     private Integer tgwUserId;
 

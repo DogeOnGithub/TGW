@@ -266,4 +266,49 @@ public class BusinessmanController {
 
         return passwordStatus;
     }
+
+    /*
+     * @Description:商家申请入驻
+     * @Param:[businessmanDetail, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:14:53
+     **/
+    @PostMapping("/tjsanshao/businessman/settle")
+    public Map<String, Object> applyToSettle(BusinessmanDetail businessmanDetail, HttpSession session) {
+        HashMap<String, Object> applyToSettleStatus = new HashMap<>();
+
+        //使用过滤器验证登录
+
+        //判断非空字段
+        if (
+                StringUtils.isEmpty(businessmanDetail.getShopName()) ||
+                StringUtils.isEmpty(businessmanDetail.getShopLocation()) ||
+                StringUtils.isEmpty(businessmanDetail.getShopDesc()) ||
+                businessmanDetail.getShopTimeOpen() != null ||
+                businessmanDetail.getShopTimeClose() != null ||
+                StringUtils.isEmpty(businessmanDetail.getPhoneNumber()) ||
+                StringUtils.isEmpty(businessmanDetail.getContactPhoneNumber())
+        ) {
+            applyToSettleStatus.put("status", "fail");
+            applyToSettleStatus.put("message", "please input the whole");
+        }
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        businessmanDetail.setTgwBusinessmanId(businessman.getId());
+        businessmanDetail.setShopSettleStatus(new Byte("0"));
+
+        //将申请存进数据库等待审核
+        if (businessmanService.applyToSettle(businessmanDetail)) {
+            applyToSettleStatus.put("status", "success");
+            applyToSettleStatus.put("message", "success");
+        } else {
+            applyToSettleStatus.put("status", "fail");
+            applyToSettleStatus.put("message", "Unknown error, please try again later");
+        }
+
+        return applyToSettleStatus;
+    }
 }

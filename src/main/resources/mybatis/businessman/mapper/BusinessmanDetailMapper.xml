@@ -7,11 +7,10 @@
     <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
     <result column="shop_location" property="shopLocation" jdbcType="VARCHAR" />
     <result column="shop_desc" property="shopDesc" jdbcType="VARCHAR" />
-    <result column="shop_time_open" property="shopTimeOpen" jdbcType="TIMESTAMP" />
-    <result column="shop_time_close" property="shopTimeClose" jdbcType="TIMESTAMP" />
+    <result column="shop_time_open" property="shopTimeOpen" jdbcType="TIME" />
+    <result column="shop_time_close" property="shopTimeClose" jdbcType="TIME" />
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="contact_phone_number" property="contactPhoneNumber" jdbcType="VARCHAR" />
-    <result column="shop_status" property="shopStatus" jdbcType="TINYINT" />
     <result column="tgw_user_id" property="tgwUserId" jdbcType="INTEGER" />
     <result column="shop_notice" property="shopNotice" jdbcType="VARCHAR" />
     <result column="shop_settle_status" property="shopSettleStatus" jdbcType="TINYINT" />
@@ -87,12 +86,12 @@
     insert into tgw_businessman_detail (id, tgw_businessman_id, shop_name, 
       shop_location, shop_desc, shop_time_open, 
       shop_time_close, phone_number, contact_phone_number, 
-      shop_status, tgw_user_id, shop_notice, shop_settle_status
+      tgw_user_id, shop_notice, shop_settle_status
       )
     values (#{id,jdbcType=INTEGER}, #{tgwBusinessmanId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
-      #{shopLocation,jdbcType=VARCHAR}, #{shopDesc,jdbcType=VARCHAR}, #{shopTimeOpen,jdbcType=TIMESTAMP}, 
-      #{shopTimeClose,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR}, 
-      #{shopStatus,jdbcType=TINYINT}, #{tgwUserId,jdbcType=INTEGER}, #{shopNotice,jdbcType=VARCHAR}, #{shopSettleStatus,jdbcType=TINYINT}
+      #{shopLocation,jdbcType=VARCHAR}, #{shopDesc,jdbcType=VARCHAR}, #{shopTimeOpen,jdbcType=TIME},
+      #{shopTimeClose,jdbcType=TIME}, #{phoneNumber,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR},
+      #{tgwUserId,jdbcType=INTEGER}, #{shopNotice,jdbcType=VARCHAR}, #{shopSettleStatus,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.businessman.model.BusinessmanDetail" >
@@ -125,9 +124,6 @@
       <if test="contactPhoneNumber != null" >
         contact_phone_number,
       </if>
-      <if test="shopStatus != null" >
-        shop_status,
-      </if>
       <if test="tgwUserId != null" >
         tgw_user_id,
       </if>
@@ -155,19 +151,16 @@
         #{shopDesc,jdbcType=VARCHAR},
       </if>
       <if test="shopTimeOpen != null" >
-        #{shopTimeOpen,jdbcType=TIMESTAMP},
+        #{shopTimeOpen,jdbcType=TIME},
       </if>
       <if test="shopTimeClose != null" >
-        #{shopTimeClose,jdbcType=TIMESTAMP},
+        #{shopTimeClose,jdbcType=TIME},
       </if>
       <if test="phoneNumber != null" >
         #{phoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="contactPhoneNumber != null" >
         #{contactPhoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="shopStatus != null" >
-        #{shopStatus,jdbcType=TINYINT},
       </if>
       <if test="tgwUserId != null" >
         #{tgwUserId,jdbcType=INTEGER},
@@ -196,19 +189,16 @@
         shop_desc = #{shopDesc,jdbcType=VARCHAR},
       </if>
       <if test="shopTimeOpen != null" >
-        shop_time_open = #{shopTimeOpen,jdbcType=TIMESTAMP},
+        shop_time_open = #{shopTimeOpen,jdbcType=TIME},
       </if>
       <if test="shopTimeClose != null" >
-        shop_time_close = #{shopTimeClose,jdbcType=TIMESTAMP},
+        shop_time_close = #{shopTimeClose,jdbcType=TIME},
       </if>
       <if test="phoneNumber != null" >
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="contactPhoneNumber != null" >
         contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="shopStatus != null" >
-        shop_status = #{shopStatus,jdbcType=TINYINT},
       </if>
       <if test="tgwUserId != null" >
         tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
@@ -228,11 +218,10 @@
       shop_name = #{shopName,jdbcType=VARCHAR},
       shop_location = #{shopLocation,jdbcType=VARCHAR},
       shop_desc = #{shopDesc,jdbcType=VARCHAR},
-      shop_time_open = #{shopTimeOpen,jdbcType=TIMESTAMP},
-      shop_time_close = #{shopTimeClose,jdbcType=TIMESTAMP},
+      shop_time_open = #{shopTimeOpen,jdbcType=TIME},
+      shop_time_close = #{shopTimeClose,jdbcType=TIME},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
-      shop_status = #{shopStatus,jdbcType=TINYINT},
       tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
       shop_notice = #{shopNotice,jdbcType=VARCHAR},
       shop_settle_status = #{shopSettleStatus,jdbcType=TINYINT}

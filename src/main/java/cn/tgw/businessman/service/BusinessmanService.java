@@ -43,4 +43,6 @@ public interface BusinessmanService {
 
     int changeShop_settle_statusById(Integer id,Byte status);
 
+    boolean applyToSettle(BusinessmanDetail businessmanDetail);
+
 }
