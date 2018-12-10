@@ -339,6 +339,11 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testOrderServiceRabbitListener(){
+		rabbitTemplate.convertAndSend("tgw.ordertime.relay.exchange", "", 1);
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 

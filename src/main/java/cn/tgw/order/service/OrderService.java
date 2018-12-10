@@ -109,6 +109,6 @@ public interface OrderService {
      **/
     List<Order> getOrdersByUserIdAndOrderSellStatusAndStatusNormal(int userId, Byte sellStatus);
 
-    public void orderTimeQueueListener(int id);
+    public void orderTimeQueueListener(String id);
 
 }

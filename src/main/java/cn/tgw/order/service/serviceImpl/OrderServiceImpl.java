@@ -159,8 +159,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @RabbitListener(queues = {"tgw.ordertime.queue"})
-    public void orderTimeQueueListener(int id) {
-        Order order = orderMapper.selectByPrimaryKey(id);
+    public void orderTimeQueueListener(String id) {
+        Order order = orderMapper.selectByPrimaryKey(Integer.valueOf(id));
+
+        System.out.println("orderTimeQueueListener");
+        System.out.println(order);
+        System.out.println(id);
 
         if (order == null) {
             return;
