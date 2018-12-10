@@ -24,4 +24,9 @@ public interface GoodsMapper {
 
     List<GoodsVO> findAllGoodsVO();
 
+
+    List<Goods> selectByBusinessId(Integer businessId);
+
+
+
 }
