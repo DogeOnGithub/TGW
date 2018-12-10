@@ -4,6 +4,7 @@ import cn.tgw.goods.mapper.GoodsMapper;
 import cn.tgw.goods.model.Goods;
 import cn.tgw.goods.model.GoodsDetail;
 import cn.tgw.goods.model.GoodsImage;
+import cn.tgw.goods.model.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

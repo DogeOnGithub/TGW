@@ -3,6 +3,7 @@ package cn.tgw.goods.service.serviceImpl;
 import cn.tgw.admin.mapper.TgwManagerMapper;
 import cn.tgw.admin.model.TgwFirstCategory;
 import cn.tgw.admin.service.TgwFirstCategoryService;
+import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.goods.mapper.GoodsDetailMapper;
 import cn.tgw.goods.mapper.GoodsImageMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
@@ -17,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auther: 张华健
