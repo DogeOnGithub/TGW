@@ -2,6 +2,7 @@ package cn.tgw.order.service.serviceImpl;
 
 import cn.tgw.businessman.mapper.BusinessmanMapper;
 import cn.tgw.businessman.model.Businessman;
+import cn.tgw.common.utils.OrderUtils;
 import cn.tgw.goods.mapper.GoodsDetailMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
 import cn.tgw.goods.model.Goods;
@@ -9,9 +10,13 @@ import cn.tgw.goods.model.GoodsDetail;
 import cn.tgw.order.mapper.OrderMapper;
 import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
+import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,10 +39,16 @@ public class OrderServiceImpl implements OrderService {
     private GoodsMapper goodsMapper;
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private GoodsDetailMapper goodsDetailMapper;
 
     @Autowired
     private BusinessmanMapper businessmanMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public List<Order> getAllOrders() {
@@ -65,9 +76,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Order createOrderWithUserAndGoods(User user, Goods goods, int count) {
 
         Order createOrder = new Order();
+
+        //设置订单唯一编号
+        createOrder.setUniqueOrderNumber(OrderUtils.getOrderNumber(user.getMobile()));
 
         createOrder.setTgwUserId(user.getId());
         createOrder.setTgwGoodsId(goods.getId());
@@ -84,6 +99,9 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
 
+        //加入到消息队列
+        rabbitTemplate.convertAndSend("tgw.ordertime.firstIn.exchange", "", createOrder.getId());
+
         return orderMapper.selectByPrimaryKey(createOrder.getId());
     }
 
@@ -99,6 +117,9 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrderWithUserIdAndGoods(int userId, Goods goods, int count) {
         Order createOrder = new Order();
 
+        //设置订单唯一编号
+        createOrder.setUniqueOrderNumber(OrderUtils.getOrderNumber(userMapper.selectByPrimaryKey(userId).getMobile()));
+
         createOrder.setTgwUserId(userId);
         createOrder.setTgwGoodsId(goods.getId());
         createOrder.setCount(count);
@@ -113,6 +134,9 @@ public class OrderServiceImpl implements OrderService {
         if (row < 1) {
             return null;
         }
+
+        //加入到消息队列
+        rabbitTemplate.convertAndSend("tgw.ordertime.firstIn.exchange", "", createOrder.getId());
 
         return orderMapper.selectByPrimaryKey(createOrder.getId());
     }
@@ -131,5 +155,24 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderStatus(new Byte("1"));
 
         return orderMapper.selectAllOrdersByUserIdAndSellStatusAndStatus(order);
+    }
+
+    @Override
+    @RabbitListener(queues = {"tgw.ordertime.queue"})
+    public void orderTimeQueueListener(int id) {
+        Order order = orderMapper.selectByPrimaryKey(id);
+
+        if (order == null) {
+            return;
+        }
+
+        if (order.getSellStatus().intValue() != new Byte("0").intValue()) {
+            return;
+        }
+
+        //订单已过期
+        order.setSellStatus(new Byte("5"));
+
+        orderMapper.updateByPrimaryKeySelective(order);
     }
 }

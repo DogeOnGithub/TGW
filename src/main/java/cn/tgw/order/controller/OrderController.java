@@ -5,9 +5,13 @@ import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,13 +23,22 @@ import java.util.Map;
  * @Create:2018-12-05 17:32
  *
  **/
-@RestController
+@Controller
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
+    /*
+     * @Description:通过商品id以及数量创建订单
+     * @Param:[goodsId, count, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:11:18
+     **/
     @PostMapping("/tjsanshao/order/create")
+    @ResponseBody
     public Map<String, Object> create(Integer goodsId, Integer count, HttpSession session) {
         HashMap<String, Object> createStatus = new HashMap<>();
 
@@ -51,6 +64,38 @@ public class OrderController {
 
         return createStatus;
 
+    }
+
+    /*
+     * @Description:支付宝支付成功异步通知url
+     * @Param:[request]
+     * @Return:void
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:11:21
+     **/
+    @PostMapping("/alipay/notify")
+    public void alipayNotifyUrl(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+
+        //TODO 支付成功后，更新数据库
+    }
+
+    /*
+     * @Description:支付宝支付成功同步通知url
+     * @Param:[request]
+     * @Return:java.lang.String
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:11:24
+     **/
+    @GetMapping("/alipay/return")
+    public String alipayReturnUrl(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+
+        //TODO 支付成功后，跳转页面到支付完毕页面
+
+        return "payFinish";
     }
 
 }
