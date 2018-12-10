@@ -1,6 +1,5 @@
 package cn.tgw.admin.controller;
 
-import cn.tgw.admin.mapper.TgwManagerMapper;
 import cn.tgw.admin.model.TgwManager;
 import cn.tgw.admin.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;

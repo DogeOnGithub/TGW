@@ -1,7 +1,6 @@
 package cn.tgw.admin.controller;
 
 import cn.tgw.admin.model.EasyUIDataGridResult;
-import cn.tgw.admin.service.ManagerService;
 import cn.tgw.admin.service.ManagerUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
