@@ -171,6 +171,15 @@
 		</dependency>
 
 		<!-- TjSanshao引入的依赖结束 -->
+		<!--es搜索引擎-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+		</dependency>
+
+
+
+
 
 	</dependencies>
 

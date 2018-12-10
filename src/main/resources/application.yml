@@ -57,6 +57,12 @@ spring:
     host: 120.79.74.174
   thymeleaf:
     cache: false
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: 120.79.74.174:9300
+      repositories:
+        enabled: true
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml

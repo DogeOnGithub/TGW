@@ -4,8 +4,11 @@ import cn.tgw.goods.mapper.GoodsMapper;
 import cn.tgw.goods.model.Goods;
 import cn.tgw.goods.model.GoodsDetail;
 import cn.tgw.goods.model.GoodsImage;
+import cn.tgw.goods.model.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Auther: 张华健
@@ -19,4 +22,5 @@ public interface GoodsService {
     public Object findNewGoodsByCity(String city);
     public Object findGoodsByCityAndFirstCategory(String city);
     public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage);
+    public List<GoodsVO> findAllGoodsVO();
 }

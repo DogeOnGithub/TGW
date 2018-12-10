@@ -150,5 +150,10 @@ public class GoodsServiceImpl implements GoodsService {
         return "error";
     }
 
+    @Override
+    public List<GoodsVO> findAllGoodsVO(){
+      return   goodsMapper.findAllGoodsVO();
+    }
+
 
 }

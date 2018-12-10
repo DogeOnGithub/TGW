@@ -53,6 +53,18 @@
     </choose>
 
   </select>
+  <select id="findAllGoodsVO" resultType="cn.tgw.goods.model.GoodsVO">
+    select
+    tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
+    tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+    tgw_goods_image.id i_id,image_url,is_main,
+    shop_name,shop_location,
+    tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+    ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.id = tgw_goods.tgw_businessman_id)
+		 INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods
     where id = #{id,jdbcType=INTEGER}

@@ -22,4 +22,6 @@ public interface GoodsMapper {
 
     List<GoodsVO> findIndexGoodsByCityAndTypeAndFirstCategoryName(Map<String,Object> param);
 
+    List<GoodsVO> findAllGoodsVO();
+
 }
