@@ -1,5 +1,7 @@
 package cn.tgw.goods.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class GoodsDetail {
@@ -11,6 +13,7 @@ public class GoodsDetail {
 
     private Integer termOfValidity;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date creatGoodsTime;
 
     private Integer goodsRepertory;

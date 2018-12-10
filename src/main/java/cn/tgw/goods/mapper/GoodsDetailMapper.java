@@ -14,4 +14,6 @@ public interface GoodsDetailMapper {
     int updateByPrimaryKeySelective(GoodsDetail record);
 
     int updateByPrimaryKey(GoodsDetail record);
+
+    GoodsDetail selectByTgwGoodsId(Integer tgwGoodsId);
 }

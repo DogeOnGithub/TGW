@@ -3,6 +3,7 @@ package cn.tgw.goods.service.serviceImpl;
 import cn.tgw.admin.mapper.TgwManagerMapper;
 import cn.tgw.admin.model.TgwFirstCategory;
 import cn.tgw.admin.service.TgwFirstCategoryService;
+import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.goods.mapper.GoodsDetailMapper;
 import cn.tgw.goods.mapper.GoodsImageMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
@@ -17,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auther: 张华健
@@ -148,6 +146,103 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         return "error";
+    }
+
+    /**
+     *
+     * 功能描述: 根据团购id返回团购相关所有信息
+     *
+     * @param: int id
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/06
+     */
+    @Override
+    public Map<String,Object> findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(int id) {
+        Goods goods = goodsMapper.selectByPrimaryKey(id);
+        GoodsDetail goodsDetail = goodsDetailMapper.selectByTgwGoodsId(id);
+        GoodsImage goodsImage = goodsImageMapper.selectByTgwGoodsId(id);
+        Map<String,Object>resultMap = new HashMap<>();
+        resultMap.put("goods",goods);
+        resultMap.put("goodsDetail",goodsDetail);
+        resultMap.put("goodsImage",goodsImage);
+        return resultMap;
+    }
+
+    /**
+     *
+     * 功能描述: 根据商家id查询商家下的所有商品
+     *
+     * @param: Goods goods
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/06
+     */
+    @Override
+    public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(Goods goods) {
+        int businessId = goods.getTgwBusinessmanId();
+        List<Object> resultList = new ArrayList<>();
+        List<Goods> resultGoods = goodsMapper.selectByBusinessId(businessId);
+        for (int i = 0; i < resultGoods.size(); i++) {
+            Integer id = resultGoods.get(i).getId();
+            Map<String, Object> goodsAndGoodsDetailAndGoodsImageWithGoodsId = findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(id);
+            resultList.add(goodsAndGoodsDetailAndGoodsImageWithGoodsId);
+        }
+        return resultList;
+    }
+
+
+    /**
+     *
+     * 功能描述:
+     *
+     * @param: 更新团购信息
+     * @return: String result
+     * @auther: 张华健
+     * @date:  2018/12/06
+     */
+    @Transactional
+    @Override
+    public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,GoodsImage goodsImage) throws Exception {
+
+        int goodsId = goods.getId();
+        GoodsDetail resultGoodsDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
+        GoodsImage resultGoodsImage = goodsImageMapper.selectByTgwGoodsId(goodsId);
+        goodsDetail.setId(resultGoodsDetail.getId());
+        goodsImage.setId(resultGoodsImage.getId());
+        int resNum = goodsMapper.updateByPrimaryKeySelective(goods);
+        int resNum2 = goodsDetailMapper.updateByPrimaryKeySelective(goodsDetail);
+        int resNum3 = goodsImageMapper.updateByPrimaryKeySelective(goodsImage);
+        if(resNum+resNum2+resNum3>0){
+            //删除七牛云旧照片
+            String currentUrl = resultGoodsImage.getImageUrl().replaceAll("http://pih7n7d5x.bkt.clouddn.com/","");
+            QiniuUtil.deleteImage(currentUrl);
+            return "success";
+        }else{
+            throw new RuntimeException();
+        }
+    }
+
+
+
+
+    /**
+     *
+     * 功能描述:
+     *
+     * @param: 根据当前的状态修改上架或者下架。或者逻辑删除该团购
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/10
+     */
+    @Override
+    public String updateIsOnline(Goods goods) {
+        int i = goodsMapper.updateByPrimaryKeySelective(goods);
+        if(i==1){
+            return "success";
+        }else {
+            return "error";
+        }
     }
 
     @Override

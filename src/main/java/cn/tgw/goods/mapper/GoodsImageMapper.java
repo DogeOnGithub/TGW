@@ -14,4 +14,6 @@ public interface GoodsImageMapper {
     int updateByPrimaryKeySelective(GoodsImage record);
 
     int updateByPrimaryKey(GoodsImage record);
+
+    GoodsImage selectByTgwGoodsId(Integer tgwGoodsId);
 }

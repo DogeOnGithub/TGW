@@ -65,6 +65,12 @@
 		 INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
 
   </select>
+  <select id="selectByBusinessId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_goods
+    where tgw_businessman_id = #{businessId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods
     where id = #{id,jdbcType=INTEGER}

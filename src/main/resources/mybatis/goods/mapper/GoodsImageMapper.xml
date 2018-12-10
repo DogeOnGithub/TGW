@@ -16,7 +16,13 @@
     from tgw_goods_image
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByTgwGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+      select
+      <include refid="Base_Column_List" />
+      from tgw_goods_image
+      where tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER} AND is_main = 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods_image
     where id = #{id,jdbcType=INTEGER}
   </delete>

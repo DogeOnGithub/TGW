@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -129,5 +130,20 @@ public class QiniuUtil {
             return "error";
         }
         return "error";
+    }
+    public static String deleteImage(String key){
+        Auth auth = Auth.create(accessKey, secretKey);
+        Configuration config = new Configuration(Zone.zone2());
+        BucketManager bucketMgr = new BucketManager(auth, config);
+        //指定需要删除的文件，和文件所在的存储空间
+        String bucketName = "images";
+        try {
+            Response delete = bucketMgr.delete(bucketName, key);
+            delete.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            return "error";
+        }
+        return "success";
     }
 }
