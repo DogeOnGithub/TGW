@@ -4,7 +4,6 @@ import cn.tgw.admin.model.EasyUIDataGridResult;
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.businessman.model.BusinessmanDetail;
 import cn.tgw.businessman.service.BusinessmanService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController

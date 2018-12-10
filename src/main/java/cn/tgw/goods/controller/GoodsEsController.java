@@ -5,13 +5,11 @@ import cn.tgw.goods.model.EsGoodsVo;
 import cn.tgw.goods.model.EsResult;
 import cn.tgw.goods.model.GoodsVO;
 import cn.tgw.goods.service.GoodsService;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.search.MultiMatchQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +38,14 @@ public class GoodsEsController {
         return allGoodsVO;
     }
 
+    /**
+     * 商品搜索，输入框可以输入商品名称或者店家名称
+     * @param goodsTitle  输入的内容
+     *       分页只用于搜索全部
+     * @param page 起始页
+     * @param size  每页的大小
+     * @return
+     */
    @RequestMapping("/findByShopNameOrGoodsTitle")
     public EsResult findByShopNameOrGoodsTitle(String goodsTitle, @RequestParam(value = "page",defaultValue = "1") Integer page,
                                                @RequestParam(value = "size",defaultValue = "10")Integer size){
