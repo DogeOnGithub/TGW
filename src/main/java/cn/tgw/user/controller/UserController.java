@@ -4,6 +4,8 @@ import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.common.utils.TGWStaticString;
+import cn.tgw.order.model.Order;
+import cn.tgw.order.service.OrderService;
 import cn.tgw.user.model.User;
 import cn.tgw.user.model.UserDetail;
 import cn.tgw.user.service.UserService;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +48,9 @@ public class UserController {
     //注入秒嘀工具类service，用于生成验证码
     @Autowired
     private MiaoDiService miaoDiService;
+
+    @Autowired
+    private OrderService orderService;
 
     /*
      * @Description:用户登录
@@ -350,6 +357,51 @@ public class UserController {
         postDetailStatus.put("message", "success");
 
         return postDetailStatus;
+    }
+
+    /*
+     * @Description:获取用户的所有订单
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:17:39
+     **/
+    @RequestMapping("/tjsanshao/user/orders")
+    public Map<String, Object> allOrders(HttpSession session) {
+        HashMap<String, Object> allOrdersStatus = new HashMap<>();
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        List<Order> allOrders = orderService.getAllOrdersByUser(user);
+
+        allOrdersStatus.put("status", "success");
+        allOrdersStatus.put("orders", allOrders);
+
+        return allOrdersStatus;
+    }
+
+    /*
+     * @Description:获取用户的未付款订单
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-10
+     * @Time:17:39
+     **/
+    @RequestMapping("/tjsanshao/user/ordersNotPay")
+    public Map<String, Object> ordersWaitForPay(HttpSession session) {
+        HashMap<String, Object> ordersWaitForPayStatus = new HashMap<>();
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        //0表示待付款
+        List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("0"));
+
+        ordersWaitForPayStatus.put("status", "success");
+        ordersWaitForPayStatus.put("orders", allOrders);
+
+        return ordersWaitForPayStatus;
     }
 
 }
