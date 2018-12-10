@@ -225,11 +225,11 @@ public class GoodsController {
     public Object deleteGoods(Goods goods){
         Map<String,Object> result = new HashMap<>();
         result.put("status","error");
-        result.put("Msg","删除失败，请重试");
+        result.put("Msg","unknown error");
         String res = goodsService.updateIsOnline(goods);
         if(res.equals("success")){
             result.put("status",res);
-            result.put("Msg","删除成功！");
+            result.put("Msg","success");
         }
         return result;
     }
