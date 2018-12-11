@@ -25,8 +25,11 @@ public class UserFilterCustomConfiguration {
         //添加过滤规则
         registrationBean.addUrlPatterns("/tjsanshao/user/detail");
         registrationBean.addUrlPatterns("/tjsanshao/user/password");
-        registrationBean.addUrlPatterns("/tjsanshao/user/allOrders");
+        registrationBean.addUrlPatterns("/tjsanshao/user/orders");
         registrationBean.addUrlPatterns("/tjsanshao/user/ordersNotPay");
+        registrationBean.addUrlPatterns("/tjsanshao/user/ordersNotUse");
+        registrationBean.addUrlPatterns("/tjsanshao/user/ordersNotComment");
+        registrationBean.addUrlPatterns("/tjsanshao/user/deleteOrder");
 
         registrationBean.addUrlPatterns("/tjsanshao/order/create");
 

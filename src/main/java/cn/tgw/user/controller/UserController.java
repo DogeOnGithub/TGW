@@ -373,7 +373,7 @@ public class UserController {
 
         User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
 
-        List<Order> allOrders = orderService.getAllOrdersByUser(user);
+        List<Order> allOrders = orderService.getUserAllOrders(user);
 
         allOrdersStatus.put("status", "success");
         allOrdersStatus.put("orders", allOrders);
@@ -402,6 +402,69 @@ public class UserController {
         ordersWaitForPayStatus.put("orders", allOrders);
 
         return ordersWaitForPayStatus;
+    }
+
+    @RequestMapping("/tjsanshao/user/ordersNotUse")
+    public Map<String, Object> ordersWaitForUse(HttpSession session) {
+        HashMap<String, Object> ordersWaitForUseStatus = new HashMap<>();
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        //1表示已付款，未使用
+        List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("1"));
+
+        ordersWaitForUseStatus.put("status", "success");
+        ordersWaitForUseStatus.put("orders", allOrders);
+
+        return ordersWaitForUseStatus;
+    }
+
+    /*
+     * @Description:获取用户未评价的订单
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:08:30
+     **/
+    @RequestMapping("/tjsanshao/user/ordersNotComment")
+    public Map<String, Object> ordersWaitForComment(HttpSession session) {
+        HashMap<String, Object> ordersWaitForCommentStatus = new HashMap<>();
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        //3表示已使用
+        List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("3"));
+
+        ordersWaitForCommentStatus.put("status", "success");
+        ordersWaitForCommentStatus.put("orders", allOrders);
+
+        return ordersWaitForCommentStatus;
+    }
+
+    /*
+     * @Description:用户删除订单
+     * @Param:[id, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:08:41
+     **/
+    @RequestMapping("/tjsanshao/user/deleteOrder")
+    public Map<String, Object> deleteOrder(int id, HttpSession session) {
+        HashMap<String, Object> deleteOrderStatus = new HashMap<>();
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        if (orderService.deleteByOrderId(id)) {
+            deleteOrderStatus.put("status", "success");
+            deleteOrderStatus.put("message", "success");
+        } else {
+            deleteOrderStatus.put("status", "fail");
+            deleteOrderStatus.put("message", "Unknown Error");
+        }
+
+        return deleteOrderStatus;
     }
 
 }
