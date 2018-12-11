@@ -52,24 +52,24 @@ public class BusinessmanController {
 
         //校验用户名和密码是否为空
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            loginStatus.put("message", "please input username and password");
-            loginStatus.put("status", "fail");
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input username and password");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             return loginStatus;
         }
 
         //调用service，获取记录
         Businessman businessman = businessmanService.getBusinessmanByUsernameOrMobileAndPasswordAndStatus(username, password, new Byte("1"));
         if (businessman != null) {
-            loginStatus.put("status", "success");
-            loginStatus.put("message", "login success");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "login success");
             businessman.setPassword(""); //不返回密码到客户端
             loginStatus.put("businessman", businessman);
 
             //将记录存入session，键为"businessman"，值为businessman对象
             session.setAttribute(TGWStaticString.TGW_BUSINESSMAN, businessman);
         }else {
-            loginStatus.put("status", "fail");
-            loginStatus.put("message", "username or password error");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username or password error");
         }
 
         return loginStatus;
@@ -96,8 +96,8 @@ public class BusinessmanController {
                 //这个请求并没有经过cn.tgw.businessman.filter.BusinessmanAuthenticationFilter过滤器，因此要判断是否登录
                 if (sessionBusinessman == null) {
                     //没有登录
-                    sendMsgStatus.put("status", "authority");
-                    sendMsgStatus.put("message", "login first");
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_AUTH);
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "LOGIN FIRST");
                     return sendMsgStatus;
                 }
 
@@ -107,8 +107,8 @@ public class BusinessmanController {
                 //异步发送验证码，返回响应
                 smsVerifyService.sendMsgCodeAsync(businessmanFromSession.getMobile(), miaoDiService.generateCode(6));
 
-                sendMsgStatus.put("status", "success");
-                sendMsgStatus.put("message", "success");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
                 return sendMsgStatus;
             }
@@ -116,8 +116,8 @@ public class BusinessmanController {
 
         //验证手机号码是否为空
         if (StringUtils.isEmpty(mobileNumber)){
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         }
 
@@ -126,8 +126,8 @@ public class BusinessmanController {
 
         if (mobileNumber.length() != 11) {
             //如果不是11位，不是手机号码，直接返回fail
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         } else {
             //是11位手机号码，开始用正则匹配
@@ -136,23 +136,23 @@ public class BusinessmanController {
             boolean isMatch = m.matches();
             if (!isMatch) {
                 //如果匹配不成功，不合法，返回fail
-                sendMsgStatus.put("status", "fail");
-                sendMsgStatus.put("message", "please input correct phone number");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
                 return sendMsgStatus;
             } else {
                 //验证手机号是否可以发送验证码
                 if (!smsVerifyService.enableSend(mobileNumber)) {
                     //该手机号不可以发送验证码，超出了每天发送次数
-                    sendMsgStatus.put("status", "fail");
-                    sendMsgStatus.put("message", "send times out");
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "send times out");
                     return sendMsgStatus;
                 }
 
                 //异步发送验证码
                 smsVerifyService.sendMsgCodeAsync(mobileNumber, miaoDiService.generateCode(6));
 
-                sendMsgStatus.put("status", "success");
-                sendMsgStatus.put("message", "success");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
                 return sendMsgStatus;
             }
@@ -174,31 +174,31 @@ public class BusinessmanController {
 
         //验证用户名、密码、手机号码是否为空
         if (businessman.getUsername() == null || businessman.getPassword() == null || StringUtils.isEmpty(businessman.getMobile()) || StringUtils.isEmpty(code)) {
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "please input the whole");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
             return registerStatus;
         }
 
         //验证验证码是否正确
         if (!smsVerifyService.checkCode(businessman.getMobile(), code)){
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "code is invalid");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "code is invalid");
             return registerStatus;
         }
 
         //填写了用户名、密码、验证码，验证是否可以注册
         if (!businessmanService.enableBusinessmanRegister(businessman)){
             //用户名已存在，不可注册
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "username exists");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username exists");
             return registerStatus;
         }
 
         //存入到数据库
         businessmanService.businessmanRegister(businessman);
 
-        registerStatus.put("status", "success");
-        registerStatus.put("message", "register success");
+        registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "register success");
 
         businessman.setPassword("");
         registerStatus.put("businessman", businessman);
@@ -226,16 +226,16 @@ public class BusinessmanController {
         //判断是否带有验证码，如果没有，需要发送验证码
         if (StringUtils.isEmpty(code)){
             //请求中没有验证码
-            passwordStatus.put("status", "fail");
-            passwordStatus.put("message", "verify code error");
+            passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "verify code error");
             return passwordStatus;
         }
 
         //请求中带有验证码，开始验证验证码
         if (!smsVerifyService.checkCode(businessmanFromSession.getMobile(), code)){
             //验证码不通过
-            passwordStatus.put("status", "fail");
-            passwordStatus.put("message", "verify code error");
+            passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "verify code error");
             return passwordStatus;
         }
 
@@ -247,8 +247,8 @@ public class BusinessmanController {
             queryBusinessman = businessmanService.getBusinessmanByUsernameOrMobileAndPasswordAndStatus(businessmanFromSession.getMobile(), oldPassword, new Byte("1"));
             if (queryBusinessman == null) {
                 //没有查询到用户，即用户名和旧密码不匹配
-                passwordStatus.put("status", "fail");
-                passwordStatus.put("message", "old password error");
+                passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "old password error");
                 return passwordStatus;
             }
         }
@@ -261,8 +261,8 @@ public class BusinessmanController {
         //设置验证码状态为已使用
         smsVerifyService.codeUsed(queryBusinessman.getMobile());
 
-        passwordStatus.put("status", "success");
-        passwordStatus.put("message", "success");
+        passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
         return passwordStatus;
     }
@@ -291,8 +291,8 @@ public class BusinessmanController {
                 StringUtils.isEmpty(businessmanDetail.getPhoneNumber()) ||
                 StringUtils.isEmpty(businessmanDetail.getContactPhoneNumber())
         ) {
-            applyToSettleStatus.put("status", "fail");
-            applyToSettleStatus.put("message", "please input the whole");
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
         }
 
         Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
@@ -302,11 +302,11 @@ public class BusinessmanController {
 
         //将申请存进数据库等待审核
         if (businessmanService.applyToSettle(businessmanDetail)) {
-            applyToSettleStatus.put("status", "success");
-            applyToSettleStatus.put("message", "success");
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         } else {
-            applyToSettleStatus.put("status", "fail");
-            applyToSettleStatus.put("message", "Unknown error, please try again later");
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            applyToSettleStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "Unknown error, please try again later");
         }
 
         return applyToSettleStatus;
