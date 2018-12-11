@@ -2,6 +2,8 @@ package cn.tgw.comment.mapper;
 
 import cn.tgw.comment.model.Comment;
 
+import java.util.List;
+
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,12 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    List<Comment> selectByUserId(Integer userId);
+
+    List<Comment> selectByGoodsId(Integer goodsId);
+
+    Comment selectByOrderId(Integer orderId);
+
+
 }

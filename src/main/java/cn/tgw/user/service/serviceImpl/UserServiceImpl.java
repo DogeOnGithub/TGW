@@ -140,4 +140,20 @@ public class UserServiceImpl implements UserService {
         int rows = userDetailMapper.updateByUserIdSelective(userDetail);
         return userDetailMapper.selectByUserId(userDetail.getTgwUserId());
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+
+        User user = new User();
+        user.setUsername(username);
+        user.setMobile(username);
+
+        User queryUser = userMapper.selectByUsername(user);
+
+        if (queryUser != null) {
+            return queryUser;
+        }
+
+        return userMapper.selectByMobile(user);
+    }
 }

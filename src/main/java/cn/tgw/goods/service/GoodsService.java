@@ -28,4 +28,6 @@ public interface GoodsService {
     public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,GoodsImage goodsImage) throws Exception;
     public String updateIsOnline(Goods goods);
     public List<GoodsVO> findAllGoodsVO();
+
+    public String updateGoodsRepertory(int id,int num);
 }

@@ -1,5 +1,7 @@
 package cn.tgw.user.filter;
 
+import cn.tgw.common.utils.TGWStaticString;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +29,7 @@ public class UserAuthenticationFilter implements Filter {
 
         if (sessionUser == null){
             response.setContentType("application/json");
-            response.getWriter().print("{\"status\":\"authority\", \"message\":\"login first\"}");
+            response.getWriter().print("{\"" + TGWStaticString.TGW_RESULT_STATUS + "\":\"" + TGWStaticString.TGW_RESULT_STATUS_AUTH + "\", \"" + TGWStaticString.TGW_RESULT_MESSAGE + "\":\"LOGIN FIRST\"}");
             response.getWriter().flush();
             return;
         }

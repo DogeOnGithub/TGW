@@ -23,7 +23,10 @@ public class AlipayServiceImpl implements AlipayService {
     private AlipayConfiguration alipayConfiguration;
 
     @Override
-    public String alipayWithBaseParam(String out_trade_no, String total_amount, String subject) throws AlipayApiException {
+    public String alipayWithBaseParam(
+            String out_trade_no,
+            String total_amount,
+            String subject) throws AlipayApiException {
 
         AlipayClient alipayClient = new DefaultAlipayClient(alipayConfiguration.getGatewayUrl(), alipayConfiguration.getApp_id(), alipayConfiguration.getMerchant_private_key(), "json", alipayConfiguration.getCharset(), alipayConfiguration.getAlipay_public_key(), alipayConfiguration.getSign_type());
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
@@ -37,4 +40,28 @@ public class AlipayServiceImpl implements AlipayService {
 
         return alipayClient.pageExecute(alipayRequest).getBody();
     }
+
+    @Override
+    public String alipayWithBizParam(
+            String out_trade_no,
+            String total_amount,
+            String subject,
+            String body,
+            String goods_detail) throws AlipayApiException {
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfiguration.getGatewayUrl(), alipayConfiguration.getApp_id(), alipayConfiguration.getMerchant_private_key(), "json", alipayConfiguration.getCharset(), alipayConfiguration.getAlipay_public_key(), alipayConfiguration.getSign_type());
+        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+        alipayRequest.setReturnUrl(alipayConfiguration.getCommonUrlPrefix() + alipayConfiguration.getReturn_url());
+        alipayRequest.setNotifyUrl(alipayConfiguration.getCommonUrlPrefix() + alipayConfiguration.getNotify_url());
+
+        alipayRequest.setBizContent(
+                "{\"out_trade_no\":\""+ out_trade_no +"\","
+                + "\"total_amount\":\""+ total_amount +"\","
+                + "\"subject\":\""+ subject +"\","
+                + "\"body\":\"" + body + "\","
+                + "\"goods_detail\":\"" + goods_detail + "\","
+                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+
+        return alipayClient.pageExecute(alipayRequest).getBody();
+    }
+
 }

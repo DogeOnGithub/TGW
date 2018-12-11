@@ -13,4 +13,14 @@ public class TGWStaticString {
 
     public static final String TGW_BUSINESSMAN = "businessman";
 
+    public static final String TGW_RESULT_STATUS = "status";
+
+    public static final String TGW_RESULT_MESSAGE = "message";
+
+    public static final String TGW_RESULT_STATUS_SUCCESS = "success";
+
+    public static final String TGW_RESULT_STATUS_FAIL = "fail";
+
+    public static final String TGW_RESULT_STATUS_AUTH = "auth";
+
 }

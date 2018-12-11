@@ -27,10 +27,10 @@ public class AlipayConfiguration {
     private String commonUrlPrefix = "http://tjsanshao.free.idcfengye.com";
 
     //服务器异步通知页面路径
-    private String notify_url = "/common/test/notify_url";
+    private String notify_url = "/alipay/notify";
 
     //页面跳转同步通知页面路径
-    private String return_url = "/common/test/return_url";
+    private String return_url = "/alipay/return";
 
     //签名方式
     private String sign_type = "RSA";

@@ -1,6 +1,10 @@
 package cn.tgw.order.controller;
 
+import cn.tgw.common.service.AlipayService;
 import cn.tgw.common.utils.TGWStaticString;
+import cn.tgw.goods.model.Goods;
+import cn.tgw.goods.model.GoodsDetail;
+import cn.tgw.goods.service.GoodsService;
 import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.model.User;
@@ -13,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +39,12 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private AlipayService alipayService;
+
+    @Autowired
+    private GoodsService goodsService;
+
     /*
      * @Description:通过商品id以及数量创建订单
      * @Param:[goodsId, count, session]
@@ -46,8 +59,8 @@ public class OrderController {
         HashMap<String, Object> createStatus = new HashMap<>();
 
         if (goodsId == null || count == null) {
-            createStatus.put("status", "fail");
-            createStatus.put("message", "please input the whole");
+            createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
             return createStatus;
         }
 
@@ -56,16 +69,58 @@ public class OrderController {
         Order order =  orderService.createOrderWithUserIdAndGoodsId(user.getId(), goodsId, count);
 
         if (order == null) {
-            createStatus.put("status", "fail");
-            createStatus.put("message", "unknown error");
+            createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "unknown error");
             return createStatus;
         }
 
-        createStatus.put("status", "success");
-        createStatus.put("message", "success");
+        createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         createStatus.put("order", order);
 
         return createStatus;
+
+    }
+
+    /*
+     * @Description:订单支付
+     * @Param:[orderId, session, request, response]
+     * @Return:void
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:11:13
+     **/
+    @PostMapping("/tjsanshao/order/pay")
+    public void pay(Integer orderId, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Order order = orderService.getOrderByIdPayAble(orderId);
+
+        //该订单不存在，无效
+        if (order == null) {
+            response.setContentType("application/json");
+            response.getWriter().print("\"status\":\"fail\",\"message\":\"order is not available\"");
+            response.getWriter().flush();
+        }
+
+        //查询goods和goodsDetail
+        Map<String, Object> detailMap = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(order.getTgwGoodsId());
+        Goods goods = (Goods)detailMap.get("goods");
+        GoodsDetail goodsDetail = (GoodsDetail)detailMap.get("goodsDetail");
+
+        //发送支付请求
+        String result = alipayService.alipayWithBizParam(
+                order.getUniqueOrderNumber(),
+                order.getTotal().toString(),
+                goods.getGoodsTitle(),
+                goodsDetail.getGoodsDesc(),
+                ""
+        );
+
+        //响应
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.print(result);
+        writer.flush();
+        writer.close();
 
     }
 
@@ -127,5 +182,4 @@ public class OrderController {
         result.put("orders",resultList);
         return result;
     }
-
 }

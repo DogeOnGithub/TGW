@@ -66,8 +66,8 @@ public class UserController {
 
         //校验用户名和密码是否为空
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            loginStatus.put("message", "please input username and password");
-            loginStatus.put("status", "fail");
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input username and password");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             return loginStatus;
         }
 
@@ -78,8 +78,8 @@ public class UserController {
             //根据用户id获取userDetail，例如昵称、头像url
             UserDetail userDetail = userService.getUserDetailByUserId(user);
 
-            loginStatus.put("status", "success");
-            loginStatus.put("message", "login success");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "login success");
             user.setPassword(""); //不返回密码到客户端
             loginStatus.put("user", user);
 
@@ -89,8 +89,8 @@ public class UserController {
             session.setAttribute(TGWStaticString.TGW_USER, user);
 
         }else{
-            loginStatus.put("status", "fail");
-            loginStatus.put("message", "username or password error");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username or password error");
         }
 
         return loginStatus;
@@ -115,8 +115,8 @@ public class UserController {
                 Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
                 if (sessionUser == null){
                     //用户没有登录，提示用户先登录
-                    sendMsgStatus.put("status", "authority");
-                    sendMsgStatus.put("message", "login first");
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_AUTH);
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "login first");
                     return sendMsgStatus;
                 }
 
@@ -125,8 +125,8 @@ public class UserController {
 
                 smsVerifyService.sendMsgCodeAsync(userFromSession.getMobile(), miaoDiService.generateCode(6));
 
-                sendMsgStatus.put("status", "success");
-                sendMsgStatus.put("message", "success");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
                 return sendMsgStatus;
             }
@@ -134,8 +134,8 @@ public class UserController {
 
         //验证手机号码是否为空
         if (StringUtils.isEmpty(mobileNumber)){
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         }
 
@@ -144,8 +144,8 @@ public class UserController {
 
         if (mobileNumber.length() != 11) {
             //如果不是11位，不是手机号码，直接返回fail
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         } else {
             //是11位手机号码，开始用正则匹配
@@ -154,20 +154,20 @@ public class UserController {
             boolean isMatch = m.matches();
             if (!isMatch) {
                 //如果匹配不成功，不合法，返回fail
-                sendMsgStatus.put("status", "fail");
-                sendMsgStatus.put("message", "please input correct phone number");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
                 return sendMsgStatus;
             }else{
                 if (!smsVerifyService.enableSend(mobileNumber)){
                     //该手机号不可以发送验证码，超出了每天发送次数
-                    sendMsgStatus.put("status", "fail");
-                    sendMsgStatus.put("message", "send times out");
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "send times out");
                     return sendMsgStatus;
                 }
 
                 //校验成功，返回结果，使用异步的方式，发送手机验证码
-                sendMsgStatus.put("status", "success");
-                sendMsgStatus.put("message", "success");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
                 //异步发送手机验证码
                 smsVerifyService.sendMsgCodeAsync(mobileNumber, miaoDiService.generateCode(6));
@@ -191,38 +191,38 @@ public class UserController {
 
         //验证用户名、密码、手机号码是否为空
         if (user.getUsername() == null || user.getPassword() == null || StringUtils.isEmpty(user.getMobile()) || StringUtils.isEmpty(code)){
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "please input the whole");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
             return registerStatus;
         }
 
         //验证验证码是否正确
         if (!smsVerifyService.checkCode(user.getMobile(), code)){
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "code is invalid");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "code is invalid");
             return registerStatus;
         }
 
         //填写了用户名、密码、手机号码、验证码，验证是否可以注册
         if (!userService.enableUserRegister(user)){
             //用户名已存在，不可注册
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "username exists");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username exists");
             return registerStatus;
         }
 
         if (!userService.enableMoblieRegister(user.getMobile())){
             //手机号已绑定，不可注册
-            registerStatus.put("status", "fail");
-            registerStatus.put("message", "mobile exists");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "mobile exists");
             return registerStatus;
         }
 
         //存入到数据库
         userService.userRegister(user);
 
-        registerStatus.put("status", "success");
-        registerStatus.put("message", "register success");
+        registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "register success");
 
         user.setPassword("");
         registerStatus.put("user", user);
@@ -257,16 +257,16 @@ public class UserController {
         //判断是否带有验证码，如果没有，需要发送验证码
         if (StringUtils.isEmpty(code)){
             //请求中没有验证码
-            passwordStatus.put("status", "fail");
-            passwordStatus.put("message", "verify code error");
+            passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "verify code error");
             return passwordStatus;
         }
 
         //请求中带有验证码，开始验证验证码
         if (!smsVerifyService.checkCode(userFromSession.getMobile(), code)){
             //验证码不通过
-            passwordStatus.put("status", "fail");
-            passwordStatus.put("message", "verify code error");
+            passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "verify code error");
             return passwordStatus;
         }
 
@@ -275,8 +275,8 @@ public class UserController {
 
         if (queryUser == null){
             //没有查询到用户，即用户名和旧密码不匹配
-            passwordStatus.put("status", "fail");
-            passwordStatus.put("message", "old password error");
+            passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "old password error");
             return passwordStatus;
         }
 
@@ -288,10 +288,84 @@ public class UserController {
         //设置验证码状态为已使用
         smsVerifyService.codeUsed(userFromSession.getMobile());
 
-        passwordStatus.put("status", "success");
-        passwordStatus.put("message", "success");
+        passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
         return passwordStatus;
+    }
+
+    /*
+     * @Description:用户选择忘记密码，直接根据用户名发送验证码
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:14:50
+     **/
+    @PostMapping("/tjsanshao/user/forgot")
+    public Map<String, Object> forgotPassword(String username) {
+        HashMap<String, Object> forgotStatus = new HashMap<>();
+
+        //如果没有输入用户名
+        if (StringUtils.isEmpty(username)) {
+            forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
+            return forgotStatus;
+        }
+
+        //根据username查询数据库，username的传入可能是user的属性username或者mobile
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "user is not available");
+            return forgotStatus;
+        }
+
+        //用户名有效，向用户手机发送验证码
+        smsVerifyService.sendMsgCodeAsync(user.getMobile(), miaoDiService.generateCode(6));
+
+        forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+        return forgotStatus;
+    }
+
+    @PostMapping("/tjsanshao/user/newpwd")
+    public Map<String, Object> newPassword(String username, String password, String code) {
+        HashMap<String, Object> newPasswordStatus = new HashMap<>();
+
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(code)) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
+            return newPasswordStatus;
+        }
+
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "user is not available");
+            return newPasswordStatus;
+        }
+
+        //验证码错误
+        if (!smsVerifyService.checkCode(user.getMobile(), code)) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "code is not available");
+            return newPasswordStatus;
+        }
+
+        //验证码正确，用户名正确，更新数据库
+        user.setPassword(password);
+        user.setUserStatus(new Byte("1"));
+
+        userService.updateUserPassword(user);
+
+        smsVerifyService.codeUsed(user.getMobile());
+
+        newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+        return newPasswordStatus;
     }
 
     /*
@@ -315,10 +389,10 @@ public class UserController {
 
         UserDetail userDetail = userService.getUserDetailByUserId(userFromSession);
 
-        getDetailStatus.put("status", "success");
+        getDetailStatus.put(TGWStaticString.TGW_RESULT_STATUS, "success");
         getDetailStatus.put("user", userFromSession);
         getDetailStatus.put("userDetail", userDetail);
-        getDetailStatus.put("message", "success");
+        getDetailStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
         return getDetailStatus;
     }
@@ -350,11 +424,11 @@ public class UserController {
         //更新数据库，并获得更新后的UserDetail
         UserDetail userDetailUpdated = userService.updateUserDetail(userDetail);
 
-        postDetailStatus.put("status", "success");
+        postDetailStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         userFromSession.setPassword("");
         postDetailStatus.put("user", userFromSession);
         postDetailStatus.put("userDetail", userDetailUpdated);
-        postDetailStatus.put("message", "success");
+        postDetailStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
         return postDetailStatus;
     }
@@ -375,7 +449,7 @@ public class UserController {
 
         List<Order> allOrders = orderService.getUserAllOrders(user);
 
-        allOrdersStatus.put("status", "success");
+        allOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         allOrdersStatus.put("orders", allOrders);
 
         return allOrdersStatus;
@@ -398,12 +472,20 @@ public class UserController {
         //0表示待付款
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("0"));
 
-        ordersWaitForPayStatus.put("status", "success");
+        ordersWaitForPayStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         ordersWaitForPayStatus.put("orders", allOrders);
 
         return ordersWaitForPayStatus;
     }
 
+    /*
+     * @Description:获取用户的已付款的未使用的订单
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:14:40
+     **/
     @RequestMapping("/tjsanshao/user/ordersNotUse")
     public Map<String, Object> ordersWaitForUse(HttpSession session) {
         HashMap<String, Object> ordersWaitForUseStatus = new HashMap<>();
@@ -413,7 +495,7 @@ public class UserController {
         //1表示已付款，未使用
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("1"));
 
-        ordersWaitForUseStatus.put("status", "success");
+        ordersWaitForUseStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         ordersWaitForUseStatus.put("orders", allOrders);
 
         return ordersWaitForUseStatus;
@@ -436,7 +518,7 @@ public class UserController {
         //3表示已使用
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("3"));
 
-        ordersWaitForCommentStatus.put("status", "success");
+        ordersWaitForCommentStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         ordersWaitForCommentStatus.put("orders", allOrders);
 
         return ordersWaitForCommentStatus;
@@ -457,11 +539,11 @@ public class UserController {
         User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
 
         if (orderService.deleteByOrderId(id)) {
-            deleteOrderStatus.put("status", "success");
-            deleteOrderStatus.put("message", "success");
+            deleteOrderStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            deleteOrderStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         } else {
-            deleteOrderStatus.put("status", "fail");
-            deleteOrderStatus.put("message", "Unknown Error");
+            deleteOrderStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            deleteOrderStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "Unknown Error");
         }
 
         return deleteOrderStatus;
