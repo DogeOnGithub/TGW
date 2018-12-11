@@ -4,6 +4,16 @@ import com.alipay.api.AlipayApiException;
 
 public interface AlipayService {
 
-    String alipayWithBaseParam(String out_trade_no, String total_amount, String subject) throws AlipayApiException;
+    String alipayWithBaseParam(
+            String out_trade_no,
+            String total_amount,
+            String subject) throws AlipayApiException;
+
+    String alipayWithBizParam(
+            String out_trade_no,
+            String total_amount,
+            String subject,
+            String body,
+            String goods_detail) throws AlipayApiException;
 
 }

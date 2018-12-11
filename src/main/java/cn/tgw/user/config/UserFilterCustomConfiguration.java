@@ -32,6 +32,7 @@ public class UserFilterCustomConfiguration {
         registrationBean.addUrlPatterns("/tjsanshao/user/deleteOrder");
 
         registrationBean.addUrlPatterns("/tjsanshao/order/create");
+        registrationBean.addUrlPatterns("/tjsanshao/order/pay");
 
         //设置过滤器名称
         registrationBean.setName("UserLoginFilter");

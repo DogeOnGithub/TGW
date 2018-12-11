@@ -210,4 +210,26 @@ public class OrderServiceImpl implements OrderService {
 
         return true;
     }
+
+    @Override
+    public Order getOrderByIdPayAble(int id) {
+        Order order = orderMapper.selectByPrimaryKey(id);
+
+        //如果订单不存在
+        if (order == null) {
+            return null;
+        }
+
+        //如果订单不是正常状态，返回null
+        if (order.getOrderStatus().intValue() != 1) {
+            return null;
+        }
+
+        //如果订单不是处于未付款状态，返回null
+        if (order.getSellStatus().intValue() != 0) {
+            return null;
+        }
+
+        return order;
+    }
 }

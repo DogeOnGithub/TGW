@@ -141,4 +141,14 @@ public interface OrderService {
      **/
     public boolean deleteByOrderId(int id);
 
+    /*
+     * @Description:根据id获取可以支付的订单，有则返回order，无则返回null
+     * @Param:[id]
+     * @Return:cn.tgw.order.model.Order
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:09:49
+     **/
+    public Order getOrderByIdPayAble(int id);
+
 }
