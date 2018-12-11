@@ -344,6 +344,11 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testOrderServiceCreateOrder(){
+		System.out.println(orderService.createmsKillOrderByUserIdAndmsKillId(1, 1, 1));
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 

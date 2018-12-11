@@ -33,6 +33,7 @@ public class UserFilterCustomConfiguration {
 
         registrationBean.addUrlPatterns("/tjsanshao/order/create");
         registrationBean.addUrlPatterns("/tjsanshao/order/pay");
+        registrationBean.addUrlPatterns("/tjsanshao/order/msKillCreate");
 
         //设置过滤器名称
         registrationBean.setName("UserLoginFilter");

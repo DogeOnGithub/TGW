@@ -1,5 +1,6 @@
 package cn.tgw.order.service;
 
+import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.goods.model.Goods;
 import cn.tgw.order.model.Order;
@@ -152,5 +153,9 @@ public interface OrderService {
     public Order getOrderByIdPayAble(int id);
 
     public Order getOrderById(int id);
+
+    public Order createmsKillOrderByUserAndmsKill(User user, TgwSeckill msKill, int count);
+
+    public Order createmsKillOrderByUserIdAndmsKillId(int userId, int msKillId, int count);
 
 }

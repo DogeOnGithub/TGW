@@ -1,5 +1,7 @@
 package cn.tgw.order.service.serviceImpl;
 
+import cn.tgw.admin.mapper.TgwSeckillMapper;
+import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.businessman.mapper.BusinessmanMapper;
 import cn.tgw.businessman.model.Businessman;
 import cn.tgw.common.utils.OrderUtils;
@@ -43,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private GoodsDetailMapper goodsDetailMapper;
+
+    @Autowired
+    private TgwSeckillMapper seckillMapper;
 
     @Autowired
     private BusinessmanMapper businessmanMapper;
@@ -236,5 +241,47 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrderById(int id) {
         return orderMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Order createmsKillOrderByUserAndmsKill(User user, TgwSeckill msKill, int count) {
+
+        Goods goods = goodsMapper.selectByPrimaryKey(msKill.getTgwGoodsId());
+
+        Order createOrder = new Order();
+
+        //设置订单唯一编号
+        createOrder.setUniqueOrderNumber(OrderUtils.getOrderNumber(user.getMobile()));
+
+        createOrder.setTgwUserId(user.getId());
+        createOrder.setTgwGoodsId(goods.getId());
+        createOrder.setCount(count);
+        createOrder.setOrderCreateTime(new Date());
+        createOrder.setSellStatus(new Byte("0"));
+        createOrder.setOrderStatus(new Byte("1"));
+
+        //商品秒杀价
+        createOrder.setTotal(msKill.getSeckillPrice().multiply(new BigDecimal(count)));
+
+        createOrder.setTgwBusinessmanId(goods.getTgwBusinessmanId());
+
+        int row = orderMapper.insertSelective(createOrder);
+
+        if (row < 1) {
+            return null;
+        }
+
+        //加入到消息队列
+        rabbitTemplate.convertAndSend("tgw.ordertime.firstIn.exchange", "", createOrder.getId());
+
+        return orderMapper.selectByPrimaryKey(createOrder.getId());
+    }
+
+    @Override
+    public Order createmsKillOrderByUserIdAndmsKillId(int userId, int msKillId, int count) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        TgwSeckill msKill = seckillMapper.selectByPrimaryKey(msKillId);
+
+        return this.createmsKillOrderByUserAndmsKill(user, msKill, count);
     }
 }
