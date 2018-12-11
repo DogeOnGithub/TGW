@@ -42,10 +42,10 @@ public class SecKillController {
     * @UpdateRemark:   修改内容
     * @Version:        1.0
     */
-    @RequestMapping("/{id}/{md5}")
-    public  Object executeSecKill(@PathVariable(value = "id") Integer id,@PathVariable(value = "md5") String md5){
+    @RequestMapping("/{seckillId}/{md5}")
+    public  Object executeSecKill(@PathVariable(value = "seckillId") Integer seckillId,@PathVariable(value = "md5") String md5){
 
-        String md5Url = MD5Utils.tgwMD5(id + "");
+        String md5Url = MD5Utils.tgwMD5(seckillId + "");
         Map<String,Object>map=new HashMap<>();
         if (!md5.equals(md5Url)){
             map.put("status",false);
