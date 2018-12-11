@@ -1,5 +1,7 @@
 package cn.tgw.order.controller;
 
+import cn.tgw.admin.model.TgwSeckill;
+import cn.tgw.admin.service.SecKillService;
 import cn.tgw.common.service.AlipayService;
 import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.goods.model.Goods;
@@ -44,6 +46,9 @@ public class OrderController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private SecKillService secKillService;
 
     /*
      * @Description:通过商品id以及数量创建订单
