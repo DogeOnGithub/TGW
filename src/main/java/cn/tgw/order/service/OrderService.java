@@ -151,4 +151,6 @@ public interface OrderService {
      **/
     public Order getOrderByIdPayAble(int id);
 
+    public Order getOrderById(int id);
+
 }

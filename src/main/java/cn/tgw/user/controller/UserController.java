@@ -66,8 +66,8 @@ public class UserController {
 
         //校验用户名和密码是否为空
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            loginStatus.put("message", "please input username and password");
-            loginStatus.put("status", "fail");
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input username and password");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             return loginStatus;
         }
 
@@ -78,8 +78,8 @@ public class UserController {
             //根据用户id获取userDetail，例如昵称、头像url
             UserDetail userDetail = userService.getUserDetailByUserId(user);
 
-            loginStatus.put("status", "success");
-            loginStatus.put("message", "login success");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "login success");
             user.setPassword(""); //不返回密码到客户端
             loginStatus.put("user", user);
 
@@ -89,8 +89,8 @@ public class UserController {
             session.setAttribute(TGWStaticString.TGW_USER, user);
 
         }else{
-            loginStatus.put("status", "fail");
-            loginStatus.put("message", "username or password error");
+            loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username or password error");
         }
 
         return loginStatus;
@@ -115,8 +115,8 @@ public class UserController {
                 Object sessionUser = session.getAttribute(TGWStaticString.TGW_USER);
                 if (sessionUser == null){
                     //用户没有登录，提示用户先登录
-                    sendMsgStatus.put("status", "authority");
-                    sendMsgStatus.put("message", "login first");
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_AUTH);
+                    sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "login first");
                     return sendMsgStatus;
                 }
 
@@ -125,8 +125,8 @@ public class UserController {
 
                 smsVerifyService.sendMsgCodeAsync(userFromSession.getMobile(), miaoDiService.generateCode(6));
 
-                sendMsgStatus.put("status", "success");
-                sendMsgStatus.put("message", "success");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
                 return sendMsgStatus;
             }
@@ -134,8 +134,8 @@ public class UserController {
 
         //验证手机号码是否为空
         if (StringUtils.isEmpty(mobileNumber)){
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         }
 
@@ -144,8 +144,8 @@ public class UserController {
 
         if (mobileNumber.length() != 11) {
             //如果不是11位，不是手机号码，直接返回fail
-            sendMsgStatus.put("status", "fail");
-            sendMsgStatus.put("message", "please input correct phone number");
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
             return sendMsgStatus;
         } else {
             //是11位手机号码，开始用正则匹配
@@ -154,13 +154,13 @@ public class UserController {
             boolean isMatch = m.matches();
             if (!isMatch) {
                 //如果匹配不成功，不合法，返回fail
-                sendMsgStatus.put("status", "fail");
-                sendMsgStatus.put("message", "please input correct phone number");
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+                sendMsgStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input correct phone number");
                 return sendMsgStatus;
             }else{
                 if (!smsVerifyService.enableSend(mobileNumber)){
                     //该手机号不可以发送验证码，超出了每天发送次数
-                    sendMsgStatus.put("status", "fail");
+                    sendMsgStatus.put("status", TGWStaticString.TGW_RESULT_STATUS_FAIL);
                     sendMsgStatus.put("message", "send times out");
                     return sendMsgStatus;
                 }

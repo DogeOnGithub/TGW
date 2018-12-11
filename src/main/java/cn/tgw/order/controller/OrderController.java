@@ -59,8 +59,8 @@ public class OrderController {
         HashMap<String, Object> createStatus = new HashMap<>();
 
         if (goodsId == null || count == null) {
-            createStatus.put("status", "fail");
-            createStatus.put("message", "please input the whole");
+            createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
             return createStatus;
         }
 
@@ -74,8 +74,8 @@ public class OrderController {
             return createStatus;
         }
 
-        createStatus.put("status", "success");
-        createStatus.put("message", "success");
+        createStatus.put(TGWStaticString.TGW_RESULT_STATUS, "success");
+        createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         createStatus.put("order", order);
 
         return createStatus;

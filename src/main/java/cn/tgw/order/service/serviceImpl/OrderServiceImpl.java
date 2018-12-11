@@ -232,4 +232,9 @@ public class OrderServiceImpl implements OrderService {
 
         return order;
     }
+
+    @Override
+    public Order getOrderById(int id) {
+        return orderMapper.selectByPrimaryKey(id);
+    }
 }
