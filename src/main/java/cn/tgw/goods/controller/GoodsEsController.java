@@ -47,7 +47,7 @@ public class GoodsEsController {
      * @return
      */
    @RequestMapping("/findByShopNameOrGoodsTitle")
-    public EsResult findByShopNameOrGoodsTitle(String goodsTitle, @RequestParam(value = "page",defaultValue = "1") Integer page,
+    public  EsResult findByShopNameOrGoodsTitle(String goodsTitle, @RequestParam(value = "page",defaultValue = "1") Integer page,
                                                @RequestParam(value = "size",defaultValue = "10")Integer size){
         Pageable pageable=PageRequest.of(page,size);
        // Page<EsGoodsVo> esGoodsVos = goodsEsRepository.findByShopNameLikeOrGoodsTitleLike(content, content, pageable);

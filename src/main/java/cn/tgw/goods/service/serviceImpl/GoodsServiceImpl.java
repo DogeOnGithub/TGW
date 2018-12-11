@@ -251,4 +251,28 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
 
+
+    /**
+     *
+     * 功能描述: 下单减少商品库存
+     *
+     * @param: 团购id，团购数量
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/11
+     */
+    @Override
+    public String updateGoodsRepertory(int id, int num) {
+        GoodsDetail resDetail = goodsDetailMapper.selectByTgwGoodsId(id);
+        int resRepertory = resDetail.getGoodsRepertory();
+        if(resRepertory<num){
+            return "error";
+        }
+        resRepertory = resRepertory-num;
+        resDetail.setGoodsRepertory(resRepertory);
+        resDetail.setSalesVolumn(resDetail.getSalesVolumn()+num);
+        return "success";
+    }
+
+
 }

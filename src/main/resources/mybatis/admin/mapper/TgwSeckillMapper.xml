@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tgw.admin.mapper.TgwSeckillMapper">
+  <resultMap id="BaseResultMap" type="cn.tgw.admin.model.TgwSeckill">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tgw_goods_id" jdbcType="INTEGER" property="tgwGoodsId" />
+    <result column="seckill_repertory" jdbcType="INTEGER" property="seckillRepertory" />
+    <result column="seckill_creattime" jdbcType="TIMESTAMP" property="seckillCreattime" />
+    <result column="seckill_end" jdbcType="TIMESTAMP" property="seckillEnd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tgw_goods_id, seckill_repertory, seckill_creattime, seckill_end
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tgw_seckill
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="findGoodsIsKilling" resultType="cn.tgw.admin.model.TgwSeckill">
+      select * from tgw_seckill where seckill_end >= #{nowTime} and #{nowTime} >= seckill_creattime
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tgw_seckill
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tgw.admin.model.TgwSeckill">
+    insert into tgw_seckill (id, tgw_goods_id, seckill_repertory, 
+      seckill_creattime, seckill_end)
+    values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{seckillRepertory,jdbcType=INTEGER}, 
+      #{seckillCreattime,jdbcType=TIMESTAMP}, #{seckillEnd,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tgw.admin.model.TgwSeckill">
+    insert into tgw_seckill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tgwGoodsId != null">
+        tgw_goods_id,
+      </if>
+      <if test="seckillRepertory != null">
+        seckill_repertory,
+      </if>
+      <if test="seckillCreattime != null">
+        seckill_creattime,
+      </if>
+      <if test="seckillEnd != null">
+        seckill_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tgwGoodsId != null">
+        #{tgwGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="seckillRepertory != null">
+        #{seckillRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="seckillCreattime != null">
+        #{seckillCreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seckillEnd != null">
+        #{seckillEnd,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tgw.admin.model.TgwSeckill">
+    update tgw_seckill
+    <set>
+      <if test="tgwGoodsId != null">
+        tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="seckillRepertory != null">
+        seckill_repertory = #{seckillRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="seckillCreattime != null">
+        seckill_creattime = #{seckillCreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seckillEnd != null">
+        seckill_end = #{seckillEnd,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tgw.admin.model.TgwSeckill">
+    update tgw_seckill
+    set tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
+      seckill_repertory = #{seckillRepertory,jdbcType=INTEGER},
+      seckill_creattime = #{seckillCreattime,jdbcType=TIMESTAMP},
+      seckill_end = #{seckillEnd,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
