@@ -69,12 +69,12 @@ public class OrderController {
         Order order =  orderService.createOrderWithUserIdAndGoodsId(user.getId(), goodsId, count);
 
         if (order == null) {
-            createStatus.put("status", "fail");
-            createStatus.put("message", "unknown error");
+            createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "unknown error");
             return createStatus;
         }
 
-        createStatus.put(TGWStaticString.TGW_RESULT_STATUS, "success");
+        createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         createStatus.put("order", order);
 
