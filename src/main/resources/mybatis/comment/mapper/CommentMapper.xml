@@ -8,9 +8,10 @@
     <result column="comment_desc" jdbcType="VARCHAR" property="commentDesc" />
     <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
     <result column="comment_stars" jdbcType="TINYINT" property="commentStars" />
+    <result column="tgw_order_id" jdbcType="INTEGER" property="tgwOrderId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, tgw_goods_id, tgw_user_id, comment_desc, comment_time, comment_stars
+    id, tgw_goods_id, tgw_user_id, comment_desc, comment_time, comment_stars, tgw_order_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,11 +25,11 @@
   </delete>
   <insert id="insert" parameterType="cn.tgw.comment.model.Comment">
     insert into tgw_goods_comment (id, tgw_goods_id, tgw_user_id, 
-      comment_desc, comment_time, comment_stars
-      )
+      comment_desc, comment_time, comment_stars, 
+      tgw_order_id)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{tgwUserId,jdbcType=INTEGER}, 
-      #{commentDesc,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{commentStars,jdbcType=TINYINT}
-      )
+      #{commentDesc,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{commentStars,jdbcType=TINYINT}, 
+      #{tgwOrderId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.comment.model.Comment">
     insert into tgw_goods_comment
@@ -51,6 +52,9 @@
       <if test="commentStars != null">
         comment_stars,
       </if>
+      <if test="tgwOrderId != null">
+        tgw_order_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -70,6 +74,9 @@
       </if>
       <if test="commentStars != null">
         #{commentStars,jdbcType=TINYINT},
+      </if>
+      <if test="tgwOrderId != null">
+        #{tgwOrderId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -91,6 +98,9 @@
       <if test="commentStars != null">
         comment_stars = #{commentStars,jdbcType=TINYINT},
       </if>
+      <if test="tgwOrderId != null">
+        tgw_order_id = #{tgwOrderId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +110,8 @@
       tgw_user_id = #{tgwUserId,jdbcType=INTEGER},
       comment_desc = #{commentDesc,jdbcType=VARCHAR},
       comment_time = #{commentTime,jdbcType=TIMESTAMP},
-      comment_stars = #{commentStars,jdbcType=TINYINT}
+      comment_stars = #{commentStars,jdbcType=TINYINT},
+      tgw_order_id = #{tgwOrderId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

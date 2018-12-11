@@ -15,6 +15,8 @@ public class Comment {
 
     private Byte commentStars;
 
+    private Integer tgwOrderId;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Comment {
 
     public void setCommentStars(Byte commentStars) {
         this.commentStars = commentStars;
+    }
+
+    public Integer getTgwOrderId() {
+        return tgwOrderId;
+    }
+
+    public void setTgwOrderId(Integer tgwOrderId) {
+        this.tgwOrderId = tgwOrderId;
     }
 }
