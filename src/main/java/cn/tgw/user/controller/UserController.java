@@ -295,6 +295,80 @@ public class UserController {
     }
 
     /*
+     * @Description:用户选择忘记密码，直接根据用户名发送验证码
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:14:50
+     **/
+    @PostMapping("/tjsanshao/user/forgot")
+    public Map<String, Object> forgotPassword(String username) {
+        HashMap<String, Object> forgotStatus = new HashMap<>();
+
+        //如果没有输入用户名
+        if (StringUtils.isEmpty(username)) {
+            forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
+            return forgotStatus;
+        }
+
+        //根据username查询数据库，username的传入可能是user的属性username或者mobile
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "user is not available");
+            return forgotStatus;
+        }
+
+        //用户名有效，向用户手机发送验证码
+        smsVerifyService.sendMsgCodeAsync(user.getMobile(), miaoDiService.generateCode(6));
+
+        forgotStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        forgotStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+        return forgotStatus;
+    }
+
+    @PostMapping("/tjsanshao/user/newpwd")
+    public Map<String, Object> newPassword(String username, String password, String code) {
+        HashMap<String, Object> newPasswordStatus = new HashMap<>();
+
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(code)) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
+            return newPasswordStatus;
+        }
+
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "user is not available");
+            return newPasswordStatus;
+        }
+
+        //验证码错误
+        if (!smsVerifyService.checkCode(user.getMobile(), code)) {
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "code is not available");
+            return newPasswordStatus;
+        }
+
+        //验证码正确，用户名正确，更新数据库
+        user.setPassword(password);
+        user.setUserStatus(new Byte("1"));
+
+        userService.updateUserPassword(user);
+
+        smsVerifyService.codeUsed(user.getMobile());
+
+        newPasswordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        newPasswordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+        return newPasswordStatus;
+    }
+
+    /*
      * @Description:使用get请求，返回当前登录用户的用户详细信息，需要用户登录
      * @Param:[session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>

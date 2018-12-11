@@ -53,4 +53,6 @@ public interface UserService {
 
     UserDetail updateUserDetail(UserDetail userDetail);
 
+    User getUserByUsername(String username);
+
 }
