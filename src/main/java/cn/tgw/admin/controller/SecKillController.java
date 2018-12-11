@@ -57,11 +57,23 @@ public class SecKillController {
         return "";
     }
 
+    /**
+    * @Description:    查询准备秒杀的商品
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/11 0011 16:19
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/11 0011 16:19
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
     @RequestMapping("/findGoodspreparationKilling")
     public Object findGoodspreparationKilling(){
         List<Map<String, Object>> preparationKilling = secKillService.findGoodspreparationKilling();
         return preparationKilling;
     }
+
+
+
 
 
 

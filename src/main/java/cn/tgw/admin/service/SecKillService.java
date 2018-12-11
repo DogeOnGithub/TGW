@@ -55,5 +55,18 @@ public class SecKillService {
         return goodsInfo;
     }
 
+    /**
+    * @Description:    根据秒杀记录表id查询秒杀记录信息
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/11 0011 16:29
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/11 0011 16:29
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    public TgwSeckill findTgwSeckillById(Integer id){
+        return tgwSeckillMapper.selectByPrimaryKey(id);
+    }
+
 
 }
