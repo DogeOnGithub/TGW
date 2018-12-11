@@ -191,14 +191,14 @@ public class UserController {
 
         //验证用户名、密码、手机号码是否为空
         if (user.getUsername() == null || user.getPassword() == null || StringUtils.isEmpty(user.getMobile()) || StringUtils.isEmpty(code)){
-            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, "fail");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "please input the whole");
             return registerStatus;
         }
 
         //验证验证码是否正确
         if (!smsVerifyService.checkCode(user.getMobile(), code)){
-            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, "fail");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "code is invalid");
             return registerStatus;
         }
@@ -206,14 +206,14 @@ public class UserController {
         //填写了用户名、密码、手机号码、验证码，验证是否可以注册
         if (!userService.enableUserRegister(user)){
             //用户名已存在，不可注册
-            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, "fail");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username exists");
             return registerStatus;
         }
 
         if (!userService.enableMoblieRegister(user.getMobile())){
             //手机号已绑定，不可注册
-            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, "fail");
+            registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "mobile exists");
             return registerStatus;
         }
@@ -221,7 +221,7 @@ public class UserController {
         //存入到数据库
         userService.userRegister(user);
 
-        registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, "success");
+        registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "register success");
 
         user.setPassword("");
@@ -404,6 +404,14 @@ public class UserController {
         return ordersWaitForPayStatus;
     }
 
+    /*
+     * @Description:获取用户的已付款的未使用的订单
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-11
+     * @Time:14:40
+     **/
     @RequestMapping("/tjsanshao/user/ordersNotUse")
     public Map<String, Object> ordersWaitForUse(HttpSession session) {
         HashMap<String, Object> ordersWaitForUseStatus = new HashMap<>();
