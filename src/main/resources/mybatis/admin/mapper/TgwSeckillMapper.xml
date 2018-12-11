@@ -7,9 +7,10 @@
     <result column="seckill_repertory" jdbcType="INTEGER" property="seckillRepertory" />
     <result column="seckill_creattime" jdbcType="TIMESTAMP" property="seckillCreattime" />
     <result column="seckill_end" jdbcType="TIMESTAMP" property="seckillEnd" />
+    <result column="seckill_price" jdbcType="DECIMAL" property="seckillPrice" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, tgw_goods_id, seckill_repertory, seckill_creattime, seckill_end
+    id, tgw_goods_id, seckill_repertory, seckill_creattime, seckill_end, seckill_price
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,18 +18,17 @@
     from tgw_seckill
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="findGoodsIsKilling" resultType="cn.tgw.admin.model.TgwSeckill">
-      select * from tgw_seckill where seckill_end >= #{nowTime} and #{nowTime} >= seckill_creattime
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tgw_seckill
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tgw.admin.model.TgwSeckill">
     insert into tgw_seckill (id, tgw_goods_id, seckill_repertory, 
-      seckill_creattime, seckill_end)
+      seckill_creattime, seckill_end, seckill_price
+      )
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{seckillRepertory,jdbcType=INTEGER}, 
-      #{seckillCreattime,jdbcType=TIMESTAMP}, #{seckillEnd,jdbcType=TIMESTAMP})
+      #{seckillCreattime,jdbcType=TIMESTAMP}, #{seckillEnd,jdbcType=TIMESTAMP}, #{seckillPrice,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.admin.model.TgwSeckill">
     insert into tgw_seckill
@@ -48,6 +48,9 @@
       <if test="seckillEnd != null">
         seckill_end,
       </if>
+      <if test="seckillPrice != null">
+        seckill_price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,6 +67,9 @@
       </if>
       <if test="seckillEnd != null">
         #{seckillEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seckillPrice != null">
+        #{seckillPrice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -82,6 +88,9 @@
       <if test="seckillEnd != null">
         seckill_end = #{seckillEnd,jdbcType=TIMESTAMP},
       </if>
+      <if test="seckillPrice != null">
+        seckill_price = #{seckillPrice,jdbcType=DECIMAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -90,7 +99,20 @@
     set tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
       seckill_repertory = #{seckillRepertory,jdbcType=INTEGER},
       seckill_creattime = #{seckillCreattime,jdbcType=TIMESTAMP},
-      seckill_end = #{seckillEnd,jdbcType=TIMESTAMP}
+      seckill_end = #{seckillEnd,jdbcType=TIMESTAMP},
+      seckill_price = #{seckillPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updaterepertory">
+     update tgw_seckill
+      set seckill_repertory = (seckill_repertory-1)
+     where seckill_repertory > 0 and id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findGoodsIsKilling" resultType="cn.tgw.admin.model.TgwSeckill">
+      select * from tgw_seckill where seckill_end >= #{nowTime} and #{nowTime} >= seckill_creattime
+    </select>
+  <select id="findGoodspreparationKilling" resultType="cn.tgw.admin.model.TgwSeckill">
+       select * from tgw_seckill where seckill_creattime >= #{nowTime}
+    </select>
 </mapper>

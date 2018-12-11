@@ -1,5 +1,4 @@
 package cn.tgw.admin.mapper;
-
 import cn.tgw.admin.model.TgwSeckill;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,5 +18,9 @@ public interface TgwSeckillMapper {
 
     int updateByPrimaryKey(TgwSeckill record);
 
-    List<TgwSeckill>findGoodsIsKilling(@Param("nowTime") Date nowTime);
+    List<TgwSeckill> findGoodsIsKilling(@Param("nowTime") Date nowTime);
+
+    List<TgwSeckill>findGoodspreparationKilling(@Param("nowTime") Date nowTime);
+
+    int updaterepertory(Integer id);
 }

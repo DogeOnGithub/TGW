@@ -30,8 +30,26 @@ public class SecKillService {
             Integer tgwGoodsId = seckill.getTgwGoodsId();
             Map<String, Object> map = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(tgwGoodsId);
             String md5Url = MD5Utils.tgwMD5(tgwGoodsId + "");
+            map.put("seckill",seckill);
             map.put("status","正在秒杀");
             map.put("url","/seckill/"+tgwGoodsId+"/"+md5Url);
+            goodsInfo.add(map);
+        }
+        return goodsInfo;
+    }
+    public List<Map<String, Object>> findGoodspreparationKilling(){
+        Date date = new Date();
+        List<TgwSeckill> goodsIsKilling = tgwSeckillMapper.findGoodspreparationKilling(date);
+        List<Map<String, Object>> goodsInfo=new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < goodsIsKilling.size(); i++) {
+            TgwSeckill seckill = goodsIsKilling.get(i);
+            Integer tgwGoodsId = seckill.getTgwGoodsId();
+            Map<String, Object> map = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(tgwGoodsId);
+            map.put("seckill",seckill);
+            map.put("status","等待秒杀");
+            long pretime = seckill.getSeckillCreattime().getTime()-date.getTime();
+            map.put("pretime",pretime);
+
             goodsInfo.add(map);
         }
         return goodsInfo;

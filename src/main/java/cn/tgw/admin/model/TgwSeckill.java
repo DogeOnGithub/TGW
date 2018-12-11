@@ -1,11 +1,10 @@
 package cn.tgw.admin.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-@Data
 public class TgwSeckill {
     private Integer id;
 
@@ -18,6 +17,8 @@ public class TgwSeckill {
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date seckillEnd;
+
+    private BigDecimal seckillPrice;
 
     public Integer getId() {
         return id;
@@ -57,5 +58,13 @@ public class TgwSeckill {
 
     public void setSeckillEnd(Date seckillEnd) {
         this.seckillEnd = seckillEnd;
+    }
+
+    public BigDecimal getSeckillPrice() {
+        return seckillPrice;
+    }
+
+    public void setSeckillPrice(BigDecimal seckillPrice) {
+        this.seckillPrice = seckillPrice;
     }
 }
