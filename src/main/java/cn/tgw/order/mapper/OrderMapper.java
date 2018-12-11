@@ -1,6 +1,7 @@
 package cn.tgw.order.mapper;
 
 import cn.tgw.order.model.Order;
+import cn.tgw.user.model.User;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public interface OrderMapper {
     List<Order> selectAllOrdersByBusinessmanId(Integer businessmanId);
 
     List<Order> selectAllOrdersByUserIdAndSellStatusAndStatus(Order order);
+
+    List<Order> selectOrdersStatusNormalByUserId(Integer userId);
 
     //自定义查询结束
 }

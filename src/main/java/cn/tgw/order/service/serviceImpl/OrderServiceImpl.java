@@ -158,6 +158,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getUserAllOrders(int userId) {
+        return orderMapper.selectOrdersStatusNormalByUserId(userId);
+    }
+
+    @Override
+    public List<Order> getUserAllOrders(User user) {
+        return this.getUserAllOrders(user.getId());
+    }
+
+    @Override
     @RabbitListener(queues = {"tgw.ordertime.queue"})
     public void orderTimeQueueListener(String id) {
         Order order = orderMapper.selectByPrimaryKey(Integer.valueOf(id));
@@ -178,5 +188,26 @@ public class OrderServiceImpl implements OrderService {
         order.setSellStatus(new Byte("5"));
 
         orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    public boolean deleteByOrderId(int id) {
+
+        Order order = orderMapper.selectByPrimaryKey(id);
+
+        if (order == null) {
+            return false;
+        }
+
+        //将标志位设置为删除
+        order.setOrderStatus(new Byte("0"));
+
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+
+        if (row < 1) {
+            return false;
+        }
+
+        return true;
     }
 }
