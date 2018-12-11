@@ -262,8 +262,8 @@ public class GoodsServiceImpl implements GoodsService {
      * @date:  2018/12/11
      */
     @Override
-    public String updateGoodsRepertory(int id, int num) {
-        GoodsDetail resDetail = goodsDetailMapper.selectByTgwGoodsId(id);
+    public String updateGoodsRepertory(int goodsId, int num) {
+        GoodsDetail resDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
         int resRepertory = resDetail.getGoodsRepertory();
         if(resRepertory<num){
             return "error";
@@ -271,7 +271,23 @@ public class GoodsServiceImpl implements GoodsService {
         resRepertory = resRepertory-num;
         resDetail.setGoodsRepertory(resRepertory);
         resDetail.setSalesVolumn(resDetail.getSalesVolumn()+num);
+        int i = goodsDetailMapper.updateByPrimaryKeySelective(resDetail);
+        if(i!=1){
+            return "error";
+        }
         return "success";
+    }
+
+    @Override
+    public String addGoodsSalesVolumn(int goodsId, int num) {
+        GoodsDetail resDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
+        resDetail.setSalesVolumn(resDetail.getSalesVolumn()+num);
+        int i = goodsDetailMapper.updateByPrimaryKeySelective(resDetail);
+        if(i!=1){
+            return "error";
+        }
+        return "success";
+
     }
 
 

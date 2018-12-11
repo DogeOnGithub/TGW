@@ -37,6 +37,11 @@
         from tgw_goods_comment
         where tgw_order_id = #{orderId,jdbcType=INTEGER}
     </select>
+    <select id="selectAllComment" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from tgw_goods_comment
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tgw_goods_comment
     where id = #{id,jdbcType=INTEGER}

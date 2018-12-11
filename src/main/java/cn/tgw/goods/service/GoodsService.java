@@ -29,5 +29,7 @@ public interface GoodsService {
     public String updateIsOnline(Goods goods);
     public List<GoodsVO> findAllGoodsVO();
 
-    public String updateGoodsRepertory(int id,int num);
+    public String updateGoodsRepertory(int goodsId,int num);
+
+    public String addGoodsSalesVolumn(int goodsId,int num);
 }
