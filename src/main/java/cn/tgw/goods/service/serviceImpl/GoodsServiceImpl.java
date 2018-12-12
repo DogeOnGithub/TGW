@@ -290,5 +290,10 @@ public class GoodsServiceImpl implements GoodsService {
 
     }
 
+    @Override
+    public List<Goods> findGoodsByBusinessmanId(int businessmanId) {
+        return goodsMapper.selectByBusinessId(businessmanId);
+    }
+
 
 }

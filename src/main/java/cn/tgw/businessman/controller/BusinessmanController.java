@@ -6,6 +6,8 @@ import cn.tgw.businessman.service.BusinessmanService;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.common.utils.TGWStaticString;
+import cn.tgw.goods.model.Goods;
+import cn.tgw.goods.service.GoodsService;
 import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
 import com.github.pagehelper.PageInfo;
@@ -45,6 +47,9 @@ public class BusinessmanController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     /*
      * @Description:商家用户登录功能
@@ -366,5 +371,28 @@ public class BusinessmanController {
         watchOrdersStatus.put("pageInfo", pageInfo);
 
         return watchOrdersStatus;
+    }
+
+    /*
+     * @Description:商家查看在售商品
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-12
+     * @Time:16:19
+     **/
+    @RequestMapping("/tjsanshao/businessman/goods")
+    public Map<String, Object> watchGoods(HttpSession session) {
+        HashMap<String, Object> watchGoodsStatus = new HashMap<>();
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        //根据商家id查询该商家的所有商品
+        List<Goods> allGoods = goodsService.findGoodsByBusinessmanId(businessman.getId());
+
+        watchGoodsStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        watchGoodsStatus.put("list", allGoods);
+
+        return watchGoodsStatus;
     }
 }

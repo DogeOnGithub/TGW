@@ -32,4 +32,6 @@ public interface GoodsService {
     public String updateGoodsRepertory(int goodsId,int num);
 
     public String addGoodsSalesVolumn(int goodsId,int num);
+
+    public List<Goods> findGoodsByBusinessmanId(int businessmanId);
 }
