@@ -298,4 +298,78 @@ public class OrderServiceImpl implements OrderService {
     public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId) {
         return orderMapper.selectAllOrdersByBusinessmanId(businessmanId);
     }
+
+    @Override
+    public Order getOrderByUniqueOrderNumber(String orderNumber) {
+        return orderMapper.selectByUniqueOrderNumber(orderNumber);
+    }
+
+    @Override
+    public boolean orderPayFinish(Order order) {
+        order.setSellStatus(new Byte("1"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean orderPayFinish(int orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        order.setSellStatus(new Byte("1"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean orderUseFinish(Order order) {
+        order.setSellStatus(new Byte("3"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean orderUseFinish(int orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        order.setSellStatus(new Byte("3"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean orderCommentFinish(Order order) {
+        order.setSellStatus(new Byte("4"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean orderCommentFinish(int orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        order.setSellStatus(new Byte("4"));
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if (row > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

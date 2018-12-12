@@ -139,12 +139,27 @@ public class OrderController {
      * @Time:11:21
      **/
     @PostMapping("/alipay/notify")
-    public void alipayNotifyUrl(HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
+    @ResponseBody
+    public String alipayNotifyUrl(
+            String notify_time,
+            String trade_no,
+            String app_id,
+            String out_trade_no,
+            String trade_status) {
 
-        System.out.println(parameterMap);
+        if (!trade_status.equals("TRADE_SUCCESS")) {
+            return "fail";
+        }
 
-        //TODO 支付成功后，更新数据库
+        //支付成功后，更新数据库
+        Order order = orderService.getOrderByUniqueOrderNumber(out_trade_no);
+        order.setPaySerialsNumber(trade_no);
+
+        if (orderService.orderPayFinish(order)) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     /*
@@ -156,12 +171,25 @@ public class OrderController {
      * @Time:11:24
      **/
     @GetMapping("/alipay/return")
-    public String alipayReturnUrl(HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
+    public String alipayReturnUrl(
+            String timestamp,
+            String out_trade_no,
+            String trade_no,
+            String total_amount,
+            String seller_id,
+            Map<String, String> kvMap) {
 
-        System.out.println(parameterMap);
+        System.out.println(timestamp);
+        System.out.println(out_trade_no);
+        System.out.println(trade_no);
+        System.out.println(total_amount);
+        System.out.println(seller_id);
 
-        //TODO 支付成功后，跳转页面到支付完毕页面
+        kvMap.put("timestamp", timestamp);
+        kvMap.put("out_trade_no", out_trade_no);
+        kvMap.put("trade_no", trade_no);
+        kvMap.put("total_amount", total_amount);
+        kvMap.put("seller_id", seller_id);
 
         return "test/return";
     }

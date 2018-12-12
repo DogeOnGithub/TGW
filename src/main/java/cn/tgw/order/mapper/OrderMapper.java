@@ -32,6 +32,8 @@ public interface OrderMapper {
 
     List<Order> selectOrdersStatusNormalByUserId(Integer userId);
 
+    Order selectByUniqueOrderNumber(String orderNumber);
+
     //自定义查询结束
 
 

@@ -173,4 +173,19 @@ public interface OrderService {
 
     public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId);
 
+    public Order getOrderByUniqueOrderNumber(String orderNumber);
+
+    //更改订单支付状态方法开始
+
+    public boolean orderPayFinish(Order order);
+    public boolean orderPayFinish(int orderId);
+
+    public boolean orderUseFinish(Order order);
+    public boolean orderUseFinish(int orderId);
+
+    public boolean orderCommentFinish(Order order);
+    public boolean orderCommentFinish(int orderId);
+
+    //更改订单支付状态方法结束
+
 }
