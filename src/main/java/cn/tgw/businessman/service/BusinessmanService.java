@@ -45,4 +45,6 @@ public interface BusinessmanService {
 
     boolean applyToSettle(BusinessmanDetail businessmanDetail);
 
+    boolean checkSettled(Businessman businessman);
+
 }

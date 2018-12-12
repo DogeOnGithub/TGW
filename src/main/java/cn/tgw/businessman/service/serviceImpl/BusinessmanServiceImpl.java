@@ -258,4 +258,21 @@ public class BusinessmanServiceImpl implements BusinessmanService
         return false;
     }
 
+    @Override
+    public boolean checkSettled(Businessman businessman) {
+        BusinessmanDetail businessmanDetail = businessmanDetailMapper.selectByBusinessmanId(businessman.getId());
+
+        //如果没有详细信息，未入驻
+        if (businessmanDetail == null) {
+            return false;
+        }
+
+        //如果状态不是1，未入驻
+        if (businessmanDetail.getShopSettleStatus().intValue() != 1) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
