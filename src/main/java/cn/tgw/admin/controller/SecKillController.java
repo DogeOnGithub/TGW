@@ -81,11 +81,10 @@ public class SecKillController {
          */
 
         if (redisLock.lock(key,value)){
-
             try {
 
                 Order order = secKillService.executeSecKill(user.getId(), seckillId);
-                map.put("status",false);
+                map.put("status",true);
                 map.put("msg",order);
                 redisLock.unlock(key,value);
                 return map;
@@ -97,15 +96,12 @@ public class SecKillController {
 
             }
 
-
-
         }else {
             map.put("status",false);
             map.put("msg","很遗憾，换个姿势再试!");
             return map;
 
         }
-
 
     }
 
