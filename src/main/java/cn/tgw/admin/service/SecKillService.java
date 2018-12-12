@@ -1,6 +1,7 @@
 package cn.tgw.admin.service;
 
 import cn.tgw.admin.mapper.TgwSeckillMapper;
+import cn.tgw.admin.model.SeckillResultInfo;
 import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.goods.service.GoodsService;
@@ -94,9 +95,14 @@ public class SecKillService {
      * @param nowTime  当前时间
      * @return
      */
-    public TgwSeckill findTgwSeckillBygoodsIdAndNowTime(Integer tgw_goods_id, Date nowTime){
+    public SeckillResultInfo findTgwSeckillBygoodsIdAndNowTime(Integer tgw_goods_id, Date nowTime){
         TgwSeckill tgwSeckill = tgwSeckillMapper.findTgwSeckillBygoodsIdAndNowTime(tgw_goods_id, nowTime);
-        return tgwSeckill;
+        Integer seckillId = tgwSeckill.getId();
+
+        String md5Url = MD5Utils.tgwMD5(seckillId + "");
+        String url="/seckill/"+seckillId+"/"+md5Url;
+        SeckillResultInfo seckillResultInfo=new SeckillResultInfo(url,tgwSeckill);
+        return seckillResultInfo;
     }
 
     @Transactional
@@ -124,8 +130,8 @@ public class SecKillService {
         Integer tgwGoodsId = tgwSeckill.getTgwGoodsId();
         Date seckillCreattime = tgwSeckill.getSeckillCreattime();
         Date seckillEndttime = tgwSeckill.getSeckillEnd();
-        Order order = orderService.IsRepeatKill(userId, tgwGoodsId, seckillCreattime, seckillEndttime);
-        if (order!=null){
+        List<Order> orders = orderService.IsRepeatKill(userId, tgwGoodsId, seckillCreattime, seckillEndttime);
+        if (orders!=null&&orders.size()>0){
             return true;
         }
 

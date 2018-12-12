@@ -36,7 +36,7 @@ public interface OrderMapper {
 
 
 
-    Order IsRepeatKill(@Param("tgw_user_id") Integer tgw_user_id, @Param("tgw_goods_id") Integer tgw_goods_id,
+    List<Order> IsRepeatKill(@Param("tgw_user_id") Integer tgw_user_id, @Param("tgw_goods_id") Integer tgw_goods_id,
                        @Param("seckillCreattime") Date seckillCreattime, @Param("seckillEndttime") Date seckillEndttime);
 
 
