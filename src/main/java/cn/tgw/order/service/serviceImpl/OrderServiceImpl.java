@@ -284,4 +284,10 @@ public class OrderServiceImpl implements OrderService {
 
         return this.createmsKillOrderByUserAndmsKill(user, msKill, count);
     }
+
+    @Override
+    public Order IsRepeatKill(Integer tgw_user_id, Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime) {
+
+        return null;
+    }
 }

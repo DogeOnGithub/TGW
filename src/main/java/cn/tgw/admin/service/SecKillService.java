@@ -4,6 +4,8 @@ import cn.tgw.admin.mapper.TgwSeckillMapper;
 import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.goods.service.GoodsService;
+import cn.tgw.order.model.Order;
+import cn.tgw.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,10 @@ public class SecKillService {
 
     @Autowired
     private GoodsService goodsService;
+
+
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     TgwSeckillMapper tgwSeckillMapper;
@@ -79,9 +85,22 @@ public class SecKillService {
     * @UpdateDate:     2018/12/11 0011 16:47
     * @UpdateRemark:   修改内容
     * @Version:        1.0
+     *
     */
+
+    /**
+     * 进入商品详情页的时候判断该商品是否为  秒杀商品
+     * @param tgw_goods_id  商品id
+     * @param nowTime  当前时间
+     * @return
+     */
+    public TgwSeckill findTgwSeckillBygoodsIdAndNowTime(Integer tgw_goods_id, Date nowTime){
+        TgwSeckill tgwSeckill = tgwSeckillMapper.findTgwSeckillBygoodsIdAndNowTime(tgw_goods_id, nowTime);
+        return tgwSeckill;
+    }
+
     @Transactional
-    public void executeSecKill(Integer seckillId,Integer UserId){
+    public Order executeSecKill(Integer userId,Integer seckillId){
 
         /**
          * 减秒杀信息表的库存
@@ -93,7 +112,24 @@ public class SecKillService {
         /**
          * 下订单
          */
+        Order order = orderService.createmsKillOrderByUserIdAndmsKillId(userId, seckillId, Integer.valueOf(1));
+        if (order==null){
+            throw new RuntimeException();//添加订单失败
+        }
+        return order;
+    }
 
+    public boolean IsRepeatKill(Integer userId,Integer seckillId){
+        TgwSeckill tgwSeckill = tgwSeckillMapper.selectByPrimaryKey(seckillId);
+        Integer tgwGoodsId = tgwSeckill.getTgwGoodsId();
+        Date seckillCreattime = tgwSeckill.getSeckillCreattime();
+        Date seckillEndttime = tgwSeckill.getSeckillEnd();
+        Order order = orderService.IsRepeatKill(userId, tgwGoodsId, seckillCreattime, seckillEndttime);
+        if (order!=null){
+            return true;
+        }
+
+        return false;
     }
 
 

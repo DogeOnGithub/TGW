@@ -115,4 +115,7 @@
   <select id="findGoodspreparationKilling" resultType="cn.tgw.admin.model.TgwSeckill">
        select * from tgw_seckill where seckill_creattime >= #{nowTime}
     </select>
+  <select id="findTgwSeckillBygoodsIdAndNowTime" resultType="cn.tgw.admin.model.TgwSeckill">
+     select * from tgw_seckill where seckill_end >= #{nowTime} and #{nowTime} >= seckill_creattime and tgw_goods_id=#{tgw_goods_id}
+  </select>
 </mapper>

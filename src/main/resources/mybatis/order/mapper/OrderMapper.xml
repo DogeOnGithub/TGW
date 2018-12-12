@@ -60,6 +60,10 @@
     from tgw_order
     where tgw_user_id = #{userId,jdbcType=INTEGER} and order_status = '1'
   </select>
+  <select id="IsRepeatKill" resultType="cn.tgw.order.model.Order">
+    select * from tgw_order
+    where tgw_user_id=#{tgw_user_id} and tgw_goods_id = #{tgw_goods_id} and order_create_time >= #{seckillCreattime} and #{seckillEndttime} >= order_create_time
+  </select>
 
   <!-- 自定义查询结束 -->
 

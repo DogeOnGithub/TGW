@@ -14,7 +14,7 @@ public class RedisLock {
 
     /**
      * 加锁操作
-     * @param key  商品id
+     * @param key  m秒杀中的id
      * @param value  当前时间+过期时间，就是拥有锁的时间作为key
      * @return
      */
