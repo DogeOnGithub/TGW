@@ -27,6 +27,7 @@ public class BusinessmanFilterCustomConfiguration {
         registrationBean.addUrlPatterns("/businessman/test");
         registrationBean.addUrlPatterns("/tjsanshao/businessman/password");
         registrationBean.addUrlPatterns("/tjsanshao/businessman/settle");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders");
 
         //设置过滤器名称
         registrationBean.setName("BusinessmanLoginFilter");

@@ -4,6 +4,7 @@ import cn.tgw.admin.mapper.TgwSeckillMapper;
 import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.businessman.mapper.BusinessmanMapper;
 import cn.tgw.businessman.model.Businessman;
+import cn.tgw.common.annotation.OrderPageAnnotation;
 import cn.tgw.common.utils.OrderUtils;
 import cn.tgw.goods.mapper.GoodsDetailMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
@@ -289,5 +290,12 @@ public class OrderServiceImpl implements OrderService {
     public Order IsRepeatKill(Integer tgw_user_id, Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime) {
 
         return null;
+    }
+
+    @Override
+    @OrderPageAnnotation
+    //实际返回类型是List<Order>
+    public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId) {
+        return orderMapper.selectAllOrdersByBusinessmanId(businessmanId);
     }
 }

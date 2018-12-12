@@ -34,6 +34,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @RunWith(SpringRunner.class)
@@ -346,6 +347,11 @@ public class TgwApplicationTests {
 	@Test
 	public void testOrderServiceCreateOrder(){
 		System.out.println(orderService.createmsKillOrderByUserIdAndmsKillId(1, 1, 1));
+	}
+
+	@Test
+	public void testOrderServiceOrderDivide(){
+		System.out.println(orderService.getOrdersByBusinessmanIdWithPage(1, 2, 1));
 	}
 
 	@Test

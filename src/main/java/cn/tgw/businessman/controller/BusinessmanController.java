@@ -6,14 +6,19 @@ import cn.tgw.businessman.service.BusinessmanService;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.common.utils.TGWStaticString;
+import cn.tgw.order.model.Order;
+import cn.tgw.order.service.OrderService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +42,9 @@ public class BusinessmanController {
 
     @Autowired
     private MiaoDiService miaoDiService;
+
+    @Autowired
+    private OrderService orderService;
 
     /*
      * @Description:商家用户登录功能
@@ -310,5 +318,27 @@ public class BusinessmanController {
         }
 
         return applyToSettleStatus;
+    }
+
+    /*
+     * @Description:商家查看订单
+     * @Param:[session, page, pageSize]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-12
+     * @Time:09:54
+     **/
+    @RequestMapping("/tjsanshao/businessman/orders")
+    public Map<String, Object> watchOrders(HttpSession session, int page, int pageSize) {
+        HashMap<String, Object> watchOrdersStatus = new HashMap<>();
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        PageInfo<List<Order>> pageInfo = (PageInfo<List<Order>>) orderService.getOrdersByBusinessmanIdWithPage(page, pageSize, businessman.getId());
+
+        watchOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        watchOrdersStatus.put("pageInfo", pageInfo);
+
+        return watchOrdersStatus;
     }
 }
