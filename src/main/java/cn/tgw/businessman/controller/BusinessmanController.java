@@ -90,6 +90,26 @@ public class BusinessmanController {
     }
 
     /*
+     * @Description:商家用户退出登录
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-12
+     * @Time:15:51
+     **/
+    @RequestMapping("/tjsanshao/businessman/logout")
+    public Map<String, Object> logout(HttpSession session) {
+        HashMap<String, Object> logoutStatus = new HashMap<>();
+
+        session.setAttribute(TGWStaticString.TGW_BUSINESSMAN, null);
+
+        logoutStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        logoutStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+
+        return logoutStatus;
+    }
+
+    /*
      * @Description:商家发送验证码功能
      * @Param:[mobileNumber, requestParam, session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>

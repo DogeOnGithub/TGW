@@ -97,6 +97,26 @@ public class UserController {
     }
 
     /*
+     * @Description:用户退出登录
+     * @Param:[session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-12
+     * @Time:15:53
+     **/
+    @RequestMapping("/tjsanshao/user/logout")
+    public Map<String, Object> logout(HttpSession session) {
+        HashMap<String, Object> logoutStatus = new HashMap<>();
+
+        session.setAttribute(TGWStaticString.TGW_USER, null);
+
+        logoutStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        logoutStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+
+        return logoutStatus;
+    }
+
+    /*
      * @Description:发送验证码，requestParam=password参数可以用于请求修改密码的验证码（根据用户登录信息发送验证码，不需要输入手机号），不带有requestParam参数时，需要填写mobileNumber参数
      * @Param:[mobileNumber, requestParam, session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>
