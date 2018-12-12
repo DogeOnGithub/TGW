@@ -170,6 +170,11 @@
 			<version>3.4.27.ALL</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!-- TjSanshao引入的依赖结束 -->
 		<!--es搜索引擎-->
 		<dependency>

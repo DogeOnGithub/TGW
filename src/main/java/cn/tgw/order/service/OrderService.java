@@ -158,4 +158,6 @@ public interface OrderService {
 
     public Order createmsKillOrderByUserIdAndmsKillId(int userId, int msKillId, int count);
 
+    public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId);
+
 }
