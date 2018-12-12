@@ -46,8 +46,7 @@ public class AlipayServiceImpl implements AlipayService {
             String out_trade_no,
             String total_amount,
             String subject,
-            String body,
-            String goods_detail) throws AlipayApiException {
+            String body) throws AlipayApiException {
         AlipayClient alipayClient = new DefaultAlipayClient(alipayConfiguration.getGatewayUrl(), alipayConfiguration.getApp_id(), alipayConfiguration.getMerchant_private_key(), "json", alipayConfiguration.getCharset(), alipayConfiguration.getAlipay_public_key(), alipayConfiguration.getSign_type());
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
         alipayRequest.setReturnUrl(alipayConfiguration.getCommonUrlPrefix() + alipayConfiguration.getReturn_url());
@@ -58,7 +57,6 @@ public class AlipayServiceImpl implements AlipayService {
                 + "\"total_amount\":\""+ total_amount +"\","
                 + "\"subject\":\""+ subject +"\","
                 + "\"body\":\"" + body + "\","
-                + "\"goods_detail\":\"" + goods_detail + "\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 
         return alipayClient.pageExecute(alipayRequest).getBody();

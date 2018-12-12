@@ -13,7 +13,6 @@ public interface AlipayService {
             String out_trade_no,
             String total_amount,
             String subject,
-            String body,
-            String goods_detail) throws AlipayApiException;
+            String body) throws AlipayApiException;
 
 }

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test AliPay</title>
+</head>
+<body>
+    <form method="post" action="/tjsanshao/user/login">
+        <input type="text" name="username" value="TjSanshao">
+        <input type="text" name="password" value="666666">
+        <input type="submit">
+    </form>
+
+    <form method="post" action="/tjsanshao/order/create">
+        <input type="text" name="goodsId" value="1">
+        <input type="text" name="count" value="10">
+        <input type="submit">
+    </form>
+
+    <form method="post" action="/tjsanshao/order/pay">
+        <input type="text" name="orderId" value="1" >
+        <input type="submit">
+    </form>
+</body>
+</html>

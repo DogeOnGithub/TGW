@@ -31,7 +31,7 @@ public class TestController {
     @GetMapping("/common/test/alipay")
     public void testAlipay(HttpServletResponse response) {
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        String out_trade_no = "1342012042406";
+        String out_trade_no = "134201204240999";
         //付款金额，必填
         String total_amount = "99";
         //订单名称，必填

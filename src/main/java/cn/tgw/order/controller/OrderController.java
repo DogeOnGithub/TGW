@@ -104,6 +104,8 @@ public class OrderController {
             response.setContentType("application/json");
             response.getWriter().print("\"status\":\"fail\",\"message\":\"order is not available\"");
             response.getWriter().flush();
+            response.getWriter().close();
+            return;
         }
 
         //查询goods和goodsDetail
@@ -116,8 +118,7 @@ public class OrderController {
                 order.getUniqueOrderNumber(),
                 order.getTotal().toString(),
                 goods.getGoodsTitle(),
-                goodsDetail.getGoodsDesc(),
-                ""
+                goodsDetail.getGoodsDesc()
         );
 
         //响应
@@ -141,6 +142,8 @@ public class OrderController {
     public void alipayNotifyUrl(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
 
+        System.out.println(parameterMap);
+
         //TODO 支付成功后，更新数据库
     }
 
@@ -156,9 +159,11 @@ public class OrderController {
     public String alipayReturnUrl(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
 
+        System.out.println(parameterMap);
+
         //TODO 支付成功后，跳转页面到支付完毕页面
 
-        return "payFinish";
+        return "test/return";
     }
 
     /**
