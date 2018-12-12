@@ -6,6 +6,7 @@ import cn.tgw.goods.model.Goods;
 import cn.tgw.order.model.Order;
 import cn.tgw.user.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
@@ -157,6 +158,18 @@ public interface OrderService {
     public Order createmsKillOrderByUserAndmsKill(User user, TgwSeckill msKill, int count);
 
     public Order createmsKillOrderByUserIdAndmsKillId(int userId, int msKillId, int count);
+
+    /**
+    * @Description:    根据tgw_user_id  tgw_goods_id , Date seckillCreattime,Date seckillEndttime
+     *                 判断用户是否重复秒杀
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/12 0012 9:30
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/12 0012 9:30
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    public Order  IsRepeatKill(Integer tgw_user_id,Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime);
 
     public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId);
 

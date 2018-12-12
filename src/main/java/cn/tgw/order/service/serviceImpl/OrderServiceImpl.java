@@ -287,6 +287,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order IsRepeatKill(Integer tgw_user_id, Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime) {
+
+        return null;
+    }
+
+    @Override
     @OrderPageAnnotation
     //实际返回类型是List<Order>
     public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId) {

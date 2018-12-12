@@ -2,7 +2,9 @@ package cn.tgw.order.mapper;
 
 import cn.tgw.order.model.Order;
 import cn.tgw.user.model.User;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderMapper {
@@ -31,4 +33,11 @@ public interface OrderMapper {
     List<Order> selectOrdersStatusNormalByUserId(Integer userId);
 
     //自定义查询结束
+
+
+
+    Order IsRepeatKill(@Param("tgw_user_id") Integer tgw_user_id, @Param("tgw_goods_id") Integer tgw_goods_id,
+                       @Param("seckillCreattime") Date seckillCreattime, @Param("seckillEndttime") Date seckillEndttime);
+
+
 }

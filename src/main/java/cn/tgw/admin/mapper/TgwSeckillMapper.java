@@ -23,4 +23,6 @@ public interface TgwSeckillMapper {
     List<TgwSeckill>findGoodspreparationKilling(@Param("nowTime") Date nowTime);
 
     int updaterepertory(Integer id);
+
+    TgwSeckill findTgwSeckillBygoodsIdAndNowTime(@Param("tgw_goods_id") Integer tgw_goods_id,@Param("nowTime") Date nowTime);
 }
