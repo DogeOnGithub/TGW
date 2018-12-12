@@ -23,6 +23,7 @@ public class UserFilterCustomConfiguration {
         registrationBean.setFilter(new UserAuthenticationFilter());
 
         //添加过滤规则
+        registrationBean.addUrlPatterns("/tjsanshao/user/logout");
         registrationBean.addUrlPatterns("/tjsanshao/user/detail");
         registrationBean.addUrlPatterns("/tjsanshao/user/password");
         registrationBean.addUrlPatterns("/tjsanshao/user/orders");
