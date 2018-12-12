@@ -9,6 +9,7 @@ package cn.tgw.businessman.config;
  **/
 
 import cn.tgw.businessman.filter.BusinessmanAuthenticationFilter;
+import cn.tgw.businessman.filter.BusinessmanSettledFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,21 @@ public class BusinessmanFilterCustomConfiguration {
 
         //设置过滤器顺序
         registrationBean.setOrder(1);
+
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean businessmanSettledFilterRegistration() {
+        FilterRegistrationBean<BusinessmanSettledFilter> registrationBean = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new BusinessmanSettledFilter());
+
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders");
+
+        registrationBean.setName("BusinessmanSettledFilter");
+
+        registrationBean.setOrder(2);
 
         return registrationBean;
     }

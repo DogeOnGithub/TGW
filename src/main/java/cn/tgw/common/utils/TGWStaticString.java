@@ -23,4 +23,6 @@ public class TGWStaticString {
 
     public static final String TGW_RESULT_STATUS_AUTH = "auth";
 
+    public static final String TGW_BUSINESSMAN_SETTLE = "settle";
+
 }

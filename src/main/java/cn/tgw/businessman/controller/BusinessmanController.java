@@ -75,6 +75,12 @@ public class BusinessmanController {
 
             //将记录存入session，键为"businessman"，值为businessman对象
             session.setAttribute(TGWStaticString.TGW_BUSINESSMAN, businessman);
+
+            //判断是否已入驻
+            boolean settled = businessmanService.checkSettled(businessman);
+            if (settled) {
+                session.setAttribute(TGWStaticString.TGW_BUSINESSMAN_SETTLE, "settled");
+            }
         }else {
             loginStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             loginStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "username or password error");

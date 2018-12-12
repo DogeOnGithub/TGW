@@ -17,7 +17,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, tgw_businessman_id, shop_name, shop_location, shop_desc, shop_time_open, shop_time_close, 
-    phone_number, contact_phone_number, shop_status, tgw_user_id, shop_notice, shop_settle_status
+    phone_number, contact_phone_number, tgw_user_id, shop_notice, shop_settle_status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
