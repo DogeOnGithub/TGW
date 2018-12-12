@@ -287,9 +287,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order IsRepeatKill(Integer tgw_user_id, Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime) {
-
-        return null;
+    public List<Order>  IsRepeatKill(Integer tgw_user_id, Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime) {
+        List<Order> orders = orderMapper.IsRepeatKill(tgw_user_id, tgw_goods_id, seckillCreattime, seckillEndttime);
+        return orders;
     }
 
     @Override

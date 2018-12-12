@@ -130,8 +130,8 @@ public class SecKillService {
         Integer tgwGoodsId = tgwSeckill.getTgwGoodsId();
         Date seckillCreattime = tgwSeckill.getSeckillCreattime();
         Date seckillEndttime = tgwSeckill.getSeckillEnd();
-        Order order = orderService.IsRepeatKill(userId, tgwGoodsId, seckillCreattime, seckillEndttime);
-        if (order!=null){
+        List<Order> orders = orderService.IsRepeatKill(userId, tgwGoodsId, seckillCreattime, seckillEndttime);
+        if (orders!=null&&orders.size()>0){
             return true;
         }
 

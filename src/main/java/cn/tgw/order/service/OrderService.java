@@ -169,7 +169,7 @@ public interface OrderService {
     * @UpdateRemark:   修改内容
     * @Version:        1.0
     */
-    public Order  IsRepeatKill(Integer tgw_user_id,Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime);
+    public List<Order>  IsRepeatKill(Integer tgw_user_id,Integer tgw_goods_id, Date seckillCreattime,Date seckillEndttime);
 
     public Object getOrdersByBusinessmanIdWithPage(int page, int pageSize, int businessmanId);
 
