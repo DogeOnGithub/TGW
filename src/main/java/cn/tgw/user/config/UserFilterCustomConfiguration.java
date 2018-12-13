@@ -26,6 +26,8 @@ public class UserFilterCustomConfiguration {
         registrationBean.addUrlPatterns("/tjsanshao/user/logout");
         registrationBean.addUrlPatterns("/tjsanshao/user/detail");
         registrationBean.addUrlPatterns("/tjsanshao/user/password");
+        registrationBean.addUrlPatterns("/tjsanshao/user/verifyMobile");
+        registrationBean.addUrlPatterns("/tjsanshao/user/mobile");
         registrationBean.addUrlPatterns("/tjsanshao/user/orders");
         registrationBean.addUrlPatterns("/tjsanshao/user/ordersNotPay");
         registrationBean.addUrlPatterns("/tjsanshao/user/ordersNotUse");

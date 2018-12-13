@@ -321,6 +321,90 @@ public class UserController {
     }
 
     /*
+     * @Description:在换绑手机时，验证输入的手机号和密码是否正确
+     * @Param:[mobile, password, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-13
+     * @Time:15:37
+     **/
+    @PostMapping("/tjsanshao/user/verifyMobile")
+    public Map<String, Object> verifyMobile(String mobile, String password, HttpSession session) {
+        HashMap<String, Object> verifyStatus = new HashMap<>();
+
+        //判断字段是否为空
+        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
+            verifyStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            verifyStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "input incorrect");
+            return verifyStatus;
+        }
+
+        User user = userService.getUserByUsernameOrMobileAndPasswordAndStatus(mobile, password, new Byte("1"));
+
+        if (user == null) {
+            verifyStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            verifyStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "input incorrect");
+            return verifyStatus;
+        }
+
+        verifyStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        verifyStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+
+        return verifyStatus;
+    }
+
+    /*
+     * @Description:换绑手机
+     * @Param:[mobile, code, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-13
+     * @Time:15:48
+     **/
+    @RequestMapping("/tjsanshao/user/mobile")
+    public Map<String, Object> changeMobile(String mobile, String code, HttpSession session) {
+        HashMap<String, Object> mobileStatus = new HashMap<>();
+
+        //验证字段是否为空
+        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(code)) {
+            mobileStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            mobileStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "input incorrect");
+            return mobileStatus;
+        }
+
+        //验证手机号是否被绑定过
+        if (!userService.enableMoblieRegister(mobile)) {
+            //如果手机号被绑定过
+            mobileStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            mobileStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "mobile is exists");
+            return mobileStatus;
+        }
+
+        //验证验证码是否正确
+        if (!smsVerifyService.checkCode(mobile, code)) {
+            mobileStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            mobileStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "verify code incorrect");
+            return mobileStatus;
+        }
+
+        User user = (User)session.getAttribute(TGWStaticString.TGW_USER);
+
+        User updatedUser = userService.updateUserMobile(user, mobile);
+
+        //更新session
+        session.setAttribute(TGWStaticString.TGW_USER, updatedUser);
+
+        //返回结果
+        mobileStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        mobileStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+
+        updatedUser.setPassword("");
+        mobileStatus.put(TGWStaticString.TGW_USER, updatedUser);
+
+        return mobileStatus;
+    }
+
+    /*
      * @Description:用户选择忘记密码，直接根据用户名发送验证码
      * @Param:[session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>

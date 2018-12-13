@@ -49,6 +49,8 @@ public interface UserService {
 
     User updateUserPassword(User user);
 
+    User updateUserMobile(User user, String newMobile);
+
     User getUserById(int id);
 
     UserDetail updateUserDetail(UserDetail userDetail);

@@ -130,6 +130,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public User updateUserMobile(User user, String newMobile) {
+        //判断username是否和mobile一样
+        if (user.getMobile().equals(user.getUsername())) {
+            //如果这个User的username和mobile是一样的
+            user.setUsername(newMobile);
+        }
+
+        //设置新的手机号
+        user.setMobile(newMobile);
+        userMapper.updateByPrimaryKey(user);
+
+        //同时需要更新userDetail
+        UserDetail userDetail = new UserDetail();
+        userDetail.setTgwUserId(user.getId());
+        userDetail.setMobile(newMobile);
+        userDetailMapper.updateByUserIdSelective(userDetail);
+
+        return userMapper.selectByPrimaryKey(user.getId());
+    }
+
+    @Override
     @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
     public User getUserById(int id) {
         return userMapper.selectByPrimaryKey(id);
