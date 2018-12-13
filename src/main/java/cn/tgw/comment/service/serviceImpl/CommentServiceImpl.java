@@ -66,6 +66,10 @@ public class CommentServiceImpl implements CommentService {
         if(i!=1){
             return "error";
         }
+        boolean commentFinish = orderService.orderCommentFinish(orderId);
+        if(commentFinish=false){
+            return "error";
+        }
         return "success";
     }
 

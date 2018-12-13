@@ -92,24 +92,44 @@ public class GoodsController {
      * @date:  2018/12/04
      */
     @RequestMapping(value = "xiaojian/addGoods",method = RequestMethod.POST)
-    public Object addGoods(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage, @RequestParam(value = "multipartFile",required = false)MultipartFile multipartFile){
-
-        String returnUrl = null;
+    public Object addGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile multipartFile){
         Map<String,Object> result = new HashMap<>();
-        try {
-            returnUrl = QiniuUtil.uploadImg(multipartFile);
-        } catch (IOException e) {
-            result.put("error","图片上传错误！请重试！");
-            return result;
-        }
-        goodsImage.setImageUrl(returnUrl);
 
-        String addresult = goodsService.addGoodsAndGoodsDetailAndGoodsImage(goods, goodsDetail, goodsImage);
+        String addresult = goodsService.addGoodsAndGoodsDetailAndGoodsImage(goods, goodsDetail, multipartFile);
         if (addresult.equals("success")){
             result.put(addresult,"添加团购成功");
         }else{
             result.put(addresult,"添加失败，清稍后重试");
         }
+        return result;
+    }
+
+    /**
+     *
+     * 功能描述: 商家修改团购信息接口
+     *
+     * @param: Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage,MultipartFile multipartFile
+     * @return: Map result
+     * @auther: 张华健
+     * @date:  2018/12/06
+     */
+    @RequestMapping(value = "xiaojian/updateGoods",method = RequestMethod.POST)
+    public Object updateGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile multipartFile){
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("status","error");
+        result.put("Msg","修改出错，请稍后重试");
+        try {
+            String res = goodsService.updateGoodsByGoodsId(goods, goodsDetail, multipartFile);
+            if(res.equals("error")){
+                return result;
+            }
+        } catch (Exception e) {
+//            e.printStackTrace();
+            return result;
+        }
+        result.put("status","success");
+        result.put("Msg","修改成功");
         return result;
     }
 
@@ -172,31 +192,7 @@ public class GoodsController {
     }
 
 
-    /**
-     *
-     * 功能描述: 商家修改团购信息接口
-     *
-     * @param: Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage,MultipartFile multipartFile
-     * @return: Map result
-     * @auther: 张华健
-     * @date:  2018/12/06
-     */
-    @RequestMapping(value = "xiaojian/updateGoods",method = RequestMethod.POST)
-    public Object updateGoods(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage){
 
-        Map<String,Object> result = new HashMap<>();
-        result.put("status","error");
-        result.put("Msg","修改出错，请稍后重试");
-        try {
-            String res = goodsService.updateGoodsByGoodsId(goods, goodsDetail, goodsImage);
-        } catch (Exception e) {
-//            e.printStackTrace();
-            return result;
-        }
-        result.put("status","success");
-        result.put("Msg","修改成功");
-        return result;
-    }
 
     /**
      *
@@ -216,6 +212,7 @@ public class GoodsController {
         } catch (IOException e) {
             result.put("status","error");
             result.put("Msg","图片上传错误，请重试");
+            return result;
         }
         result.put("status","success");
         result.put("Msg","success");

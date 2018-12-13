@@ -7,6 +7,8 @@ import cn.tgw.goods.model.GoodsImage;
 import cn.tgw.goods.model.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -22,10 +24,10 @@ public interface GoodsService {
     public Object findHotGoodsByCity(String city);
     public Object findNewGoodsByCity(String city);
     public Object findGoodsByCityAndFirstCategory(String city);
-    public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage);
+    public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, MultipartFile multipartFile);
     public Map<String,Object> findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(int id);
     public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(int businessmanId);
-    public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,GoodsImage goodsImage) throws Exception;
+    public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,MultipartFile multipartFile) throws Exception;
     public String updateIsOnline(Goods goods);
     public List<GoodsVO> findAllGoodsVO();
 
@@ -36,4 +38,5 @@ public interface GoodsService {
     public List<Goods> findGoodsByBusinessmanId(int businessmanId);
 
     public List<Goods> findGoodsByBusinessmanIdWithIsOnline(int businessmanId);
+
 }

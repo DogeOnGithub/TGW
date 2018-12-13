@@ -17,7 +17,9 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -129,7 +131,17 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Transactional
     @Override
-    public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage) {
+    public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, MultipartFile multipartFile) {
+
+        //上传图片
+        GoodsImage goodsImage = new GoodsImage();
+        String returnUrl = null;
+        try {
+            returnUrl = QiniuUtil.uploadImg(multipartFile);
+        } catch (IOException e) {
+            return "error";
+        }
+
 
 //        //随机生成团购ID
         String toHash = goods.getGoodsTitle()+goods.getGoodsCategory()+goodsDetail.getGoodsDesc()+Math.random();
@@ -151,6 +163,8 @@ public class GoodsServiceImpl implements GoodsService {
 
         //在团购图片中的tgwGoodsId写上团购id
         goodsImage.setTgwGoodsId(gid);
+        goodsImage.setImageUrl(returnUrl);
+        goodsImage.setIsMain(1);
         //插入到数据库
         int resultGoodsImageInsert = goodsImageMapper.insertSelective(goodsImage);
 
@@ -158,7 +172,6 @@ public class GoodsServiceImpl implements GoodsService {
         if(resultGoodsInsert==1&&resultGoodsDetailInsert==1&&resultGoodsImageInsert==1){
             return "success";
         }
-
         return "error";
     }
 
@@ -216,13 +229,24 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Transactional
     @Override
-    public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,GoodsImage goodsImage) throws Exception {
+    public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,MultipartFile multipartFile) throws Exception {
+
+        //上传图片
+        GoodsImage goodsImage = new GoodsImage();
+        String returnUrl = null;
+        try {
+            returnUrl = QiniuUtil.uploadImg(multipartFile);
+        } catch (IOException e) {
+            return "error";
+        }
 
         int goodsId = goods.getId();
         GoodsDetail resultGoodsDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
         GoodsImage resultGoodsImage = goodsImageMapper.selectByTgwGoodsId(goodsId);
         goodsDetail.setId(resultGoodsDetail.getId());
         goodsImage.setId(resultGoodsImage.getId());
+        goodsImage.setIsMain(1);
+        goodsImage.setImageUrl(returnUrl);
         int resNum = goodsMapper.updateByPrimaryKeySelective(goods);
         int resNum2 = goodsDetailMapper.updateByPrimaryKeySelective(goodsDetail);
         int resNum3 = goodsImageMapper.updateByPrimaryKeySelective(goodsImage);
@@ -235,7 +259,6 @@ public class GoodsServiceImpl implements GoodsService {
             throw new RuntimeException();
         }
     }
-
 
 
 
@@ -331,6 +354,7 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> findGoodsByBusinessmanIdWithIsOnline(int businessmanId){
         return goodsMapper.selectByBusinessIdWithIsOnline(businessmanId);
     }
+
 
 
 }
