@@ -97,10 +97,13 @@ public class SecKillService {
      */
     public SeckillResultInfo findTgwSeckillBygoodsIdAndNowTime(Integer tgw_goods_id, Date nowTime){
         TgwSeckill tgwSeckill = tgwSeckillMapper.findTgwSeckillBygoodsIdAndNowTime(tgw_goods_id, nowTime);
-        Integer seckillId = tgwSeckill.getId();
+        String url="";
+        if (tgwSeckill!=null){
+            Integer seckillId = tgwSeckill.getId();
+            String md5Url = MD5Utils.tgwMD5(seckillId + "");
+            url="/seckill/"+seckillId+"/"+md5Url;
+        }
 
-        String md5Url = MD5Utils.tgwMD5(seckillId + "");
-        String url="/seckill/"+seckillId+"/"+md5Url;
         SeckillResultInfo seckillResultInfo=new SeckillResultInfo(url,tgwSeckill);
         return seckillResultInfo;
     }
@@ -136,6 +139,35 @@ public class SecKillService {
         }
 
         return false;
+    }
+
+    /**
+    * @Description:    添加秒杀商品
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/13 0013 10:02
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/13 0013 10:02
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    public int InsertSeckill(TgwSeckill tgwSeckill){
+        int insert = tgwSeckillMapper.insert(tgwSeckill);
+        return insert;
+
+    }
+
+    /**
+    * @Description:    shanchu删除秒杀商品
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/13 0013 10:03
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/13 0013 10:03
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
+    public  int deleteSeckilling(Integer id){
+        int i = tgwSeckillMapper.deleteByPrimaryKey(id);
+        return i;
     }
 
 

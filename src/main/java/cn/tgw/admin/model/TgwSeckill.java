@@ -67,4 +67,15 @@ public class TgwSeckill {
     public void setSeckillPrice(BigDecimal seckillPrice) {
         this.seckillPrice = seckillPrice;
     }
+
+    public TgwSeckill(Integer tgwGoodsId, Integer seckillRepertory, Date seckillCreattime, Date seckillEnd, BigDecimal seckillPrice) {
+        this.tgwGoodsId = tgwGoodsId;
+        this.seckillRepertory = seckillRepertory;
+        this.seckillCreattime = seckillCreattime;
+        this.seckillEnd = seckillEnd;
+        this.seckillPrice = seckillPrice;
+    }
+
+    public TgwSeckill() {
+    }
 }
