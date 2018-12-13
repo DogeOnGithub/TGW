@@ -360,7 +360,17 @@ public class BusinessmanController {
      * @Time:09:54
      **/
     @RequestMapping("/tjsanshao/businessman/orders")
-    public Map<String, Object> watchOrders(HttpSession session, int page, int pageSize) {
+    public Map<String, Object> watchOrders(HttpSession session, Integer page, Integer pageSize) {
+
+        //如果没有分页参数，给予默认分页参数
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+
         HashMap<String, Object> watchOrdersStatus = new HashMap<>();
 
         Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
@@ -374,7 +384,7 @@ public class BusinessmanController {
     }
 
     /*
-     * @Description:商家查看在售商品
+     * @Description:商家查看在售商品，不包括已被商家删除的
      * @Param:[session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>
      * @Author:TjSanshao
@@ -388,7 +398,7 @@ public class BusinessmanController {
         Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
 
         //根据商家id查询该商家的所有商品
-        List<Goods> allGoods = goodsService.findGoodsByBusinessmanId(businessman.getId());
+        List<Goods> allGoods = goodsService.findGoodsByBusinessmanIdWithIsOnline(businessman.getId());
 
         watchGoodsStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         watchGoodsStatus.put("list", allGoods);

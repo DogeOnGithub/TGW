@@ -206,7 +206,7 @@ public class UserController {
      * @Time:11:09
      **/
     @PostMapping("/tjsanshao/user/register")
-    public Map<String, Object> register(User user, String code){
+    public Map<String, Object> register(User user, String code, HttpSession session){
         HashMap<String, Object> registerStatus = new HashMap<>();
 
         //验证用户名、密码、手机号码是否为空
@@ -246,6 +246,9 @@ public class UserController {
 
         user.setPassword("");
         registerStatus.put("user", user);
+
+        //注册之后直接登录
+        session.setAttribute(TGWStaticString.TGW_USER, user);
 
         //查询到userDetail返回到前端
         UserDetail userDetail = userService.getUserDetailByUserId(user);
