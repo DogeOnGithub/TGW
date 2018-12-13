@@ -124,7 +124,7 @@ public class UserController {
      * @Date:2018-11-30
      * @Time:10:31
      **/
-    @GetMapping("/tjsanshao/user/sendMsgCode")
+    @RequestMapping("/tjsanshao/user/sendMsgCode")
     public Map<String, Object> sendMsgCode(String mobileNumber, String requestParam, HttpSession session){
         HashMap<String, Object> sendMsgStatus = new HashMap<>();
 
@@ -262,7 +262,7 @@ public class UserController {
      * @Date:2018-11-30
      * @Time:10:29
      **/
-    @GetMapping("/tjsanshao/user/password")
+    @PostMapping("/tjsanshao/user/password")
     public Map<String, Object> password(String password, String code, String oldPassword, HttpSession session){
         HashMap<String, Object> passwordStatus = new HashMap<>();
 
@@ -311,6 +311,9 @@ public class UserController {
         passwordStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         passwordStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
 
+        //清空session中的信息
+        session.setAttribute(TGWStaticString.TGW_USER, null);
+
         return passwordStatus;
     }
 
@@ -322,7 +325,7 @@ public class UserController {
      * @Date:2018-12-11
      * @Time:14:50
      **/
-    @PostMapping("/tjsanshao/user/forgot")
+    @RequestMapping("/tjsanshao/user/forgot")
     public Map<String, Object> forgotPassword(String username) {
         HashMap<String, Object> forgotStatus = new HashMap<>();
 
@@ -350,6 +353,14 @@ public class UserController {
         return forgotStatus;
     }
 
+    /*
+     * @Description:忘记密码后，新密码
+     * @Param:[username, password, code]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-13
+     * @Time:09:42
+     **/
     @PostMapping("/tjsanshao/user/newpwd")
     public Map<String, Object> newPassword(String username, String password, String code) {
         HashMap<String, Object> newPasswordStatus = new HashMap<>();
@@ -417,6 +428,14 @@ public class UserController {
         return getDetailStatus;
     }
 
+    /*
+     * @Description:修改用户信息
+     * @Param:[userDetail, headImage, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-13
+     * @Time:09:20
+     **/
     @PostMapping("/tjsanshao/user/detail")
     public Map<String, Object> userDetail(UserDetail userDetail, MultipartFile headImage, HttpSession session) throws IOException {
         HashMap<String, Object> postDetailStatus = new HashMap<>();
@@ -429,6 +448,8 @@ public class UserController {
         User userFromSession = (User)sessionUser;
         userDetail.setTgwUserId(userFromSession.getId());
         userDetail.setLastUpdateTime(new Date());
+        userDetail.setRegTime(null);
+        userDetail.setMobile(null);
 
         //判断用户是否上传了头像图片
         if (headImage != null) {
