@@ -66,6 +66,13 @@ public class GoodsServiceImpl implements GoodsService {
         return indexGoodsByCityAndTypeAndFirstCategoryName;
     }
 
+    /**
+     *
+     * 功能描述: 寻找最新热卖团购
+     *
+     * @auther: 张华健
+     * @date:  2018/12/13
+     */
     @Override
     public Object findNewGoodsByCity(String city) {
         Map<String,Object> param = new HashMap<>();
@@ -78,6 +85,13 @@ public class GoodsServiceImpl implements GoodsService {
         return indexGoodsByCityAndTypeAndFirstCategoryName;
     }
 
+    /**
+     *
+     * 功能描述:按照一级分类寻找团购
+     *
+     * @auther: 张华健
+     * @date:  2018/12/13
+     */
     @Override
     public Object findGoodsByCityAndFirstCategory(String city) {
         Map<String,Object> param = new HashMap<>();
@@ -179,10 +193,9 @@ public class GoodsServiceImpl implements GoodsService {
      * @date:  2018/12/06
      */
     @Override
-    public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(Goods goods) {
-        int businessId = goods.getTgwBusinessmanId();
+    public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(int businessmanId) {
         List<Object> resultList = new ArrayList<>();
-        List<Goods> resultGoods = goodsMapper.selectByBusinessId(businessId);
+        List<Goods> resultGoods = goodsMapper.selectByBusinessId(businessmanId);
         for (int i = 0; i < resultGoods.size(); i++) {
             Integer id = resultGoods.get(i).getId();
             Map<String, Object> goodsAndGoodsDetailAndGoodsImageWithGoodsId = findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(id);
@@ -254,7 +267,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      *
-     * 功能描述: 下单减少商品库存
+     * 功能描述: 下单减少商品库存，增加销量
      *
      * @param: 团购id，团购数量
      * @return:
@@ -278,6 +291,12 @@ public class GoodsServiceImpl implements GoodsService {
         return "success";
     }
 
+    /**
+     *
+     * 功能描述:下单增加商品销量（不使用库存的情况下使用）
+     * @auther: 张华健
+     * @date:  2018/12/13
+     */
     @Override
     public String addGoodsSalesVolumn(int goodsId, int num) {
         GoodsDetail resDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
@@ -290,9 +309,27 @@ public class GoodsServiceImpl implements GoodsService {
 
     }
 
+    /**
+     *
+     * 功能描述:根据商家id查询商品（查询全部的，包括逻辑删除的）
+     * @auther: 张华健
+     * @date:  2018/12/13
+     */
     @Override
     public List<Goods> findGoodsByBusinessmanId(int businessmanId) {
         return goodsMapper.selectByBusinessId(businessmanId);
+    }
+
+    /**
+     *
+     * 功能描述: 根据商家id查询商品(不包括逻辑删除的）
+     *
+     * @auther: 张华健
+     * @date:  2018/12/13
+     */
+    @Override
+    public List<Goods> findGoodsByBusinessmanIdWithIsOnline(int businessmanId){
+        return goodsMapper.selectByBusinessIdWithIsOnline(businessmanId);
     }
 
 

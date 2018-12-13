@@ -1,6 +1,9 @@
 package cn.tgw.goods.controller;
 
 
+import cn.tgw.admin.model.SeckillResultInfo;
+import cn.tgw.admin.model.TgwSeckill;
+import cn.tgw.admin.service.SecKillService;
 import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.goods.mapper.GoodsImageMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +35,9 @@ public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private SecKillService secKillService;
 
 
 
@@ -116,12 +123,12 @@ public class GoodsController {
      * @date:  2018/12/06
      */
     @RequestMapping(value = "xiaojian/goodsByTgwBusinessId",method = RequestMethod.GET)
-    public Object findGoodsByBusniessmanId(Goods goods){
+    public Object findGoodsByBusniessmanId(Integer businessmanId){
 
         Map<String,Object> result = new HashMap<>();
         result.put("status","error");
         result.put("Msg","出错");
-        List<Object> resultList = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(goods);
+        List<Object> resultList = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(businessmanId);
         if(resultList!=null){
             result.put("status","success");
             result.put("Msg","success");
@@ -151,7 +158,13 @@ public class GoodsController {
         if(resultMap!=null){
             result.put("status","success");
             result.put("Msg","success");
-            result.put("result",resultMap);
+            result.put("resultGoods",resultMap);
+            result.put("isOnSecKill",false);
+            SeckillResultInfo resultInfo = secKillService.findTgwSeckillBygoodsIdAndNowTime(id, new Date());
+            if(resultInfo.getTgwSeckill()!=null){
+                result.put("isOnSecKill",true);
+                result.put("secKill",resultInfo);
+            }
         }else{
             result.put("Msg","暂无团购");
         }
@@ -230,6 +243,7 @@ public class GoodsController {
         if(res.equals("success")){
             result.put("status",res);
             result.put("Msg","success");
+
         }
         return result;
     }

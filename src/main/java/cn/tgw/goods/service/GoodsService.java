@@ -24,7 +24,7 @@ public interface GoodsService {
     public Object findGoodsByCityAndFirstCategory(String city);
     public String addGoodsAndGoodsDetailAndGoodsImage(Goods goods, GoodsDetail goodsDetail, GoodsImage goodsImage);
     public Map<String,Object> findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(int id);
-    public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(Goods goods);
+    public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(int businessmanId);
     public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,GoodsImage goodsImage) throws Exception;
     public String updateIsOnline(Goods goods);
     public List<GoodsVO> findAllGoodsVO();
@@ -34,4 +34,6 @@ public interface GoodsService {
     public String addGoodsSalesVolumn(int goodsId,int num);
 
     public List<Goods> findGoodsByBusinessmanId(int businessmanId);
+
+    public List<Goods> findGoodsByBusinessmanIdWithIsOnline(int businessmanId);
 }

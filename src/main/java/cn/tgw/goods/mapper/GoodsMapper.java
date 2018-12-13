@@ -27,6 +27,8 @@ public interface GoodsMapper {
 
     List<Goods> selectByBusinessId(Integer businessId);
 
+    List<Goods> selectByBusinessIdWithIsOnline(Integer businessId);
+
 
 
 }
