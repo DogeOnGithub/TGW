@@ -35,7 +35,7 @@
       term_of_validity, creat_goods_time, goods_repertory, 
       sales_volumn)
     values (#{id,jdbcType=INTEGER}, #{tgwGoodsId,jdbcType=INTEGER}, #{goodsDesc,jdbcType=VARCHAR}, 
-      #{termOfValidity,jdbcType=INTEGER}, #{creatGoodsTime,jdbcType=DATE}, #{goodsRepertory,jdbcType=INTEGER}, 
+      #{termOfValidity,jdbcType=INTEGER}, #{creatGoodsTime,jdbcType=TIMESTAMP}, #{goodsRepertory,jdbcType=INTEGER},
       #{salesVolumn,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.tgw.goods.model.GoodsDetail" >
@@ -77,7 +77,7 @@
         #{termOfValidity,jdbcType=INTEGER},
       </if>
       <if test="creatGoodsTime != null" >
-        #{creatGoodsTime,jdbcType=DATE},
+        #{creatGoodsTime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsRepertory != null" >
         #{goodsRepertory,jdbcType=INTEGER},
@@ -100,7 +100,7 @@
         term_of_validity = #{termOfValidity,jdbcType=INTEGER},
       </if>
       <if test="creatGoodsTime != null" >
-        creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
+        creat_goods_time = #{creatGoodsTime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsRepertory != null" >
         goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
@@ -116,7 +116,7 @@
     set tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
       goods_desc = #{goodsDesc,jdbcType=VARCHAR},
       term_of_validity = #{termOfValidity,jdbcType=INTEGER},
-      creat_goods_time = #{creatGoodsTime,jdbcType=DATE},
+      creat_goods_time = #{creatGoodsTime,jdbcType=TIMESTAMP},
       goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
       sales_volumn = #{salesVolumn,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

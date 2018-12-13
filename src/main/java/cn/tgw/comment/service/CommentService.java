@@ -83,7 +83,7 @@ public interface CommentService {
      *
      * 功能描述: 用户根据评论id对评论进行删除（建表没设字段判断状态，直接删除，不做逻辑删除）
      *
-     * @param: int orderId
+     * @param: int id
      * @return:
      * @auther: 张华健
      * @date:  2018/12/11

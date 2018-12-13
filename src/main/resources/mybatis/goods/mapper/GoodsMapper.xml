@@ -33,7 +33,7 @@
     FROM
     tgw_goods,tgw_goods_detail,tgw_goods_image,tgw_businessman_detail,tgw_second_category,tgw_first_category
     WHERE
-    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_businessman_detail.id = tgw_goods.tgw_businessman_id
+    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id
     AND tgw_second_category.category_name = goods_category AND tgw_second_category.first_category_id = tgw_first_category.id
     AND shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0
     <choose>
@@ -61,7 +61,7 @@
     shop_name,shop_location,
     tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
     FROM
-    ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.id = tgw_goods.tgw_businessman_id)
+    ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id)
 		 INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
 
   </select>
@@ -70,6 +70,12 @@
     <include refid="Base_Column_List" />
     from tgw_goods
     where tgw_businessman_id = #{businessId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBusinessIdWithIsOnline" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from tgw_goods
+    where tgw_businessman_id = #{businessId,jdbcType=INTEGER} AND is_online in (0,1)
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods
