@@ -1,5 +1,7 @@
 package cn.tgw.admin.controller;
 
+import cn.tgw.admin.model.SeckillResultInfo;
+import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.admin.redisUtil.RedisLock;
 import cn.tgw.admin.service.SecKillService;
 import cn.tgw.common.utils.MD5Utils;
@@ -7,11 +9,17 @@ import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.order.model.Order;
 import cn.tgw.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +34,18 @@ public class SecKillController {
 
     @Autowired
     RedisLock redisLock;
+
+
+    // 自定义类型转换器
+    @InitBinder
+    public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+
+        // System.out.println("initBinder  &&&&"+request.getParameter("hiredate")+"***"+request.getParameter("username"));
+
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
+    }
+
 
     /**
     * @Description:    查询正在秒杀的商品
@@ -121,6 +141,73 @@ public class SecKillController {
     }
 
 
+    /**
+    * @Description:    添加秒杀秒杀商品信息接口
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/13 0013 8:50
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/13 0013 8:50
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+     *  private Integer id;
+     *
+     *     private Integer tgwGoodsId;
+     *
+     *     private Integer seckillRepertory;
+     *
+     *     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+     *     private Date seckillCreattime;
+     *
+     *     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+     *     private Date seckillEnd;
+     *
+     *     private BigDecimal seckillPrice;
+    */
+    @RequestMapping("/insertSeckill")
+    public Object insertSeckill(Integer tgwGoodsId,Integer seckillRepertory, String seckillCreattime,String seckillEnd,BigDecimal seckillPrice){
+        TgwSeckill tgwSeckill=new TgwSeckill(tgwGoodsId,seckillRepertory,new Date(Long.valueOf(seckillCreattime)),new Date(Long.valueOf(seckillEnd)),seckillPrice);
+       int i = secKillService.InsertSeckill(tgwSeckill);
+        Map<String,Object>map=new HashMap<>();
+        if (i>0){
+            map.put("status",true);
+            map.put("msg", "添加成功");
+        }else {
+            map.put("status",false);
+            map.put("msg", "添加失败，请重试");
+        }
+        return map;
+
+    }
+
+    @RequestMapping("/isKillingNow")
+    public Object isKillingNow(Integer tgwGoodsId){
+        SeckillResultInfo info = secKillService.findTgwSeckillBygoodsIdAndNowTime(tgwGoodsId, new Date());
+        Map<String,Object>map=new HashMap<>();
+        if (info.getTgwSeckill()!=null){
+            map.put("status",false);
+            map.put("msg", "该商品正在秒杀，不能设置抢购");
+            map.put("info",info);
+        }else {
+            map.put("status",true);
+            map.put("msg", "");
+
+        }
+        return map;
+    }
+
+    @RequestMapping("/deleteSeckilling")
+    public Object deleteSeckilling(Integer id){
+        Map<String,Object>map=new HashMap<>();
+        int i = secKillService.deleteSeckilling(id);
+        if (i>0){
+            map.put("status",true);
+            map.put("msg", "删除成功");
+        }else {
+            map.put("status",false);
+            map.put("msg", "删除失败，请重试");
+        }
+        return map;
+    }
 
 
 
