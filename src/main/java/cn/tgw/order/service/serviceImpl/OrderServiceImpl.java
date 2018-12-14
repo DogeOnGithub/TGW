@@ -12,6 +12,7 @@ import cn.tgw.goods.model.Goods;
 import cn.tgw.goods.model.GoodsDetail;
 import cn.tgw.order.mapper.OrderMapper;
 import cn.tgw.order.model.Order;
+import cn.tgw.order.model.OrderQueryModel;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.mapper.UserMapper;
 import cn.tgw.user.model.User;
@@ -371,5 +372,27 @@ public class OrderServiceImpl implements OrderService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    @OrderPageAnnotation
+    public Object getOrdersByBusinessmanIdInDaysWithPage(int page, int pageSize, int businessmanId, Date start, Date end) {
+
+        OrderQueryModel query = new OrderQueryModel();
+        query.setBusinessmanId(businessmanId);
+        query.setStart(start);
+        query.setEnd(end);
+
+        return orderMapper.selectOrderInDaysByBusinessmanId(query);
+    }
+
+    @Override
+    public BigDecimal getOrdersTotalMoneyByBusinessmanIdInDays(int businessmanId, Date start, Date end) {
+        OrderQueryModel query = new OrderQueryModel();
+        query.setBusinessmanId(businessmanId);
+        query.setStart(start);
+        query.setEnd(end);
+
+        return orderMapper.selectTotalInDaysByBusinessmanId(query);
     }
 }

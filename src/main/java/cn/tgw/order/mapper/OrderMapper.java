@@ -1,9 +1,11 @@
 package cn.tgw.order.mapper;
 
 import cn.tgw.order.model.Order;
+import cn.tgw.order.model.OrderQueryModel;
 import cn.tgw.user.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,10 @@ public interface OrderMapper {
     List<Order> selectOrdersStatusNormalByUserId(Integer userId);
 
     Order selectByUniqueOrderNumber(String orderNumber);
+
+    List<Order> selectOrderInDaysByBusinessmanId(OrderQueryModel query);
+
+    BigDecimal selectTotalInDaysByBusinessmanId(OrderQueryModel query);
 
     //自定义查询结束
 

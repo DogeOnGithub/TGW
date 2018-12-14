@@ -5,6 +5,7 @@ import cn.tgw.businessman.model.BusinessmanDetail;
 import cn.tgw.businessman.service.BusinessmanService;
 import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
+import cn.tgw.common.utils.DateUtil;
 import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.goods.model.Goods;
 import cn.tgw.goods.service.GoodsService;
@@ -19,9 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -379,6 +379,114 @@ public class BusinessmanController {
 
         watchOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         watchOrdersStatus.put("pageInfo", pageInfo);
+
+        return watchOrdersStatus;
+    }
+
+    /*
+     * @Description:查询商家7天内订单
+     * @Param:[session, page, pageSize]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-14
+     * @Time:08:32
+     **/
+    @RequestMapping("/tjsanshao/businessman/orders7days")
+    public Map<String, Object> watchOrders7days(HttpSession session, Integer page, Integer pageSize) {
+
+        //如果没有分页参数，给予默认分页参数
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+
+        HashMap<String, Object> watchOrdersStatus = new HashMap<>();
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        //日期范围
+        Date start = DateUtil.getDateDealWithDays(-7, true);
+        Date end = new Date();
+
+        PageInfo<List<Order>> pageInfo = (PageInfo<List<Order>>) orderService.getOrdersByBusinessmanIdInDaysWithPage(page, pageSize, businessman.getId(), start, end);
+
+        BigDecimal totalMoney = orderService.getOrdersTotalMoneyByBusinessmanIdInDays(businessman.getId(), start, end);
+
+        watchOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        watchOrdersStatus.put("pageInfo", pageInfo);
+        watchOrdersStatus.put("totalMoney", totalMoney);
+
+        return watchOrdersStatus;
+
+    }
+
+    @RequestMapping("/tjsanshao/businessman/orders30days")
+    public Map<String, Object> watchOrders30days(HttpSession session, Integer page, Integer pageSize) {
+        //如果没有分页参数，给予默认分页参数
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+
+        HashMap<String, Object> watchOrdersStatus = new HashMap<>();
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        //日期范围
+        Date start = DateUtil.getDateDealWithDays(-30, true);
+        Date end = new Date();
+
+        PageInfo<List<Order>> pageInfo = (PageInfo<List<Order>>) orderService.getOrdersByBusinessmanIdInDaysWithPage(page, pageSize, businessman.getId(), start, end);
+
+        BigDecimal totalMoney = orderService.getOrdersTotalMoneyByBusinessmanIdInDays(businessman.getId(), start, end);
+
+        watchOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        watchOrdersStatus.put("pageInfo", pageInfo);
+        watchOrdersStatus.put("totalMoney", totalMoney);
+
+        return watchOrdersStatus;
+    }
+
+    /*
+     * @Description:自定义日期查询订单，自定义日期中，只有年月日有效，时间无效
+     * @Param:[page, pageSize, start, end, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-14
+     * @Time:10:43
+     **/
+    @RequestMapping("/tjsanshao/businessman/ordersCustom")
+    public Map<String, Object> watchOrdersCustomDays(Integer page, Integer pageSize, String start, String end, HttpSession session) throws Exception {
+        //如果没有分页参数，给予默认分页参数
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+
+        HashMap<String, Object> watchOrdersStatus = new HashMap<>();
+
+        Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        //解析日期
+        Date startDate = DateUtil.formatString(start, "yyyy-MM-dd");
+        Date endDate = DateUtil.formatString(end, "yyyy-MM-dd");
+
+        PageInfo<List<Order>> pageInfo = (PageInfo<List<Order>>) orderService.getOrdersByBusinessmanIdInDaysWithPage(page, pageSize, businessman.getId(), startDate, endDate);
+
+        BigDecimal totalMoney = orderService.getOrdersTotalMoneyByBusinessmanIdInDays(businessman.getId(), startDate, endDate);
+
+        watchOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        watchOrdersStatus.put("pageInfo", pageInfo);
+        watchOrdersStatus.put("totalMoney", totalMoney);
 
         return watchOrdersStatus;
     }

@@ -6,11 +6,13 @@ import cn.tgw.businessman.model.Businessman;
 import cn.tgw.common.mapper.SmsVerifyMapper;
 import cn.tgw.common.model.SmsVerify;
 import cn.tgw.common.service.MiaoDiService;
+import cn.tgw.common.utils.DateUtil;
 import cn.tgw.common.utils.MD5Utils;
 import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.config.AlipayConfiguration;
 import cn.tgw.order.mapper.OrderMapper;
 import cn.tgw.order.model.Order;
+import cn.tgw.order.model.OrderQueryModel;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.mapper.UserDetailMapper;
 import cn.tgw.user.mapper.UserMapper;
@@ -352,6 +354,26 @@ public class TgwApplicationTests {
 	@Test
 	public void testOrderServiceOrderDivide(){
 		System.out.println(orderService.getOrdersByBusinessmanIdWithPage(1, 2, 1));
+	}
+
+	@Test
+	public void testOrderMapperQueryModel() throws Exception {
+		OrderQueryModel query = new OrderQueryModel();
+		query.setBusinessmanId(1);
+		query.setStart(DateUtil.formatString("2018-12-05 15:31:06", "yyyy-MM-dd HH:mm:ss"));
+		query.setEnd(new Date());
+		System.out.println(orderMapper.selectOrderInDaysByBusinessmanId(query));
+		System.out.println(orderMapper.selectTotalInDaysByBusinessmanId(query));
+	}
+
+	@Test
+	public void testCalendar3() throws Exception {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -7);
+		calendar.set(Calendar.HOUR, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		System.out.println(DateUtil.formatDate(calendar.getTime(), "yyyy-MM-dd HH:mm:ss"));
 	}
 
 	@Test

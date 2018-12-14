@@ -100,6 +100,27 @@ public class DateUtil {
 		}
 		return months;
 	}
+
+	/*
+	 * @Description:用于获取当前日期指定days的天数前或者后，正数指当前日期后days天，负数指当前日期后days天，且返回的Date中，时分秒均为0，reset参数指定是否将时间重置为00：00：00
+	 * @Param:[days, reset]
+	 * @Return:java.util.Date
+	 * @Author:TjSanshao
+	 * @Date:2018-12-14
+	 * @Time:10:30
+	 **/
+	public static Date getDateDealWithDays(int days, boolean reset) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, days);
+
+		if (reset) {
+			calendar.set(Calendar.HOUR, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+		}
+
+		return calendar.getTime();
+	}
 	
 	public static void main(String[] args) throws Exception {
 		List<String> dates=getRangeMonths("2016-10","2017-12");

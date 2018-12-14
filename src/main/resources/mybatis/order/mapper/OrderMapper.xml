@@ -47,6 +47,19 @@
     where tgw_businessman_id = #{businessmanId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectOrderInDaysByBusinessmanId" resultType="cn.tgw.order.model.Order" parameterType="cn.tgw.order.model.OrderQueryModel" >
+    select
+    <include refid="Base_Column_List" />
+    from tgw_order
+    where <![CDATA[ order_create_time  >=  #{start}  ]]> <![CDATA[ and order_create_time <=  #{end}  ]]> and tgw_businessman_id = #{businessmanId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTotalInDaysByBusinessmanId" resultType="java.math.BigDecimal" parameterType="cn.tgw.order.model.OrderQueryModel" >
+    select sum(total)
+    from tgw_order
+    where <![CDATA[ order_create_time  >=  #{start}  ]]> <![CDATA[ and order_create_time <=  #{end}  ]]> and tgw_businessman_id = #{businessmanId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAllOrdersByUserIdAndSellStatusAndStatus" resultType="cn.tgw.order.model.Order" parameterType="cn.tgw.order.model.Order" >
     select
     <include refid="Base_Column_List" />

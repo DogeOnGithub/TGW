@@ -29,6 +29,9 @@ public class BusinessmanFilterCustomConfiguration {
         registrationBean.addUrlPatterns("/tjsanshao/businessman/password");
         registrationBean.addUrlPatterns("/tjsanshao/businessman/settle");
         registrationBean.addUrlPatterns("/tjsanshao/businessman/orders");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders7days");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders30days");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/ordersCustom");
         registrationBean.addUrlPatterns("/tjsanshao/businessman/goods");
 
         //设置过滤器名称
@@ -47,6 +50,10 @@ public class BusinessmanFilterCustomConfiguration {
         registrationBean.setFilter(new BusinessmanSettledFilter());
 
         registrationBean.addUrlPatterns("/tjsanshao/businessman/orders");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders7days");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/orders30days");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/ordersCustom");
+        registrationBean.addUrlPatterns("/tjsanshao/businessman/goods");
 
         registrationBean.setName("BusinessmanSettledFilter");
 
