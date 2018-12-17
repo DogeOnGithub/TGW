@@ -55,4 +55,19 @@ public class CategoryController {
         map.put("status",false);
         return map;
     }
+
+    /**
+     * @Description:    根据一级商品商品id 返回二级商品数据
+     * @Author:         梁智发
+     * @CreateDate:     2018/12/14 0014 8:46
+     * @UpdateUser:     梁智发
+     * @UpdateDate:     2018/12/14 0014 8:46
+     * @UpdateRemark:   修改内容
+     * @Version:        1.0
+     */
+    @RequestMapping("/category/findtgwSecondCategoryById")
+    public Object findtgwSecondCategory(Integer id){
+        List<TgwSecondCategory> tgwSecondCategories = tgwSecondCategoryService.findtgwSecondCategory(id);
+        return  tgwSecondCategories;
+    }
 }

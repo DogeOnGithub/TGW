@@ -26,6 +26,15 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     *
+     * 功能描述: 创建评论
+     *
+     * @param: int orderId, String commentDesc, Byte commentStars
+     * @return: Map<String,Object>
+     * @auther: 张华健
+     * @date:  2018/12/14
+     */
     @RequestMapping(value = "xiaojian/createComment",method = RequestMethod.POST)
     public Map<String,Object> createComment(int orderId, String commentDesc, Byte commentStars){
         Map<String,Object> result = new HashMap<>();
@@ -42,6 +51,15 @@ public class CommentController {
         return result;
     }
 
+    /**
+     *
+     * 功能描述: 根据评论id查看评论
+     *
+     * @param: Integer id
+     * @return:  Map<String,Object>
+     * @auther: 张华健
+     * @date:  2018/12/14
+     */
     @RequestMapping(value = "xiaojian/getCommentById",method = RequestMethod.GET)
     public Map<String,Object> getCommentById(Integer id){
         Map<String,Object> result = new HashMap<>();
@@ -54,6 +72,15 @@ public class CommentController {
         return result;
     }
 
+    /**
+     *
+     * 功能描述: 根据订单id查看对此订单的评论
+     *
+     * @param: Integer orderId
+     * @return: Map<String,Object>
+     * @auther: 张华健
+     * @date:  2018/12/14
+     */
     @RequestMapping(value = "xiaojian/getCommentByOrderId",method = RequestMethod.GET)
     public Map<String,Object> getCommentByOrderId(Integer orderId){
         Map<String,Object> result = new HashMap<>();
@@ -66,6 +93,15 @@ public class CommentController {
         return result;
     }
 
+    /**
+     *
+     * 功能描述: 根据团购查找该商品的全部评价
+     *
+     * @param: Integer goodsId
+     * @return: Map<String,Object>
+     * @auther: 张华健
+     * @date:  2018/12/14
+     */
     @RequestMapping(value = "xiaojian/getCommentByGoodsId",method = RequestMethod.GET)
     public Map<String,Object> getCommentByGoodsId(Integer goodsId){
         Map<String,Object> result = new HashMap<>();
@@ -78,6 +114,15 @@ public class CommentController {
         return result;
     }
 
+    /**
+     *
+     * 功能描述: 根据id删除评论
+     *
+     * @param: Integer id
+     * @return: Map<String,Object>
+     * @auther: 张华健
+     * @date:  2018/12/14
+     */
     @RequestMapping(value = "xiaojian/deleteCommentById",method = RequestMethod.GET)
     public Map<String,Object> deleteCommentById(Integer id){
         Map<String,Object> result = new HashMap<>();
