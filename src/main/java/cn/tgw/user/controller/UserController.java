@@ -4,6 +4,10 @@ import cn.tgw.common.service.MiaoDiService;
 import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.common.utils.TGWStaticString;
+import cn.tgw.goods.model.Goods;
+import cn.tgw.goods.model.GoodsDetail;
+import cn.tgw.goods.model.GoodsImage;
+import cn.tgw.goods.service.GoodsService;
 import cn.tgw.order.model.Order;
 import cn.tgw.order.service.OrderService;
 import cn.tgw.user.model.User;
@@ -19,10 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,6 +52,9 @@ public class UserController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     /*
      * @Description:用户登录
@@ -578,7 +582,7 @@ public class UserController {
         List<Order> allOrders = orderService.getUserAllOrders(user);
 
         allOrdersStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        allOrdersStatus.put("orders", allOrders);
+        allOrdersStatus.put("orders", dealWithOrderResult(allOrders));
 
         return allOrdersStatus;
     }
@@ -601,7 +605,7 @@ public class UserController {
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("0"));
 
         ordersWaitForPayStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        ordersWaitForPayStatus.put("orders", allOrders);
+        ordersWaitForPayStatus.put("orders", dealWithOrderResult(allOrders));
 
         return ordersWaitForPayStatus;
     }
@@ -624,7 +628,7 @@ public class UserController {
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("1"));
 
         ordersWaitForUseStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        ordersWaitForUseStatus.put("orders", allOrders);
+        ordersWaitForUseStatus.put("orders", dealWithOrderResult(allOrders));
 
         return ordersWaitForUseStatus;
     }
@@ -647,7 +651,7 @@ public class UserController {
         List<Order> allOrders = orderService.getOrdersByUserAndOrderSellStatusAndStatusNormal(user, new Byte("3"));
 
         ordersWaitForCommentStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        ordersWaitForCommentStatus.put("orders", allOrders);
+        ordersWaitForCommentStatus.put("orders", dealWithOrderResult(allOrders));
 
         return ordersWaitForCommentStatus;
     }
@@ -675,6 +679,60 @@ public class UserController {
         }
 
         return deleteOrderStatus;
+    }
+
+    /*
+     * @Description:处理订单的返回数据
+     * @Param:[orderList]
+     * @Return:java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     * @Author:TjSanshao
+     * @Date:2018-12-17
+     * @Time:10:02
+     **/
+    private List<Map<String, Object>> dealWithOrderResult(List<Order> orderList) {
+
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (int i = 0; i < orderList.size(); i++) {
+            Map<String, Object> tempMap = new HashMap<>();
+
+            Order order = orderList.get(i);
+            Map<String, Object> goodsAndGoodsDetailAndGoodsImage = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(order.getTgwGoodsId());
+            Goods goods = (Goods)goodsAndGoodsDetailAndGoodsImage.get("goods");
+            GoodsDetail goodsDetail = (GoodsDetail)goodsAndGoodsDetailAndGoodsImage.get("goodsDetail");
+            GoodsImage goodsImage = (GoodsImage)goodsAndGoodsDetailAndGoodsImage.get("goodsImage");
+
+            String sellStatusToZH = changeSellStatusToZH(order.getSellStatus().intValue());
+
+            tempMap.put("order", order);
+            tempMap.put("goods", goods);
+            tempMap.put("goodsDetail", goodsDetail);
+            tempMap.put("goodsImage", goodsImage);
+            tempMap.put("sellStatus", sellStatusToZH);
+
+            result.add(tempMap);
+        }
+
+        return result;
+    }
+
+    private String changeSellStatusToZH(int status) {
+        switch (status) {
+            case 0:
+                return "未付款";
+            case 1:
+                return "待使用";
+            case 3:
+                return "待评价";
+            case 4:
+                return "已完成";
+            case 5:
+                return "已过期";
+            case 2:
+                return "退款";
+            default:
+                return "未知";
+        }
     }
 
 }
