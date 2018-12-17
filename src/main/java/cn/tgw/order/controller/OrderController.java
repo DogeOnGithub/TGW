@@ -83,9 +83,14 @@ public class OrderController {
         //返回过期时间
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(order.getOrderCreateTime());
-        calendar.add(Calendar.MINUTE, 15);
+        calendar.add(Calendar.MINUTE, 2);
 
         createStatus.put("expire", calendar.getTime());
+
+        //返回商品标题
+        Goods goods = (Goods)goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(order.getTgwGoodsId()).get("goods");
+
+        createStatus.put("goods", goods);
 
         return createStatus;
 
@@ -142,7 +147,7 @@ public class OrderController {
      * @Date:2018-12-10
      * @Time:11:21
      **/
-    @PostMapping("/alipay/notify")
+    @RequestMapping("/alipay/notify")
     @ResponseBody
     public String alipayNotifyUrl(
             String notify_time,
@@ -151,9 +156,7 @@ public class OrderController {
             String out_trade_no,
             String trade_status) {
 
-        if (!trade_status.equals("TRADE_SUCCESS")) {
-            return "fail";
-        }
+        System.out.println(trade_no);
 
         //支付成功后，更新数据库
         Order order = orderService.getOrderByUniqueOrderNumber(out_trade_no);
@@ -174,7 +177,7 @@ public class OrderController {
      * @Date:2018-12-10
      * @Time:11:24
      **/
-    @GetMapping("/alipay/return")
+    @RequestMapping("/alipay/return")
     public String alipayReturnUrl(
             String timestamp,
             String out_trade_no,
