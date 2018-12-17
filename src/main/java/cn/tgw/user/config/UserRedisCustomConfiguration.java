@@ -1,6 +1,7 @@
 package cn.tgw.user.config;
 
 import cn.tgw.user.model.User;
+import cn.tgw.user.model.UserDetail;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -33,6 +34,15 @@ public class UserRedisCustomConfiguration {
                 .entryTtl(Duration.ofSeconds(30L))//设置该缓存管理的键过期时间
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<User>(User.class)));
+        return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(configuration).build();
+    }
+
+    @Bean
+    public RedisCacheManager userDetailCacheManager(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(3600L))//设置该缓存管理的键过期时间
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<UserDetail>(UserDetail.class)));
         return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(configuration).build();
     }
 
