@@ -2,6 +2,8 @@ package cn.tgw.admin.mapper;
 
 import cn.tgw.admin.model.TgwSecondCategory;
 
+import java.util.List;
+
 public interface TgwSecondCategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface TgwSecondCategoryMapper {
     int updateByPrimaryKeySelective(TgwSecondCategory record);
 
     int updateByPrimaryKey(TgwSecondCategory record);
+
+
 }
