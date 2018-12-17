@@ -68,4 +68,8 @@
       first_category_id = #{firstCategoryId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findtgwSecondCategory" resultType="cn.tgw.admin.model.TgwSecondCategory">
+    select * from tgw_second_category where first_category_id=#{first_category_id}
+  </select>
 </mapper>

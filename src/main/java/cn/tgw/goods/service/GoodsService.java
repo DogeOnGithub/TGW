@@ -28,7 +28,9 @@ public interface GoodsService {
     public Map<String,Object> findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(int id);
     public List<Object> findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(int businessmanId);
     public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,MultipartFile multipartFile) throws Exception;
-    public String updateIsOnline(Goods goods);
+    public Boolean deleteGoods(int goodsId);
+    public Boolean upGoods(int goodsId);
+    public Boolean downGoods(int goodsId);
     public List<GoodsVO> findAllGoodsVO();
 
     public String updateGoodsRepertory(int goodsId,int num);

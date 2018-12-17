@@ -187,18 +187,21 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Map<String,Object> findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(int id) {
         Goods goods = goodsMapper.selectByPrimaryKey(id);
-        GoodsDetail goodsDetail = goodsDetailMapper.selectByTgwGoodsId(id);
-        GoodsImage goodsImage = goodsImageMapper.selectByTgwGoodsId(id);
         Map<String,Object>resultMap = new HashMap<>();
-        resultMap.put("goods",goods);
-        resultMap.put("goodsDetail",goodsDetail);
-        resultMap.put("goodsImage",goodsImage);
+        if(goods!=null){
+            GoodsDetail goodsDetail = goodsDetailMapper.selectByTgwGoodsId(id);
+            GoodsImage goodsImage = goodsImageMapper.selectByTgwGoodsId(id);
+
+            resultMap.put("goods",goods);
+            resultMap.put("goodsDetail",goodsDetail);
+            resultMap.put("goodsImage",goodsImage);
+        }
         return resultMap;
     }
 
     /**
      *
-     * 功能描述: 根据商家id查询商家下的所有商品
+     * 功能描述: 根据商家id查询商家下的所有商品（不包括逻辑删除的）
      *
      * @param: Goods goods
      * @return:
@@ -210,9 +213,11 @@ public class GoodsServiceImpl implements GoodsService {
         List<Object> resultList = new ArrayList<>();
         List<Goods> resultGoods = goodsMapper.selectByBusinessId(businessmanId);
         for (int i = 0; i < resultGoods.size(); i++) {
-            Integer id = resultGoods.get(i).getId();
-            Map<String, Object> goodsAndGoodsDetailAndGoodsImageWithGoodsId = findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(id);
-            resultList.add(goodsAndGoodsDetailAndGoodsImageWithGoodsId);
+            if(resultGoods.get(i).getIsOnline()==1 ||resultGoods.get(i).getIsOnline()==0) {
+                Integer id = resultGoods.get(i).getId();
+                Map<String, Object> goodsAndGoodsDetailAndGoodsImageWithGoodsId = findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(id);
+                resultList.add(goodsAndGoodsDetailAndGoodsImageWithGoodsId);
+            }
         }
         return resultList;
     }
@@ -266,18 +271,62 @@ public class GoodsServiceImpl implements GoodsService {
      *
      * 功能描述:
      *
-     * @param: 根据当前的状态修改上架或者下架。或者逻辑删除该团购
+     * @param: 逻辑删除该团购
      * @return:
      * @auther: 张华健
      * @date:  2018/12/10
      */
     @Override
-    public String updateIsOnline(Goods goods) {
-        int i = goodsMapper.updateByPrimaryKeySelective(goods);
-        if(i==1){
-            return "success";
+    public Boolean deleteGoods(int goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        goods.setIsOnline(2);
+        int row = goodsMapper.updateByPrimaryKeySelective(goods);
+        if(row>0){
+            return true;
         }else {
-            return "error";
+            return false;
+        }
+    }
+
+    /**
+     *
+     * 功能描述:
+     *
+     * @param: 上架该团购
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/10
+     */
+    @Override
+    public Boolean upGoods(int goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        goods.setIsOnline(1);
+        int row = goodsMapper.updateByPrimaryKeySelective(goods);
+        if(row>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     *
+     * 功能描述:
+     *
+     * @param: 下架该团购
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/10
+     */
+    @Override
+    public Boolean downGoods(int goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        goods.setIsOnline(0);
+        int row = goodsMapper.updateByPrimaryKeySelective(goods);
+        if(row>0){
+            return true;
+        }else {
+            return false;
         }
     }
 
