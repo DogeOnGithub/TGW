@@ -13,7 +13,6 @@ public class TgwSecondCategoryService {
     TgwSecondCategoryMapper tgwSecondCategoryMapper;
 
     public int add(TgwSecondCategory tgwSecondCategory){
-
        return tgwSecondCategoryMapper.insert(tgwSecondCategory);
     }
 

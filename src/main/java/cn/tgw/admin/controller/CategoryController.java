@@ -23,6 +23,15 @@ public class CategoryController {
     @Autowired
     TgwSecondCategoryService tgwSecondCategoryService;
 
+    /**
+    * @Description:    TONGG查找所有一级分类
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/14 0014 8:45
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/14 0014 8:45
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
     @RequestMapping("/category/findFirstCategory")
     public JSONArray findallFirstCategory(){
         JSONArray jsonArray=new JSONArray();
@@ -41,6 +50,15 @@ public class CategoryController {
         return jsonArray;
     }
 
+    /**
+    * @Description:    添加二级分类，传入一级商品id和二级商品名称
+    * @Author:         梁智发
+    * @CreateDate:     2018/12/14 0014 8:45
+    * @UpdateUser:     梁智发
+    * @UpdateDate:     2018/12/14 0014 8:45
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+    */
     @RequestMapping("/category/addFirstCategory")
     public Object addFirstCategory(String secName,Integer firstid){
         TgwSecondCategory tgwSecondCategory=new TgwSecondCategory();
