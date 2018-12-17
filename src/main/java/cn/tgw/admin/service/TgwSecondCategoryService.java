@@ -16,4 +16,9 @@ public class TgwSecondCategoryService {
        return tgwSecondCategoryMapper.insert(tgwSecondCategory);
     }
 
+    public List<TgwSecondCategory> findtgwSecondCategory(Integer first_category_id){
+        List<TgwSecondCategory> tgwSecondCategories = tgwSecondCategoryMapper.findtgwSecondCategory(first_category_id);
+        return  tgwSecondCategories;
+
+    }
 }

@@ -17,5 +17,5 @@ public interface TgwSecondCategoryMapper {
 
     int updateByPrimaryKey(TgwSecondCategory record);
 
-
+    List<TgwSecondCategory> findtgwSecondCategory(Integer first_category_id);
 }

@@ -6,7 +6,7 @@
     <result column="tgw_goods_id" property="tgwGoodsId" jdbcType="INTEGER" />
     <result column="goods_desc" property="goodsDesc" jdbcType="VARCHAR" />
     <result column="term_of_validity" property="termOfValidity" jdbcType="INTEGER" />
-    <result column="creat_goods_time" property="creatGoodsTime" jdbcType="DATE" />
+    <result column="creat_goods_time" property="creatGoodsTime" jdbcType="TIMESTAMP" />
     <result column="goods_repertory" property="goodsRepertory" jdbcType="INTEGER" />
     <result column="sales_volumn" property="salesVolumn" jdbcType="INTEGER" />
   </resultMap>

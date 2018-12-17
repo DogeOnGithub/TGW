@@ -5,6 +5,7 @@ import cn.tgw.admin.model.SeckillResultInfo;
 import cn.tgw.admin.model.TgwSeckill;
 import cn.tgw.admin.service.SecKillService;
 import cn.tgw.common.utils.QiniuUtil;
+import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.goods.mapper.GoodsImageMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
 import cn.tgw.goods.model.Goods;
@@ -92,15 +93,16 @@ public class GoodsController {
      * @date:  2018/12/04
      */
     @RequestMapping(value = "xiaojian/addGoods",method = RequestMethod.POST)
-    public Object addGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile multipartFile){
+    public Object addGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile image){
         Map<String,Object> result = new HashMap<>();
-
-        String addresult = goodsService.addGoodsAndGoodsDetailAndGoodsImage(goods, goodsDetail, multipartFile);
-        if (addresult.equals("success")){
-            result.put(addresult,"添加团购成功");
-        }else{
-            result.put(addresult,"添加失败，清稍后重试");
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,"添加失败，请稍后重试");
+        String addresult = goodsService.addGoodsAndGoodsDetailAndGoodsImage(goods, goodsDetail, image);
+        if (!addresult.equals("success")){
+            return result;
         }
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         return result;
     }
 
@@ -117,8 +119,8 @@ public class GoodsController {
     public Object updateGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile multipartFile){
 
         Map<String,Object> result = new HashMap<>();
-        result.put("status","error");
-        result.put("Msg","修改出错，请稍后重试");
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,"修改失败，请稍后重试");
         try {
             String res = goodsService.updateGoodsByGoodsId(goods, goodsDetail, multipartFile);
             if(res.equals("error")){
@@ -128,8 +130,8 @@ public class GoodsController {
 //            e.printStackTrace();
             return result;
         }
-        result.put("status","success");
-        result.put("Msg","修改成功");
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         return result;
     }
 
@@ -146,15 +148,16 @@ public class GoodsController {
     public Object findGoodsByBusniessmanId(Integer businessmanId){
 
         Map<String,Object> result = new HashMap<>();
-        result.put("status","error");
-        result.put("Msg","出错");
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,"查询失败，请稍后重试");
         List<Object> resultList = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(businessmanId);
         if(resultList!=null){
-            result.put("status","success");
-            result.put("Msg","success");
-            result.put("result",resultList);
+            result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            result.put("resultGoods",resultList);
         }else{
-            result.put("Msg","暂无团购");
+            result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            result.put(TGWStaticString.TGW_RESULT_MESSAGE,"暂无团购");
         }
         return result;
     }
@@ -172,12 +175,12 @@ public class GoodsController {
     public Object findGoodsById(int id){
 
         Map<String,Object> result = new HashMap<>();
-        result.put("status","error");
-        result.put("Msg","出错");
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
         Map<String, Object> resultMap = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(id);
-        if(resultMap!=null){
-            result.put("status","success");
-            result.put("Msg","success");
+        if(resultMap.get("goods")!=null){
+            result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+            result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
             result.put("resultGoods",resultMap);
             result.put("isOnSecKill",false);
             SeckillResultInfo resultInfo = secKillService.findTgwSeckillBygoodsIdAndNowTime(id, new Date());
@@ -186,7 +189,7 @@ public class GoodsController {
                 result.put("secKill",resultInfo);
             }
         }else{
-            result.put("Msg","暂无团购");
+            result.put(TGWStaticString.TGW_RESULT_MESSAGE,"无此团购");
         }
         return result;
     }
@@ -222,26 +225,67 @@ public class GoodsController {
 
     /**
      *
-     * 功能描述: 修改商品状态，接口参数为id 以及isOnline,下架：isOnline=0
-     *                                               上架：isOnline=1
-     *                                               逻辑删除：isOnline=2
+     * 功能描述: 删除团购
      *
      * @param: Goods goods
      * @return:
      * @auther: 张华健
      * @date:  2018/12/10
      */
-    @RequestMapping(value = "xiaojian/deleteGoods",method = RequestMethod.PUT)
-    public Object deleteGoods(Goods goods){
+    @RequestMapping(value = "xiaojian/deleteGoods",method = RequestMethod.GET)
+    public Object deleteGoods(Integer goodsId){
         Map<String,Object> result = new HashMap<>();
-        result.put("status","error");
-        result.put("Msg","unknown error");
-        String res = goodsService.updateIsOnline(goods);
-        if(res.equals("success")){
-            result.put("status",res);
-            result.put("Msg","success");
-
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        if(!goodsService.deleteGoods(goodsId)){
+            return result;
         }
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        return result;
+    }
+
+    /**
+     *
+     * 功能描述: 上架团购
+     *
+     * @param: Goods goods
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/10
+     */
+    @RequestMapping(value = "xiaojian/upGoods",method = RequestMethod.GET)
+    public Object upGoods(Integer goodsId){
+        Map<String,Object> result = new HashMap<>();
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        if(!goodsService.upGoods(goodsId)){
+            return result;
+        }
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        return result;
+    }
+
+    /**
+     *
+     * 功能描述: 下架团购
+     *
+     * @param: Goods goods
+     * @return:
+     * @auther: 张华健
+     * @date:  2018/12/10
+     */
+    @RequestMapping(value = "xiaojian/downGoods",method = RequestMethod.GET)
+    public Object downGoods(Integer goodsId){
+        Map<String,Object> result = new HashMap<>();
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        if(!goodsService.downGoods(goodsId)){
+            return result;
+        }
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         return result;
     }
 
