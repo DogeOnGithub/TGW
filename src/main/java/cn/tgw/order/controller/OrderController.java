@@ -23,10 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
  * @Project:tgw
@@ -82,6 +79,13 @@ public class OrderController {
         createStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         createStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
         createStatus.put("order", order);
+
+        //返回过期时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(order.getOrderCreateTime());
+        calendar.add(Calendar.MINUTE, 15);
+
+        createStatus.put("expire", calendar.getTime());
 
         return createStatus;
 
