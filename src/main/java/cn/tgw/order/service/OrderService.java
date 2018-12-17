@@ -6,6 +6,7 @@ import cn.tgw.goods.model.Goods;
 import cn.tgw.order.model.Order;
 import cn.tgw.user.model.User;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -187,5 +188,8 @@ public interface OrderService {
     public boolean orderCommentFinish(int orderId);
 
     //更改订单支付状态方法结束
+
+    public Object getOrdersByBusinessmanIdInDaysWithPage(int page, int pageSize, int businessmanId, Date start, Date end);
+    public BigDecimal getOrdersTotalMoneyByBusinessmanIdInDays(int businessmanId, Date start, Date end);
 
 }
