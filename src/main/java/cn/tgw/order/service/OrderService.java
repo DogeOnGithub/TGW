@@ -178,8 +178,8 @@ public interface OrderService {
 
     //更改订单支付状态方法开始
 
-    public boolean orderPayFinish(Order order);
-    public boolean orderPayFinish(int orderId);
+    public boolean orderPaySuccess(Order order);
+    public boolean orderPaySuccess(int orderId);
 
     public boolean orderUseFinish(Order order);
     public boolean orderUseFinish(int orderId);

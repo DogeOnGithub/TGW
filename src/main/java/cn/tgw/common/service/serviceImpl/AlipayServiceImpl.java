@@ -52,6 +52,9 @@ public class AlipayServiceImpl implements AlipayService {
         alipayRequest.setReturnUrl(alipayConfiguration.getCommonUrlPrefix() + alipayConfiguration.getReturn_url());
         alipayRequest.setNotifyUrl(alipayConfiguration.getCommonUrlPrefix() + alipayConfiguration.getNotify_url());
 
+        System.out.println(alipayRequest.getReturnUrl());
+        System.out.println(alipayRequest.getNotifyUrl());
+
         alipayRequest.setBizContent(
                 "{\"out_trade_no\":\""+ out_trade_no +"\","
                 + "\"total_amount\":\""+ total_amount +"\","

@@ -377,6 +377,18 @@ public class TgwApplicationTests {
 	}
 
 	@Test
+	public void testExpire(){
+		Calendar calendar = Calendar.getInstance();
+
+		System.out.println(calendar.getTime());
+
+		calendar.add(Calendar.MINUTE, 15);
+
+		System.out.println(calendar.getTime());
+
+	}
+
+	@Test
 	public void contextLoads() {
 	}
 

@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
      * @Time:08:29
      **/
     @Override
-    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#username")
     public User getUserByUsernameOrMobileAndPasswordAndStatus(String username, String password, Byte status) {
 
         //传进来的username可能是用户名，也可以是mobile，因此要做两次判断
@@ -113,14 +113,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userDetailCacheManager", key = "#user.id + 'userDetail'")
     public UserDetail getUserDetailByUserId(User user) {
 
         return userDetailMapper.selectByUserId(user.getId());
     }
 
     @Override
-    @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#user.username")
     @Transactional
     public User updateUserPassword(User user) {
 
@@ -130,6 +130,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#user.username")
     @Transactional
     public User updateUserMobile(User user, String newMobile) {
         //判断username是否和mobile一样
@@ -152,18 +153,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager")
+    @Cacheable(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#id")
     public User getUserById(int id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @CachePut(cacheNames = {"userCache"}, cacheManager = "userDetailCacheManager", key = "#result.tgwUserId + 'userDetail'", condition = "#result != null")
     public UserDetail updateUserDetail(UserDetail userDetail) {
         int rows = userDetailMapper.updateByUserIdSelective(userDetail);
         return userDetailMapper.selectByUserId(userDetail.getTgwUserId());
     }
 
     @Override
+    @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#result.username", condition = "#result != null")
     public User getUserByUsername(String username) {
 
         User user = new User();

@@ -7,6 +7,7 @@ import cn.tgw.common.service.SmsVerifyService;
 import cn.tgw.config.TjSanshaoMiaoDiConfig;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.Date;
  *
  **/
 @Service
+@Slf4j
 public class SmsVerifyServiceImpl implements SmsVerifyService {
 
     //注入秒嘀工具类
@@ -114,11 +116,15 @@ public class SmsVerifyServiceImpl implements SmsVerifyService {
                     smsVerifyMapper.insertSmsVerify(newSmsVerify);
                 }
             }else{
-                //TODO 发送失败，记录到日志
-                System.out.println("send false");
+                String respCode = jsonObject.getString("respCode");
+                String respDesc = jsonObject.getString("respDesc");
+                String failCount = jsonObject.getString("failCount");
+                String failList = jsonObject.getString("failList");
+                String smsId = jsonObject.getString("smsId");
+                log.error("miaodi error:(respCode)" + respCode + ",(respDesc)" + respDesc + ",(failCount)" + failCount + ",(failList)" + failList + ",(smsId)" + smsId);
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
