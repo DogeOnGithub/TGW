@@ -158,6 +158,14 @@ public class OrderController {
 
         System.out.println(trade_no);
 
+        if (trade_status == null) {
+            return "fail";
+        }
+
+        if (!trade_status.equals("TRADE_SUCCESS")) {
+            return "fail";
+        }
+
         //支付成功后，更新数据库
         Order order = orderService.getOrderByUniqueOrderNumber(out_trade_no);
         order.setPaySerialsNumber(trade_no);
