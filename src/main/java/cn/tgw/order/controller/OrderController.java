@@ -168,9 +168,14 @@ public class OrderController {
 
         //支付成功后，更新数据库
         Order order = orderService.getOrderByUniqueOrderNumber(out_trade_no);
+
+        if (order == null) {
+            return "fail";
+        }
+
         order.setPaySerialsNumber(trade_no);
 
-        if (orderService.orderPayFinish(order)) {
+        if (orderService.orderPaySuccess(order)) {
             return "success";
         } else {
             return "fail";
@@ -194,11 +199,11 @@ public class OrderController {
             String seller_id,
             Map<String, String> kvMap) {
 
-        System.out.println(timestamp);
+/*        System.out.println(timestamp);
         System.out.println(out_trade_no);
         System.out.println(trade_no);
         System.out.println(total_amount);
-        System.out.println(seller_id);
+        System.out.println(seller_id);*/
 
         kvMap.put("timestamp", timestamp);
         kvMap.put("out_trade_no", out_trade_no);

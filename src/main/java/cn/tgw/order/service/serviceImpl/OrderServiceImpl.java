@@ -306,7 +306,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean orderPayFinish(Order order) {
+    public boolean orderPaySuccess(Order order) {
         order.setSellStatus(new Byte("1"));
         int row = orderMapper.updateByPrimaryKeySelective(order);
         if (row > 0) {
@@ -317,7 +317,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean orderPayFinish(int orderId) {
+    public boolean orderPaySuccess(int orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         order.setSellStatus(new Byte("1"));
         int row = orderMapper.updateByPrimaryKeySelective(order);
