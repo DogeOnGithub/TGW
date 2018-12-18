@@ -17,7 +17,7 @@ public class UiTreeController {
             menuJsonArray="[\n" +
                     "    {\n" +
                     "        \"id\": 1,\n" +
-                    "        \"text\": \"<font size='4'>商家信息\",\n" +
+                    "        \"text\": \"<font size='3'>商家信息\",\n" +
                     "        \"state\": \"open\",\n" +
                     "        \"iconCls\": \"icon-userManage\",\n" +
                     "        \"attributes\": {\n" +
@@ -26,7 +26,7 @@ public class UiTreeController {
                     "    },\n" +
                     "    {\n" +
                     "        \"id\": 2,\n" +
-                    "        \"text\": \"<font size='4'>商家入驻管理\",\n" +
+                    "        \"text\": \"<font size='3'>商家入驻管理\",\n" +
                     "        \"state\": \"open\",\n" +
                     "        \"iconCls\": \"icon-userManage\",\n" +
                     "        \"attributes\": {\n" +
@@ -35,7 +35,7 @@ public class UiTreeController {
                     "    },\n" +
                     "    {\n" +
                     "        \"id\": 3,\n" +
-                    "        \"text\": \"<font size='4'>商品分类管理\",\n" +
+                    "        \"text\": \"<font size='3'>商品分类管理\",\n" +
                     "        \"state\": \"open\",\n" +
                     "        \"iconCls\": \"icon-userManage\",\n" +
                     "        \"attributes\": {\n" +
@@ -55,7 +55,7 @@ public class UiTreeController {
             menuJsonArray="[\n" +
                     "    {\n" +
                     "        \"id\": 1,\n" +
-                    "        \"text\": \"<font size='4'>用户信息管理\",\n" +
+                    "        \"text\": \"<font size='3'>用户信息管理\",\n" +
                     "        \"state\": \"open\",\n" +
                     "        \"iconCls\": \"icon-userManage\",\n" +
                     "        \"attributes\": {\n" +
