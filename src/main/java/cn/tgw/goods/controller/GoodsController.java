@@ -117,13 +117,13 @@ public class GoodsController {
      * @date:  2018/12/06
      */
     @RequestMapping(value = "xiaojian/updateGoods",method = RequestMethod.POST)
-    public Object updateGoods(Goods goods, GoodsDetail goodsDetail,MultipartFile multipartFile){
+    public Object updateGoods(Goods goods, GoodsDetail goodsDetail,@RequestParam(value = "image",required = false)MultipartFile image){
 
         Map<String,Object> result = new HashMap<>();
         result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
         result.put(TGWStaticString.TGW_RESULT_MESSAGE,"修改失败，请稍后重试");
         try {
-            String res = goodsService.updateGoodsByGoodsId(goods, goodsDetail, multipartFile);
+            String res = goodsService.updateGoodsByGoodsId(goods, goodsDetail, image);
             if(res.equals("error")){
                 return result;
             }

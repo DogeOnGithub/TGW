@@ -238,14 +238,19 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,MultipartFile multipartFile) throws Exception {
 
-        //上传图片
         GoodsImage goodsImage = new GoodsImage();
         String returnUrl = null;
-        try {
-            returnUrl = QiniuUtil.uploadImg(multipartFile);
-        } catch (IOException e) {
-            return "error";
+        //上传图片
+        if(multipartFile!=null){
+
+
+            try {
+                returnUrl = QiniuUtil.uploadImg(multipartFile);
+            } catch (IOException e) {
+                return "error";
+            }
         }
+
 
         int goodsId = goods.getId();
         GoodsDetail resultGoodsDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
@@ -253,14 +258,21 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDetail.setId(resultGoodsDetail.getId());
         goodsImage.setId(resultGoodsImage.getId());
         goodsImage.setIsMain(1);
-        goodsImage.setImageUrl(returnUrl);
+        if(multipartFile!=null){
+            goodsImage.setImageUrl(returnUrl);
+        }else{
+            goodsImage.setImageUrl(resultGoodsImage.getImageUrl());
+        }
+
         int resNum = goodsMapper.updateByPrimaryKeySelective(goods);
         int resNum2 = goodsDetailMapper.updateByPrimaryKeySelective(goodsDetail);
         int resNum3 = goodsImageMapper.updateByPrimaryKeySelective(goodsImage);
         if(resNum+resNum2+resNum3>0){
             //删除七牛云旧照片
-            String currentUrl = resultGoodsImage.getImageUrl().replaceAll("http://pih7n7d5x.bkt.clouddn.com/","");
-            QiniuUtil.deleteImage(currentUrl);
+            if(multipartFile!=null){
+                String currentUrl = resultGoodsImage.getImageUrl().replaceAll("http://"+QiniuUtil.path+"/","");
+                QiniuUtil.deleteImage(currentUrl);
+            }
             return "success";
         }else{
             throw new RuntimeException();
