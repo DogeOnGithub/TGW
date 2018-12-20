@@ -201,14 +201,14 @@ public class BusinessmanController {
 
     /*
      * @Description:商家注册
-     * @Param:[businessman, businessmanDetail, code]
+     * @Param:[businessman, code, session]
      * @Return:java.util.Map<java.lang.String,java.lang.Object>
      * @Author:TjSanshao
-     * @Date:2018-12-03
-     * @Time:16:31
+     * @Date:2018-12-20
+     * @Time:10:35
      **/
     @PostMapping("/tjsanshao/businessman/register")
-    public Map<String, Object> register(Businessman businessman, String code) {
+    public Map<String, Object> register(Businessman businessman, String code, HttpSession session) {
         HashMap<String, Object> registerStatus = new HashMap<>();
 
         //验证用户名、密码、手机号码是否为空
@@ -235,6 +235,8 @@ public class BusinessmanController {
 
         //存入到数据库
         businessmanService.businessmanRegister(businessman);
+
+        session.setAttribute(TGWStaticString.TGW_BUSINESSMAN, businessman);
 
         registerStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         registerStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "register success");

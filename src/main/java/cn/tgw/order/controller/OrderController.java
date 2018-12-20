@@ -140,6 +140,54 @@ public class OrderController {
     }
 
     /*
+     * @Description:根据id获取订单的详细信息
+     * @Param:[id]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-20
+     * @Time:08:25
+     **/
+    @RequestMapping("/tjsanshao/order/query")
+    @ResponseBody
+    public Map<String, Object> orderQuery(Integer id) {
+
+        HashMap<String, Object> orderStatus = new HashMap<>();
+
+        if (id == null) {
+            orderStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            orderStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "order is not valid");
+            return orderStatus;
+        }
+
+        Order order = orderService.getOrderById(id);
+
+        if (order == null) {
+            orderStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            orderStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "order is not valid");
+            return orderStatus;
+        }
+
+        orderStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        orderStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+        orderStatus.put("order", order);
+
+        //返回过期时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(order.getOrderCreateTime());
+        calendar.add(Calendar.MINUTE, 15);
+
+        orderStatus.put("expire", calendar.getTime());
+
+        //返回商品标题
+        Goods goods = (Goods)goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(order.getTgwGoodsId()).get("goods");
+
+        orderStatus.put("goods", goods);
+
+        return orderStatus;
+
+    }
+
+    /*
      * @Description:支付宝支付成功异步通知url
      * @Param:[request]
      * @Return:void

@@ -83,11 +83,5 @@ alipay:
   config:
     common-url-prefix: http://tjsanshao.free.idcfengye.com
 
-#以下配置是调试时使用
-logging:
-  level:
-    cn.tgw.user.mapper: debug
-    cn.tgw.common.mapper: debug
-debug: true
 pagehelper:
   auto-dialect: mysql
