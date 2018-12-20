@@ -37,6 +37,9 @@
     from tgw_user_detail
     where tgw_user_id = #{userId}
   </select>
+  <select id="findAllUserDetail" resultType="cn.tgw.user.model.UserDetail">
+    select * from tgw_user_detail
+  </select>
 
   <!-- 自定义查询结束 -->
 
@@ -188,4 +191,9 @@
       nick_name = #{nickName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="updateUserImgs">
+      update tgw_user_detail
+      set  user_image_url=#{userImageUrl}
+      where id=#{id}
+    </update>
 </mapper>

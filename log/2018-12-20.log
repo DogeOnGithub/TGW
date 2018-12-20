@@ -10,13 +10,13 @@
 2018-12-20 08:31:02.493 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on DESKTOP-NR810TO with PID 16948 (D:\Java\ideaworkspace\TGW\target\classes started by TjSanshao in D:\Java\ideaworkspace\TGW)
 2018-12-20 08:31:02.494 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
 2018-12-20 08:31:06.110 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 3.673 seconds (JVM running for 301.946)
-2018-12-20 08:32:49.511 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUsernameAndPasswordAndUserStatus -==>  Preparing: select id, username, password, user_status, mobile from tgw_user where username = ? and password = ? and user_status = ? 
+2018-12-20 08:32:49.511 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUsernameAndPasswordAndUserStatus -==>  Preparing: select id, username, password, user_status, mobile from tgw_user where username = ? and password = ? and user_status = ?
 2018-12-20 08:32:49.518 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUsernameAndPasswordAndUserStatus -==> Parameters: TjSanshao(String), 666666(String), 1(Byte)
 2018-12-20 08:32:49.539 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUsernameAndPasswordAndUserStatus -<==      Total: 1
-2018-12-20 08:32:50.545 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUserId -==>  Preparing: select id, tgw_user_id, sex, mobile, email, reg_time, last_update_time, user_image_url, nick_name from tgw_user_detail where tgw_user_id = ? 
+2018-12-20 08:32:50.545 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUserId -==>  Preparing: select id, tgw_user_id, sex, mobile, email, reg_time, last_update_time, user_image_url, nick_name from tgw_user_detail where tgw_user_id = ?
 2018-12-20 08:32:50.546 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUserId -==> Parameters: 1(Integer)
 2018-12-20 08:32:50.566 [http-nio-8080-exec-8] DEBUG c.t.u.m.U.selectByUserId -<==      Total: 1
-2018-12-20 08:39:19.228 [http-nio-8080-exec-2] DEBUG c.t.u.m.U.selectByPrimaryKey -==>  Preparing: select id, username, password, user_status, mobile from tgw_user where id = ? 
+2018-12-20 08:39:19.228 [http-nio-8080-exec-2] DEBUG c.t.u.m.U.selectByPrimaryKey -==>  Preparing: select id, username, password, user_status, mobile from tgw_user where id = ?
 2018-12-20 08:39:19.228 [http-nio-8080-exec-2] DEBUG c.t.u.m.U.selectByPrimaryKey -==> Parameters: 1(Integer)
 2018-12-20 08:39:19.246 [http-nio-8080-exec-2] DEBUG c.t.u.m.U.selectByPrimaryKey -<==      Total: 1
 2018-12-20 08:41:25.269 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on DESKTOP-NR810TO with PID 16948 (D:\Java\ideaworkspace\TGW\target\classes started by TjSanshao in D:\Java\ideaworkspace\TGW)
@@ -378,3 +378,18 @@ Caused by: org.apache.ibatis.exceptions.TooManyResultsException: Expected one re
 	... 78 more
 
 2018-12-20 11:36:29.907 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver -Resolved [org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 2]
+2018-12-20 09:50:39.069 [main] INFO  c.t.a.s.SecKillServiceTest -Starting SecKillServiceTest on XTZ-01705061208 with PID 5692 (started by Administrator in D:\exampleCode\TGW)
+2018-12-20 09:50:39.070 [main] INFO  c.t.a.s.SecKillServiceTest -No active profile set, falling back to default profiles: default
+2018-12-20 09:50:55.400 [main] INFO  c.t.a.s.SecKillServiceTest -Started SecKillServiceTest in 17.042 seconds (JVM running for 18.973)
+2018-12-20 09:50:55.960 [main] DEBUG c.t.u.m.U.findAllUserDetail -==>  Preparing: select * from tgw_user_detail
+2018-12-20 09:50:55.998 [main] DEBUG c.t.u.m.U.findAllUserDetail -==> Parameters:
+2018-12-20 09:50:56.070 [main] DEBUG c.t.u.m.U.findAllUserDetail -<==      Total: 6
+2018-12-20 09:50:56.073 [main] DEBUG c.t.u.m.U.updateUserImgs -==>  Preparing: update tgw_user_detail set user_image_url=? where id=?
+2018-12-20 09:50:56.080 [main] DEBUG c.t.u.m.U.updateUserImgs -==> Parameters: http://zhifa.daiqee.com/250fd81e-b0e5-4039-ab67-794f950c5980(String), 1(Integer)
+2018-12-20 09:50:56.110 [main] DEBUG c.t.u.m.U.updateUserImgs -<==    Updates: 1
+2018-12-20 09:50:56.111 [main] DEBUG c.t.u.m.U.updateUserImgs -==>  Preparing: update tgw_user_detail set user_image_url=? where id=?
+2018-12-20 09:50:56.111 [main] DEBUG c.t.u.m.U.updateUserImgs -==> Parameters: http://zhifa.daiqee.com/b9ca13a8-f7e1-4a6c-82c8-999072289541(String), 12(Integer)
+2018-12-20 09:50:56.142 [main] DEBUG c.t.u.m.U.updateUserImgs -<==    Updates: 1
+2018-12-20 09:54:42.295 [main] INFO  c.t.a.s.SecKillServiceTest -Starting SecKillServiceTest on XTZ-01705061208 with PID 26904 (started by Administrator in D:\exampleCode\TGW)
+2018-12-20 09:54:42.296 [main] INFO  c.t.a.s.SecKillServiceTest -No active profile set, falling back to default profiles: default
+2018-12-20 09:54:55.619 [main] INFO  c.t.a.s.SecKillServiceTest -Started SecKillServiceTest in 13.909 seconds (JVM running for 15.538)

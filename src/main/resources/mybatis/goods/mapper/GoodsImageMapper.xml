@@ -22,7 +22,10 @@
       from tgw_goods_image
       where tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER} AND is_main = 1
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <select id="findAllGoodsImage" resultType="cn.tgw.goods.model.GoodsImage">
+    select * from tgw_goods_image
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods_image
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -84,5 +87,10 @@
       tgw_goods_id = #{tgwGoodsId,jdbcType=INTEGER},
       is_main = #{isMain,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateGoodsImgs">
+    update tgw_goods_image
+    set image_url = #{imageUrl}
+    where id = #{id}
   </update>
 </mapper>
