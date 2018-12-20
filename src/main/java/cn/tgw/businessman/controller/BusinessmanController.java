@@ -513,4 +513,54 @@ public class BusinessmanController {
 
         return watchGoodsStatus;
     }
+
+    /*
+     * @Description:消费订单
+     * @Param:[orderNumber, session]
+     * @Return:java.util.Map<java.lang.String,java.lang.Object>
+     * @Author:TjSanshao
+     * @Date:2018-12-19
+     * @Time:15:05
+     **/
+    @RequestMapping("/tjsanshao/businessman/orderConsume")
+    public Map<String, Object> orderConsume(String orderNumber, HttpSession session) {
+
+        HashMap<String, Object> consumeStatus = new HashMap<>();
+
+        if (StringUtils.isEmpty(orderNumber)) {
+            consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "order is not valid");
+            return consumeStatus;
+        }
+
+        Businessman businessman = (Businessman) session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
+
+        Order order = orderService.getOrderByUniqueOrderNumber(orderNumber);
+
+        //判断订单是否存在且状态是已付款
+        if (order == null || order.getSellStatus().intValue() != 1) {
+            consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "order is not valid");
+            return consumeStatus;
+        }
+
+        //判断订单是否是该商家的
+        if (order.getTgwBusinessmanId() != businessman.getId()) {
+            consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "illegal operation");
+            return consumeStatus;
+        }
+
+        //调用业务层接口，使用订单
+        if (!orderService.orderUseFinish(order.getId())) {
+            consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
+            consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "Unknown Error");
+            return consumeStatus;
+        }
+
+        consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "success");
+
+        return consumeStatus;
+    }
 }

@@ -83,7 +83,7 @@ public class OrderController {
         //返回过期时间
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(order.getOrderCreateTime());
-        calendar.add(Calendar.MINUTE, 2);
+        calendar.add(Calendar.MINUTE, 15);
 
         createStatus.put("expire", calendar.getTime());
 
