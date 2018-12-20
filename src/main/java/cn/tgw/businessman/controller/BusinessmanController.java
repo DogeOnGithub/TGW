@@ -508,10 +508,10 @@ public class BusinessmanController {
         Businessman businessman = (Businessman)session.getAttribute(TGWStaticString.TGW_BUSINESSMAN);
 
         //根据商家id查询该商家的所有商品
-        List<Goods> allGoods = goodsService.findGoodsByBusinessmanIdWithIsOnline(businessman.getId());
+        List<Object> goodsList = goodsService.findGoodsAndGoodsDetailAndGoodsImageWithBussinessId(businessman.getId());
 
         watchGoodsStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        watchGoodsStatus.put("list", allGoods);
+        watchGoodsStatus.put("list", goodsList);
 
         return watchGoodsStatus;
     }
