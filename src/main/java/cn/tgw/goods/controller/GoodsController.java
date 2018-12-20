@@ -8,6 +8,7 @@ import cn.tgw.common.utils.QiniuUtil;
 import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.goods.mapper.GoodsImageMapper;
 import cn.tgw.goods.mapper.GoodsMapper;
+import cn.tgw.goods.model.EsResult;
 import cn.tgw.goods.model.Goods;
 import cn.tgw.goods.model.GoodsDetail;
 import cn.tgw.goods.model.GoodsImage;
@@ -286,6 +287,20 @@ public class GoodsController {
         }
         result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        return result;
+    }
+    @RequestMapping(value = "xiaojian/serachByOption",method = RequestMethod.GET)
+    public Map<String,Object> serachByOption(@RequestParam(value = "searchOption",defaultValue = "")String searchOption,
+                                             @RequestParam(value = "num",defaultValue = "1") Integer num,
+                                             @RequestParam(value = "size",defaultValue = "10")Integer size,
+                                             @RequestParam(value = "city",defaultValue = "湛江") String city){
+        Map<String,Object> result = new HashMap<>();
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        Map<String, Object> goodsBySearchOptionAndCity = goodsService.findGoodsBySearchOptionAndCity(searchOption, city, num, size);
+        result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
+        result.put("result",goodsBySearchOptionAndCity);
         return result;
     }
 

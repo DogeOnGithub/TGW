@@ -14,6 +14,8 @@ import cn.tgw.goods.model.GoodsVO;
 import cn.tgw.goods.service.GoodsService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -404,6 +406,20 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.selectByBusinessIdWithIsOnline(businessmanId);
     }
 
+    @Override
+    public Map<String, Object> findGoodsBySearchOptionAndCity(String searchOption, String city, int num, int size) {
+        String currentSearchOption = "%"+searchOption+"%";
+        String currentCity = "%"+city+"%";
+        Map<String, Object>map = new HashMap<>();
+        PageHelper.startPage(num,size);
+        List<GoodsVO> goodsBySearchOption = goodsMapper.findGoodsBySearchOption(currentSearchOption, currentCity);
+        PageInfo<GoodsVO> pageInfo = new PageInfo<>(goodsBySearchOption);
+        long total = pageInfo.getTotal();
+        List<GoodsVO> list = pageInfo.getList();
+        map.put("resultGoods",list);
+        map.put("total",total);
+        return map;
+    }
 
 
 }

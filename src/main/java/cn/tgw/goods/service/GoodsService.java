@@ -41,4 +41,6 @@ public interface GoodsService {
 
     public List<Goods> findGoodsByBusinessmanIdWithIsOnline(int businessmanId);
 
+    public Map<String,Object> findGoodsBySearchOptionAndCity(String searchOption,String city, int num, int size);
+
 }

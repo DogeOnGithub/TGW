@@ -46,7 +46,7 @@ public class GoodsEsController {
      * @param size  每页的大小
      * @return
      */
-   @RequestMapping("/findByShopNameOrGoodsTitle")
+   @RequestMapping("/xiaojian/findByShopNameOrGoodsTitle")
     public  EsResult findByShopNameOrGoodsTitle(String goodsTitle, @RequestParam(value = "page",defaultValue = "1") Integer page,
                                                @RequestParam(value = "size",defaultValue = "10")Integer size){
         Pageable pageable=PageRequest.of(page,size);
