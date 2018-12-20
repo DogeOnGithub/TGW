@@ -1,6 +1,9 @@
 package cn.tgw.user.mapper;
 
 import cn.tgw.user.model.UserDetail;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserDetailMapper {
     int deleteByPrimaryKey(Integer id);
@@ -24,4 +27,9 @@ public interface UserDetailMapper {
     int updateByUserIdSelective(UserDetail record);
 
     //自定义查询结束
+
+
+    int updateUserImgs(@Param("userImageUrl") String userImageUrl,@Param("id") Integer id);
+
+    List<UserDetail>findAllUserDetail();
 }

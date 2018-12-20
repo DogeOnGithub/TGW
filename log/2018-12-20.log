@@ -1,0 +1,15 @@
+2018-12-20 09:50:39.069 [main] INFO  c.t.a.s.SecKillServiceTest -Starting SecKillServiceTest on XTZ-01705061208 with PID 5692 (started by Administrator in D:\exampleCode\TGW)
+2018-12-20 09:50:39.070 [main] INFO  c.t.a.s.SecKillServiceTest -No active profile set, falling back to default profiles: default
+2018-12-20 09:50:55.400 [main] INFO  c.t.a.s.SecKillServiceTest -Started SecKillServiceTest in 17.042 seconds (JVM running for 18.973)
+2018-12-20 09:50:55.960 [main] DEBUG c.t.u.m.U.findAllUserDetail -==>  Preparing: select * from tgw_user_detail 
+2018-12-20 09:50:55.998 [main] DEBUG c.t.u.m.U.findAllUserDetail -==> Parameters: 
+2018-12-20 09:50:56.070 [main] DEBUG c.t.u.m.U.findAllUserDetail -<==      Total: 6
+2018-12-20 09:50:56.073 [main] DEBUG c.t.u.m.U.updateUserImgs -==>  Preparing: update tgw_user_detail set user_image_url=? where id=? 
+2018-12-20 09:50:56.080 [main] DEBUG c.t.u.m.U.updateUserImgs -==> Parameters: http://zhifa.daiqee.com/250fd81e-b0e5-4039-ab67-794f950c5980(String), 1(Integer)
+2018-12-20 09:50:56.110 [main] DEBUG c.t.u.m.U.updateUserImgs -<==    Updates: 1
+2018-12-20 09:50:56.111 [main] DEBUG c.t.u.m.U.updateUserImgs -==>  Preparing: update tgw_user_detail set user_image_url=? where id=? 
+2018-12-20 09:50:56.111 [main] DEBUG c.t.u.m.U.updateUserImgs -==> Parameters: http://zhifa.daiqee.com/b9ca13a8-f7e1-4a6c-82c8-999072289541(String), 12(Integer)
+2018-12-20 09:50:56.142 [main] DEBUG c.t.u.m.U.updateUserImgs -<==    Updates: 1
+2018-12-20 09:54:42.295 [main] INFO  c.t.a.s.SecKillServiceTest -Starting SecKillServiceTest on XTZ-01705061208 with PID 26904 (started by Administrator in D:\exampleCode\TGW)
+2018-12-20 09:54:42.296 [main] INFO  c.t.a.s.SecKillServiceTest -No active profile set, falling back to default profiles: default
+2018-12-20 09:54:55.619 [main] INFO  c.t.a.s.SecKillServiceTest -Started SecKillServiceTest in 13.909 seconds (JVM running for 15.538)

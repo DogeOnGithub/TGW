@@ -49,7 +49,7 @@ public class QiniuUtil {
     private static String bucket="images";
 
 
-    private static String path="pih7n7d5x.bkt.clouddn.com";
+    private static String path="zhifa.daiqee.com";
 
     /**
      * 将图片上传到七牛云
