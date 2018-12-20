@@ -4,6 +4,8 @@ import cn.tgw.comment.model.Comment;
 import cn.tgw.comment.service.CommentService;
 import cn.tgw.common.utils.TGWStaticString;
 import cn.tgw.user.model.User;
+import cn.tgw.user.model.UserDetail;
+import cn.tgw.user.service.UserService;
 import com.alibaba.druid.sql.visitor.functions.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,9 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      *
@@ -107,10 +113,22 @@ public class CommentController {
         Map<String,Object> result = new HashMap<>();
         result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_FAIL);
         result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_FAIL);
+        List<Object> resultList = new ArrayList<>();
         List<Comment> commentByGoodsId = commentService.getCommentByGoodsId(goodsId);
+        for(int i = 0;i<commentByGoodsId.size();i++){
+            Comment resultComment = commentByGoodsId.get(i);
+            Integer tgwUserId = resultComment.getTgwUserId();
+            User userById = userService.getUserById(tgwUserId);
+            UserDetail userDetailByUserId = userService.getUserDetailByUserId(userById);
+            Map<String,Object> Comment = new HashMap<>();
+            Comment.put("resultComment",resultComment);
+            Comment.put("userDetail",userDetailByUserId);
+            resultList.add(Comment);
+        }
+        result.put("comment",resultList);
         result.put(TGWStaticString.TGW_RESULT_STATUS,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
         result.put(TGWStaticString.TGW_RESULT_MESSAGE,TGWStaticString.TGW_RESULT_STATUS_SUCCESS);
-        result.put("comment",commentByGoodsId);
+
         return result;
     }
 

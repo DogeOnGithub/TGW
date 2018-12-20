@@ -14,6 +14,8 @@ import cn.tgw.goods.model.GoodsVO;
 import cn.tgw.goods.service.GoodsService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -236,14 +238,19 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public String updateGoodsByGoodsId(Goods goods,GoodsDetail goodsDetail,MultipartFile multipartFile) throws Exception {
 
-        //上传图片
         GoodsImage goodsImage = new GoodsImage();
         String returnUrl = null;
-        try {
-            returnUrl = QiniuUtil.uploadImg(multipartFile);
-        } catch (IOException e) {
-            return "error";
+        //上传图片
+        if(multipartFile!=null){
+
+
+            try {
+                returnUrl = QiniuUtil.uploadImg(multipartFile);
+            } catch (IOException e) {
+                return "error";
+            }
         }
+
 
         int goodsId = goods.getId();
         GoodsDetail resultGoodsDetail = goodsDetailMapper.selectByTgwGoodsId(goodsId);
@@ -251,14 +258,21 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDetail.setId(resultGoodsDetail.getId());
         goodsImage.setId(resultGoodsImage.getId());
         goodsImage.setIsMain(1);
-        goodsImage.setImageUrl(returnUrl);
+        if(multipartFile!=null){
+            goodsImage.setImageUrl(returnUrl);
+        }else{
+            goodsImage.setImageUrl(resultGoodsImage.getImageUrl());
+        }
+
         int resNum = goodsMapper.updateByPrimaryKeySelective(goods);
         int resNum2 = goodsDetailMapper.updateByPrimaryKeySelective(goodsDetail);
         int resNum3 = goodsImageMapper.updateByPrimaryKeySelective(goodsImage);
         if(resNum+resNum2+resNum3>0){
             //删除七牛云旧照片
-            String currentUrl = resultGoodsImage.getImageUrl().replaceAll("http://pih7n7d5x.bkt.clouddn.com/","");
-            QiniuUtil.deleteImage(currentUrl);
+            if(multipartFile!=null){
+                String currentUrl = resultGoodsImage.getImageUrl().replaceAll("http://"+QiniuUtil.path+"/","");
+                QiniuUtil.deleteImage(currentUrl);
+            }
             return "success";
         }else{
             throw new RuntimeException();
@@ -404,6 +418,20 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.selectByBusinessIdWithIsOnline(businessmanId);
     }
 
+    @Override
+    public Map<String, Object> findGoodsBySearchOptionAndCity(String searchOption, String city, int num, int size) {
+        String currentSearchOption = "%"+searchOption+"%";
+        String currentCity = "%"+city+"%";
+        Map<String, Object>map = new HashMap<>();
+        PageHelper.startPage(num,size);
+        List<GoodsVO> goodsBySearchOption = goodsMapper.findGoodsBySearchOption(currentSearchOption, currentCity);
+        PageInfo<GoodsVO> pageInfo = new PageInfo<>(goodsBySearchOption);
+        long total = pageInfo.getTotal();
+        List<GoodsVO> list = pageInfo.getList();
+        map.put("resultGoods",list);
+        map.put("total",total);
+        return map;
+    }
 
 
 }

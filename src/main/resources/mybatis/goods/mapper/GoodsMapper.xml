@@ -31,11 +31,10 @@
     shop_name,shop_location,
     tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
     FROM
-    tgw_goods,tgw_goods_detail,tgw_goods_image,tgw_businessman_detail,tgw_second_category,tgw_first_category
+    ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id)
+    INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
     WHERE
-    tgw_goods.id = tgw_goods_detail.tgw_goods_id AND tgw_goods.id = tgw_goods_image.tgw_goods_id AND tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id
-    AND tgw_second_category.category_name = goods_category AND tgw_second_category.first_category_id = tgw_first_category.id
-    AND shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0
+    shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0
     <choose>
       <when test="type == 1">
         Order By sales_volumn DESC
@@ -76,6 +75,61 @@
     <include refid="Base_Column_List" />
     from tgw_goods
     where tgw_businessman_id = #{businessId,jdbcType=INTEGER} AND is_online in (0,1)
+  </select>
+  <select id="findGoodsBySearchOption" resultType="cn.tgw.goods.model.GoodsVO">
+    select
+        tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
+        tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+        tgw_goods_image.id i_id,image_url,is_main,
+        shop_name,shop_location,
+        tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+        ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id 		= tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.			tgw_businessman_id)
+             INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON 		tgw_second_category.first_category_id = tgw_first_category.id
+    where
+            shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0 and goods_title like #{searchOption,jdbcType=VARCHAR}
+
+    union
+
+    select
+        tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
+        tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+        tgw_goods_image.id i_id,image_url,is_main,
+        shop_name,shop_location,
+        tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+        ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id)
+             INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
+    where
+            shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0 and shop_name like #{searchOption,jdbcType=VARCHAR}
+
+    union
+
+    select
+        tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
+        tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+        tgw_goods_image.id i_id,image_url,is_main,
+        shop_name,shop_location,
+        tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+        ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id)
+             INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
+    where
+            shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0 and goods_category like #{searchOption,jdbcType=VARCHAR}
+
+    union
+
+    select
+        tgw_goods.id id,goods_title,oringinal_price,discount_price,tgw_goods.tgw_businessman_id,goods_category,is_online,
+        tgw_goods_detail.id d_id,goods_desc,term_of_validity,creat_goods_time,goods_repertory,sales_volumn,
+        tgw_goods_image.id i_id,image_url,is_main,
+        shop_name,shop_location,
+        tgw_first_category.id firstCategoryId,tgw_first_category.category_name firstCategoryName
+    FROM
+        ((((tgw_goods INNER JOIN tgw_goods_detail ON tgw_goods.id = tgw_goods_detail.tgw_goods_id) INNER JOIN tgw_goods_image on  tgw_goods.id = tgw_goods_image.tgw_goods_id) INNER JOIN tgw_businessman_detail ON tgw_businessman_detail.tgw_businessman_id = tgw_goods.tgw_businessman_id)
+             INNER JOIN tgw_second_category ON tgw_second_category.category_name = goods_category) INNER JOIN tgw_first_category ON tgw_second_category.first_category_id = tgw_first_category.id
+    where
+            shop_location like #{city,jdbcType=VARCHAR} AND is_online = 1 AND goods_repertory>0 and tgw_first_category.category_name like #{searchOption,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tgw_goods

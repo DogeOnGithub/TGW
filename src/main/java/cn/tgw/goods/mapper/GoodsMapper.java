@@ -24,6 +24,7 @@ public interface GoodsMapper {
 
     List<GoodsVO> findAllGoodsVO();
 
+    List<GoodsVO> findGoodsBySearchOption(@Param(value = "searchOption") String searchOption,@Param(value = "city")String city);
 
     List<Goods> selectByBusinessId(Integer businessId);
 
