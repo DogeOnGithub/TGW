@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# version 1.0.3
+
+CACHE:
+index.html
+/static/css/app.8f771b468fb08470aa2bd64f575f7e04.css
+/static/fonts/element-icons.6f0a763.ttf
+/static/js/app.34cd2a17bda2bcc0bc02.js
+/static/js/manifest.2ae2e69a05c33dfc65f8.js
+/static/js/vendor.e48f1f58be6a211e0130.js
+/static/img/404.9314fb0.jpg
+/static/img/bg.2defc59.jpg
+/static/img/login.8789a7a.jpg
+/static/img/shop_service.f604dc4.png
+
+
+NETWORK:
+*

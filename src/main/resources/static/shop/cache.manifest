@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# version 1.0.3
+
+CACHE:
+/shop/index.html
+/shopfavicon.ico
+/shop/static/css/1.61d02ab7.chunk.css
+/shop/static/css/main.4c8eecb7.chunk.css
+/shop/static/js/1.f9cb0f88.chunk.js
+/shop/static/js/main.2ccc7c97.chunk.js
+/shop/static/js/runtime~main.3a4c97e9.js
+/shop/static/img/404.9314fb0.jpg
+/shop/static/media/bg.2b4305fd.jpg
+/shop/static/media/login.bf3ff73a.png
+
+
+NETWORK:
+*
