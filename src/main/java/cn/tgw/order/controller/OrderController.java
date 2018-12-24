@@ -181,6 +181,9 @@ public class OrderController {
         //返回商品标题
         Goods goods = (Goods)goodsService.findGoodsAndGoodsDetailAndGoodsImageWithGoodsId(order.getTgwGoodsId()).get("goods");
 
+        //增加商品销量
+        goodsService.addGoodsSalesVolumn(goods.getId(), order.getCount());
+
         orderStatus.put("goods", goods);
 
         return orderStatus;
@@ -203,8 +206,6 @@ public class OrderController {
             String app_id,
             String out_trade_no,
             String trade_status) {
-
-        System.out.println(trade_no);
 
         if (trade_status == null) {
             return "fail";
@@ -259,7 +260,7 @@ public class OrderController {
         kvMap.put("total_amount", total_amount);
         kvMap.put("seller_id", seller_id);
 
-        return "test/return";
+        return "pay/return";
     }
 
     /**

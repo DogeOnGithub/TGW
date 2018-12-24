@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付成功</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* background: url(./pay.png) no-repeat; */
+        /* background-size: 100% 100%; */
+    }
+    .container{
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-100%);
+    }
+    .flexrow{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .flexcolumn{
+        display: flex;
+        flex-direction: column;
+    }
+    .title{
+        color: #3FD09E;
+        margin-bottom: 10px;
+    }
+    .item{
+        margin-bottom: 10px;
+        color: #666666;
+        font-size: 20px;
+    }
+    .item>span:nth-child(2){
+        padding-left: 5px;
+    }
+    .footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    .footer>div{
+        padding: 10px;
+        text-align: center;
+    }
+    .footer>.one>span{
+        padding: 0 20px;
+    }
+    .tgw{
+        font-size: 80px;
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container flexcolumn">
+            <!-- <h1 class="tgw">团购网</h1> -->
+        <h1 class="title">购买成功</h1>
+        <div class="flexrow item">
+            <span>订单编号 :</span>
+            <span th:text="${out_trade_no}">12345566</span>
+        </div>
+        <div class="flexrow item">
+            <span>支付金额 :</span>
+            <span th:text="${total_amount}">12345566</span>
+        </div>
+        <div class="flexrow item">
+            <span>支付方式 :</span>
+            <span>支付宝</span>
+        </div>
+        <div class="flexrow item">
+            <span><a href="http://localhost:8080/#/orderList">查看订单详情</a></span>
+            <span><a href="http://localhost:8080">继续狂狂</a></span>
+        </div>
+    </div>
+    <div class="flexcolumn footer">
+            <div class="flexrow one">
+                <span>关于网站</span>
+                <span>常见问题</span>
+                <span>服务保障</span>
+                <span>团购合作</span>
+                <span>加入我们</span>
+            </div>
+            <div>
+                电话:123-456-7899
+            </div>
+
+            <div>
+                ©　2018　软酷网广东海洋大学实训项目 京ICP证123456号　京ICP备12345678号　京公网安备111111111111号
+            </div>
+        </div>
+</body>
+
+</html>
