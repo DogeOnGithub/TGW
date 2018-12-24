@@ -694,7 +694,7 @@ public class UserController {
 
         List<Map<String, Object>> result = new ArrayList<>();
 
-        for (int i = 0; i < orderList.size(); i++) {
+        for (int i = (orderList.size() - 1); i > 0; i--) {
             Map<String, Object> tempMap = new HashMap<>();
 
             Order order = orderList.get(i);
