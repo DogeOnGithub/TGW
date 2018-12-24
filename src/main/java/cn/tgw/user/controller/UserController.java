@@ -397,6 +397,7 @@ public class UserController {
 
         //更新session
         session.setAttribute(TGWStaticString.TGW_USER, updatedUser);
+        smsVerifyService.codeUsed(updatedUser.getMobile());
 
         //返回结果
         mobileStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_SUCCESS);

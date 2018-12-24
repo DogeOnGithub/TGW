@@ -133,15 +133,18 @@ public class UserServiceImpl implements UserService {
     @CachePut(cacheNames = {"userCache"}, cacheManager = "userCacheManager", key = "#user.username")
     @Transactional
     public User updateUserMobile(User user, String newMobile) {
+
+        User queryUser = userMapper.selectByPrimaryKey(user.getId());
+
         //判断username是否和mobile一样
-        if (user.getMobile().equals(user.getUsername())) {
+        if (queryUser.getMobile().equals(queryUser.getUsername())) {
             //如果这个User的username和mobile是一样的
-            user.setUsername(newMobile);
+            queryUser.setUsername(newMobile);
         }
 
         //设置新的手机号
-        user.setMobile(newMobile);
-        userMapper.updateByPrimaryKey(user);
+        queryUser.setMobile(newMobile);
+        userMapper.updateByPrimaryKey(queryUser);
 
         //同时需要更新userDetail
         UserDetail userDetail = new UserDetail();
