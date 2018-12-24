@@ -20,5 +20,6 @@ public class TgwApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TgwApplication.class, args);
+		System.out.println("======================启动完成==========================");
 	}
 }
