@@ -1,0 +1,522 @@
+2018-12-24 08:36:20.857 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 33016 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 08:36:20.857 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 33016 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 08:36:20.860 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 08:36:20.860 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 08:36:20.917 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 08:36:20.917 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 08:36:22.837 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 08:36:22.840 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 08:36:22.956 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 111ms. Found 1 repository interfaces.
+2018-12-24 08:36:22.973 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 08:36:22.976 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 08:36:23.013 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 08:36:23.013 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
+2018-12-24 08:36:23.522 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$b9730a6f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 08:36:23.599 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f3074c41] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 08:36:23.716 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$f7eb09e6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 08:36:24.322 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 08:36:24.336 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 08:36:24.340 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 08:36:24.340 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 08:36:24.348 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 08:36:24.521 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 08:36:24.521 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 3603 ms
+2018-12-24 08:36:24.990 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 08:36:26.804 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 08:36:27.053 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 08:36:27.054 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 08:36:27.054 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 08:36:27.054 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 08:36:27.054 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 08:36:27.054 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 08:36:28.237 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 08:36:28.788 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 08:36:28.788 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 08:36:28.789 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 08:36:28.790 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 08:36:29.793 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 08:36:30.248 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 08:36:30.433 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 08:36:32.349 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 08:36:32.481 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 08:36:32.759 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#40eae1e8:0/SimpleConnection@2f02a032 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 56744]
+2018-12-24 08:36:32.935 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 08:36:32.938 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 08:36:32.956 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 08:36:32.958 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 12.619 seconds (JVM running for 14.168)
+2018-12-24 08:36:32.958 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 12.619 seconds (JVM running for 14.168)
+2018-12-24 08:36:34.280 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 08:36:34.281 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 08:36:34.296 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 15 ms
+2018-12-24 09:09:25.802 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 37908 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 09:09:25.802 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 37908 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 09:09:25.804 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 09:09:25.804 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 09:09:25.847 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 09:09:25.847 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 09:09:26.881 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 09:09:26.883 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 09:09:26.983 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 95ms. Found 1 repository interfaces.
+2018-12-24 09:09:26.991 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 09:09:26.992 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 09:09:27.026 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 09:09:27.027 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
+2018-12-24 09:09:27.431 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$91f90bc0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 09:09:27.500 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$cb8d4d92] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 09:09:27.604 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$d0710b37] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 09:09:28.129 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 09:09:28.140 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 09:09:28.144 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 09:09:28.144 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 09:09:28.150 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 09:09:28.310 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 09:09:28.310 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2462 ms
+2018-12-24 09:09:28.751 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 09:09:30.516 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 09:09:30.734 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 09:09:30.735 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 09:09:30.735 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 09:09:30.735 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 09:09:30.735 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 09:09:30.735 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 09:09:31.729 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 09:09:32.251 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 09:09:32.251 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 09:09:32.252 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 09:09:32.253 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 09:09:32.254 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 09:09:33.033 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 09:09:33.458 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 09:09:33.628 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 09:09:34.431 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 09:09:34.583 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 09:09:34.662 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#2112d6d:0/SimpleConnection@2a4d1cf5 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 58917]
+2018-12-24 09:09:34.824 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 09:09:34.824 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 09:09:34.837 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 09:09:34.841 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 9.525 seconds (JVM running for 10.701)
+2018-12-24 09:09:34.841 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 9.525 seconds (JVM running for 10.701)
+2018-12-24 09:09:36.006 [RMI TCP Connection(8)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 09:09:36.007 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 09:09:36.019 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 12 ms
+2018-12-24 14:59:25.351 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 42456 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 14:59:25.351 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 42456 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 14:59:25.355 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 14:59:25.355 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 14:59:25.434 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 14:59:25.434 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 14:59:26.554 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 14:59:26.556 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 14:59:26.680 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 120ms. Found 1 repository interfaces.
+2018-12-24 14:59:26.693 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 14:59:26.694 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 14:59:26.730 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 14:59:26.730 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
+2018-12-24 14:59:27.206 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$c9670ae9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 14:59:27.278 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2fb4cbb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 14:59:27.377 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$7df0a60] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 14:59:27.922 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 14:59:27.933 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 14:59:27.937 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 14:59:27.938 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 14:59:27.944 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 14:59:28.112 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 14:59:28.113 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2679 ms
+2018-12-24 14:59:28.530 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 14:59:30.348 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 14:59:30.562 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 14:59:30.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 14:59:30.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 14:59:30.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 14:59:30.564 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 14:59:30.564 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 14:59:31.649 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 14:59:32.167 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 14:59:32.168 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 14:59:32.168 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 14:59:32.168 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 14:59:32.168 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 14:59:32.169 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 14:59:32.915 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 14:59:33.372 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 14:59:33.553 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 14:59:34.359 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 14:59:34.492 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 14:59:34.582 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#5fedd9b8:0/SimpleConnection@5a7d2292 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 51167]
+2018-12-24 14:59:34.768 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 14:59:34.769 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 14:59:34.784 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 14:59:34.788 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.11 seconds (JVM running for 11.476)
+2018-12-24 14:59:34.788 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.11 seconds (JVM running for 11.476)
+2018-12-24 14:59:35.667 [RMI TCP Connection(6)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 14:59:35.667 [RMI TCP Connection(6)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 14:59:35.680 [RMI TCP Connection(6)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 13 ms
+2018-12-24 15:36:47.370 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 35016 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:36:47.370 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 35016 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:36:47.374 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:36:47.374 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:36:47.428 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:36:47.428 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:36:48.532 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:36:48.534 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:36:48.638 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 101ms. Found 1 repository interfaces.
+2018-12-24 15:36:48.647 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:36:48.648 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:36:48.681 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:36:48.681 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 25ms. Found 0 repository interfaces.
+2018-12-24 15:36:49.103 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$be74ddb6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:36:49.182 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f8091f88] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:36:49.289 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$fcecdd2d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:36:49.829 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:36:49.841 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:36:49.846 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:36:49.846 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:36:49.852 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:36:50.021 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:36:50.021 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2593 ms
+2018-12-24 15:36:50.470 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:36:52.284 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:36:52.516 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:36:52.517 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:36:52.517 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:36:52.517 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:36:52.517 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:36:52.517 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:36:53.545 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:36:54.084 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:36:54.085 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:36:54.086 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:36:54.086 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:36:54.087 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:36:54.853 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:36:55.286 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:36:55.464 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:36:56.270 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:36:56.397 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:36:56.667 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#1fa940cc:0/SimpleConnection@722a2cb6 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52008]
+2018-12-24 15:36:56.829 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:36:56.832 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:36:56.849 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:36:56.852 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.077 seconds (JVM running for 11.342)
+2018-12-24 15:36:56.852 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.077 seconds (JVM running for 11.342)
+2018-12-24 15:36:57.474 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:36:57.474 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:36:57.537 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 62 ms
+2018-12-24 15:38:29.560 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44976 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:38:29.560 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44976 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:38:29.563 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:38:29.563 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:38:29.614 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:38:29.615 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:38:30.726 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:38:30.728 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:38:30.842 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 108ms. Found 1 repository interfaces.
+2018-12-24 15:38:30.851 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:38:30.852 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:38:30.886 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:38:30.887 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 26ms. Found 0 repository interfaces.
+2018-12-24 15:38:31.307 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$2a4b9900] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:38:31.379 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$63dfdad2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:38:31.481 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$68c39877] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:38:32.043 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:38:32.055 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:38:32.059 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:38:32.060 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:38:32.066 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:38:32.243 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:38:32.244 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2629 ms
+2018-12-24 15:38:32.734 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:38:34.558 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:38:34.789 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:38:34.790 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:38:34.790 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:38:34.790 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:38:34.790 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:38:34.790 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:38:36.149 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:38:36.770 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:38:36.771 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:38:36.771 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:38:36.771 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:38:36.771 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:38:36.771 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:38:36.772 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:38:37.622 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:38:38.047 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:38:38.230 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:38:39.181 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:38:39.348 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:38:39.436 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#7a4ce567:0/SimpleConnection@502dd3c4 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52117]
+2018-12-24 15:38:39.602 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:38:39.603 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:38:39.616 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:38:39.620 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.637 seconds (JVM running for 12.142)
+2018-12-24 15:38:39.620 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.637 seconds (JVM running for 12.142)
+2018-12-24 15:38:40.740 [RMI TCP Connection(7)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:38:40.742 [RMI TCP Connection(7)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:38:40.755 [RMI TCP Connection(7)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 13 ms
+2018-12-24 15:40:28.089 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44792 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:40:28.089 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44792 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:40:28.092 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:40:28.092 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:40:28.145 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:40:28.146 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:40:29.222 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:40:29.224 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:40:29.325 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 98ms. Found 1 repository interfaces.
+2018-12-24 15:40:29.334 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:40:29.335 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:40:29.368 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:40:29.369 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 26ms. Found 0 repository interfaces.
+2018-12-24 15:40:29.779 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$32142a55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:40:29.852 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6ba86c27] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:40:29.957 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$708c29cc] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:40:30.488 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:40:30.500 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:40:30.504 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:40:30.504 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:40:30.510 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:40:30.680 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:40:30.680 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2534 ms
+2018-12-24 15:40:31.127 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:40:32.902 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:40:33.131 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:40:33.131 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:40:33.131 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:40:33.131 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:40:33.132 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:40:33.132 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:40:34.178 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:40:34.710 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:40:34.710 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:40:34.710 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:40:34.710 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:40:34.711 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:40:34.712 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:40:35.479 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:40:35.912 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:40:36.086 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:40:36.914 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:40:37.071 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:40:37.159 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#409103de:0/SimpleConnection@656ff34a [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52236]
+2018-12-24 15:40:37.327 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:40:37.328 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:40:37.342 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:40:37.346 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 9.828 seconds (JVM running for 11.097)
+2018-12-24 15:40:37.346 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 9.828 seconds (JVM running for 11.097)
+2018-12-24 15:40:37.823 [RMI TCP Connection(8)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:40:37.823 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:40:37.849 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 26 ms
+2018-12-24 15:50:50.506 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 43896 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:50:50.506 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 43896 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:50:50.509 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:50:50.509 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:50:50.562 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:50:50.562 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:50:51.629 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:50:51.630 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:50:51.738 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 103ms. Found 1 repository interfaces.
+2018-12-24 15:50:51.748 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:50:51.749 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:50:51.789 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:50:51.789 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 30ms. Found 0 repository interfaces.
+2018-12-24 15:50:52.253 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$a64f8ba2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:50:52.322 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$dfe3cd74] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:50:52.422 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$e4c78b19] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:50:52.970 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:50:52.980 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:50:52.984 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:50:52.985 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:50:52.991 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:50:53.176 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:50:53.176 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2614 ms
+2018-12-24 15:50:53.621 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:50:58.361 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:50:58.580 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:50:58.581 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:50:58.581 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:50:58.581 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:50:58.581 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:50:58.581 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:50:59.617 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:51:00.175 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:51:00.176 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:51:00.177 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:51:00.177 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:51:00.943 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:51:01.380 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:51:01.555 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:51:02.386 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:51:02.544 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:51:02.632 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#2cfc6c14:0/SimpleConnection@1d8ce94f [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52532]
+2018-12-24 15:51:02.804 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:51:02.805 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:51:02.820 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:51:02.824 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 13.02 seconds (JVM running for 14.167)
+2018-12-24 15:51:02.824 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 13.02 seconds (JVM running for 14.167)
+2018-12-24 15:51:03.635 [RMI TCP Connection(8)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:51:03.635 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:51:03.646 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 11 ms
+2018-12-24 15:52:02.556 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44036 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:52:02.556 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 44036 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:52:02.559 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:52:02.559 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:52:02.610 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:52:02.611 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:52:03.754 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:52:03.756 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:52:03.857 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 97ms. Found 1 repository interfaces.
+2018-12-24 15:52:03.867 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:52:03.868 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:52:03.904 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:52:03.904 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
+2018-12-24 15:52:04.337 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$89dfc884] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:52:04.409 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c3740a56] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:52:04.511 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$c857c7fb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:52:05.049 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:52:05.060 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:52:05.064 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:52:05.065 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:52:05.071 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:52:05.238 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:52:05.238 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2627 ms
+2018-12-24 15:52:05.683 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:52:07.452 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:52:07.686 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:52:07.687 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:52:07.687 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:52:07.688 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:52:07.690 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:52:07.690 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:52:08.733 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:52:09.271 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:52:09.271 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:52:09.271 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:52:09.271 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:52:09.271 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:52:09.272 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:52:09.273 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:52:10.081 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:52:10.530 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:52:10.716 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:52:11.581 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:52:11.743 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:52:11.832 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#67563a7:0/SimpleConnection@4eb2ead3 [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52626]
+2018-12-24 15:52:12.007 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:52:12.008 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:52:12.021 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:52:12.025 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.213 seconds (JVM running for 11.46)
+2018-12-24 15:52:12.025 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.213 seconds (JVM running for 11.46)
+2018-12-24 15:52:12.613 [RMI TCP Connection(9)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:52:12.613 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:52:12.623 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 10 ms
+2018-12-24 15:53:09.551 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 42148 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:53:09.551 [restartedMain] INFO  cn.tgw.TgwApplication -Starting TgwApplication on XTZ-01705061208 with PID 42148 (D:\exampleCode\TGW\target\classes started by Administrator in D:\exampleCode\TGW)
+2018-12-24 15:53:09.554 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:53:09.554 [restartedMain] INFO  cn.tgw.TgwApplication -No active profile set, falling back to default profiles: default
+2018-12-24 15:53:09.605 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018-12-24 15:53:09.605 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018-12-24 15:53:10.649 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:53:10.650 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:53:10.754 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 99ms. Found 1 repository interfaces.
+2018-12-24 15:53:10.764 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-12-24 15:53:10.765 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-24 15:53:10.799 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport -Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.tgw.goods.elasticsearchRepository.GoodsEsRepository.
+2018-12-24 15:53:10.800 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -Finished Spring Data repository scanning in 28ms. Found 0 repository interfaces.
+2018-12-24 15:53:11.225 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$62f5debe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:53:11.297 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9c8a2090] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:53:11.401 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'redisConfig' of type [cn.tgw.admin.redisConfig.RedisConfig$$EnhancerBySpringCGLIB$$a16dde35] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-24 15:53:11.938 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2018-12-24 15:53:11.948 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:53:11.953 [restartedMain] INFO  o.a.c.c.StandardService -Starting service [Tomcat]
+2018-12-24 15:53:11.953 [restartedMain] INFO  o.a.c.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-24 15:53:11.959 [restartedMain] INFO  o.a.c.c.AprLifecycleListener -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_131\bin; ;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\360Downloads\Software\apache-maven-3.5.0\bin;D:\svn\bin;C:\Program Files\TortoiseSVN\bin;D:\gradle-4.5.1\bin;E:\PuTTy\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;.]
+2018-12-24 15:53:12.126 [restartedMain] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring embedded WebApplicationContext
+2018-12-24 15:53:12.127 [restartedMain] INFO  o.s.w.c.ContextLoader -Root WebApplicationContext: initialization completed in 2521 ms
+2018-12-24 15:53:12.562 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -Init DruidDataSource
+2018-12-24 15:53:14.344 [restartedMain] INFO  c.a.d.p.DruidDataSource -{dataSource-1} inited
+2018-12-24 15:53:14.562 [restartedMain] INFO  o.e.p.PluginsService -no modules loaded
+2018-12-24 15:53:14.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-12-24 15:53:14.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-12-24 15:53:14.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-12-24 15:53:14.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-12-24 15:53:14.563 [restartedMain] INFO  o.e.p.PluginsService -loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-12-24 15:53:15.547 [restartedMain] INFO  o.s.d.e.c.TransportClientFactoryBean -Adding transport node : 120.79.74.174:9300
+2018-12-24 15:53:16.070 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'formContentFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanLoginFilter' to urls: [/businessman/test, /tjsanshao/businessman/password, /tjsanshao/businessman/settle, /tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'UserLoginFilter' to urls: [/tjsanshao/user/logout, /tjsanshao/user/detail, /tjsanshao/user/password, /tjsanshao/user/verifyMobile, /tjsanshao/user/mobile, /tjsanshao/user/orders, /tjsanshao/user/ordersNotPay, /tjsanshao/user/ordersNotUse, /tjsanshao/user/ordersNotComment, /tjsanshao/user/deleteOrder, /tjsanshao/order/create, /tjsanshao/order/pay, /tjsanshao/order/msKillCreate]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'BusinessmanSettledFilter' to urls: [/tjsanshao/businessman/orders, /tjsanshao/businessman/orders7days, /tjsanshao/businessman/orders30days, /tjsanshao/businessman/ordersCustom, /tjsanshao/businessman/goods]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpTraceFilter' to: [/*]
+2018-12-24 15:53:16.071 [restartedMain] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-12-24 15:53:16.072 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2018-12-24 15:53:16.072 [restartedMain] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet statViewServlet mapped to [/druid/*]
+2018-12-24 15:53:16.870 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2018-12-24 15:53:17.328 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor -Initializing ExecutorService 'applicationTaskExecutor'
+2018-12-24 15:53:17.523 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping -Adding welcome page: class path resource [static/index.html]
+2018-12-24 15:53:18.366 [restartedMain] INFO  o.s.b.a.e.w.EndpointLinksResolver -Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-12-24 15:53:18.486 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Attempting to connect to: [120.79.74.174:5672]
+2018-12-24 15:53:18.569 [restartedMain] INFO  o.s.a.r.c.CachingConnectionFactory -Created new connection: rabbitConnectionFactory#f32d12a:0/SimpleConnection@f2f9daa [delegate=amqp://guest@120.79.74.174:5672/, localPort= 52719]
+2018-12-24 15:53:18.742 [restartedMain] INFO  o.a.c.h.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+2018-12-24 15:53:18.743 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool -Using a shared selector for servlet write/read
+2018-12-24 15:53:18.945 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path ''
+2018-12-24 15:53:18.948 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.199 seconds (JVM running for 11.359)
+2018-12-24 15:53:18.948 [restartedMain] INFO  cn.tgw.TgwApplication -Started TgwApplication in 10.199 seconds (JVM running for 11.359)
+2018-12-24 15:53:19.558 [RMI TCP Connection(8)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018-12-24 15:53:19.558 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+2018-12-24 15:53:19.610 [RMI TCP Connection(8)-127.0.0.1] INFO  o.s.w.s.DispatcherServlet -Completed initialization in 52 ms
