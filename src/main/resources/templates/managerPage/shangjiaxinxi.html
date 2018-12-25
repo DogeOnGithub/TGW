@@ -43,7 +43,7 @@
                 collapsible:true,minimizable:false,maximizable:false">
 <table id="dg" title="商家信息管理" class="easyui-datagrid"
            fitColumns="true" pagination="true" rownumbers="true" singleSelect="true"
-           url="/usermanager/findBusinessmansByLikeMobile" fit="true" toolbar="#tb">
+           url="/usermanager/findBusinessmansByLikeMobile" fit="true" toolbar="#tb" pageSize="20">
         <thead>
         <tr>
             <th field="id" width="50" align="center">编号</th>
@@ -68,7 +68,7 @@
                 collapsible:true,minimizable:false,maximizable:false">
     <table id="dg2" title="商家的商店信息" class="easyui-datagrid"
            fitColumns="true" pagination="true" rownumbers="true" singleSelect="true"
-           url="/usermanager/findAllDetailsByBusinessmanId" fit="true">
+           url="/usermanager/findAllDetailsByBusinessmanId" fit="true" pageSize="20">
         <thead>
         <!--
             {"total":1,"rows":[{"id":3,"tgwBusinessmanId":2,"shopName":"TjSanshaoShop",
