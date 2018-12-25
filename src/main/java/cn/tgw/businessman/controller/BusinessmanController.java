@@ -547,7 +547,7 @@ public class BusinessmanController {
         }
 
         //判断订单是否是该商家的
-        if (order.getTgwBusinessmanId() != businessman.getId()) {
+        if (order.getTgwBusinessmanId().intValue() != businessman.getId().intValue()) {
             consumeStatus.put(TGWStaticString.TGW_RESULT_STATUS, TGWStaticString.TGW_RESULT_STATUS_FAIL);
             consumeStatus.put(TGWStaticString.TGW_RESULT_MESSAGE, "illegal operation");
             return consumeStatus;
